@@ -1,0 +1,69 @@
+
+
+import 'package:flutter/widgets.dart';
+import 'package:harcapp_core/comm_classes/app_text_style.dart';
+import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/comm_widgets/simple_button.dart';
+import 'package:harcapp_core/dimen.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
+import 'package:provider/provider.dart';
+
+import '../common.dart';
+import '../providers.dart';
+
+class AddButtonsWidget extends StatelessWidget{
+
+  final Function onPressed;
+  const AddButtonsWidget({this.onPressed});
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+
+        Expanded(
+          child: SimpleButton(
+            padding: EdgeInsets.all(Dimen.MARG_ICON),
+            onTap: (){
+              CurrentItemProvider prov = Provider.of<CurrentItemProvider>(context, listen: false);
+              prov.addPart(SongPart.empty());
+              if(onPressed!=null) onPressed();
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(MdiIcons.plus, color: accentColor(context)),
+                Icon(MdiIcons.musicBox, color: accentColor(context)),
+                SizedBox(width: Dimen.MARG_ICON),
+                Text('Zwrotka', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG))
+              ],
+            ),
+          ),
+        ),
+
+        Expanded(
+          child: SimpleButton(
+            padding: EdgeInsets.all(Dimen.MARG_ICON),
+            onTap: (){
+              CurrentItemProvider prov = Provider.of<CurrentItemProvider>(context, listen: false);
+              RefrenPartProvider refPart = Provider.of<RefrenPartProvider>(context, listen: false);
+              prov.addPart(SongPart.from(refPart.part.element));
+              if(onPressed!=null) onPressed();
+            },
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(MdiIcons.plus, color: accentColor(context)),
+                Icon(MdiIcons.musicBoxOutline, color: accentColor(context)),
+                SizedBox(width: Dimen.MARG_ICON),
+                Text('Refren', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG))
+              ],
+            ),
+          ),
+        )
+
+      ],
+    );
+  }
+
+}
