@@ -35,21 +35,21 @@ class RefrenTemplate extends StatelessWidget{
                 child: SongPartCard.from(
                     songPart: prov.part,
                     type: SongPartType.REFREN_TEMPLATE,
-                    topBuilder: (context, part) => Consumer<RefrenEnabProvider>(
-                      builder: (context, refEnabProv, child) => Row(
+                    topBuilder: (context, part) => Consumer<CurrentItemProvider>(
+                      builder: (context, currItemProv, child) => Row(
                           children: <Widget>[
                             HeaderWidget(
                                 'Szablon refrenu',
                                 prov.isError?MdiIcons.alertOutline:MdiIcons.musicBoxOutline,
                                 iconColor: prov.isError?Colors.red:null,
-                                enabled: refEnabProv.refEnab
+                                enabled: currItemProv.hasRefren
                             ),
                             Expanded(child:Container()),
                             SizedBox(width: 34),
                             Switch(
-                                value: refEnabProv.refEnab,
+                                value: currItemProv.hasRefren,
                                 onChanged: (bool value){
-                                  refEnabProv.refEnab = !refEnabProv.refEnab;
+                                  currItemProv.hasRefren = !currItemProv.hasRefren;
                                   if(onRefrenEnabledChaned != null) onRefrenEnabledChaned(value);
                                 }),
                           ]
@@ -63,5 +63,4 @@ class RefrenTemplate extends StatelessWidget{
         )
     );
   }
-
 }
