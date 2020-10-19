@@ -231,11 +231,13 @@ class TopZwrotkaButtons extends StatelessWidget{
   final SongPart songPart;
   final Function(SongPart) onDuplicate;
   final Function(SongPart) onDelete;
+  final bool showName;
 
   const TopZwrotkaButtons(
       this.songPart,
       {this.onDuplicate,
         this.onDelete,
+        this.showName: true
       });
 
   @override
@@ -247,6 +249,9 @@ class TopZwrotkaButtons extends StatelessWidget{
           padding: EdgeInsets.all(Dimen.MARG_ICON),
           child: Handle(child: Icon(MdiIcons.swapVertical, color: iconEnabledColor(context))),
         ),
+
+        if(showName)
+          Text('Zwrotka', style: AppTextStyle()),
 
         Expanded(child: Container()),
 
@@ -263,6 +268,7 @@ class TopZwrotkaButtons extends StatelessWidget{
             Provider.of<CurrentItemProvider>(context, listen: false).addPart(songPart.copy());
           },
         ),
+
 
         IconButton(
           icon: Icon(MdiIcons.trashCanOutline, color: iconEnabledColor(context)),
@@ -282,11 +288,14 @@ class TopRefrenButtons extends StatelessWidget{
 
   final SongPart songPart;
   final Function(SongPart) onDelete;
+  final bool showName;
 
   const TopRefrenButtons(
       this.songPart,
-      {this.onDelete}
-      );
+      {
+      this.onDelete,
+      this.showName: true
+      });
 
   @override
   Widget build(BuildContext context) {
@@ -297,6 +306,9 @@ class TopRefrenButtons extends StatelessWidget{
           padding: EdgeInsets.all(Dimen.MARG_ICON),
           child: Handle(child: Icon(MdiIcons.swapVertical, color: iconEnabledColor(context))),
         ),
+
+        if(showName)
+          Text('Refren', style: AppTextStyle()),
 
         Expanded(child: Container()),
 
