@@ -72,11 +72,13 @@ class SongPartCard extends StatelessWidget{
         );
 
         String emptText;
+        IconData iconData;
 
         if(type == SongPartType.ZWROTKA){
-          if(songPart.isEmpty)
-            emptText = 'Dotknij, aby edytować zwrotkę.';
-
+          if(songPart.isEmpty) {
+            emptText = 'Edytuj zwrotkę.';
+            iconData = MdiIcons.pencil;
+          }
         }else if(type == SongPartType.REFREN){
           if(prov.refEnab) {
             if(songPart.isEmpty)
@@ -84,19 +86,29 @@ class SongPartCard extends StatelessWidget{
           }else
             emptText = 'Refren ukryty. Nie będzie wyświetlany w piosence.';
         }else if(type == SongPartType.REFREN_TEMPLATE){
-          if(songPart.isEmpty)
-            emptText = 'Dotknij, aby edytować szablon refrenu.';
+          if(songPart.isEmpty) {
+            emptText = 'Edytuj szablon refrenu.';
+            iconData = MdiIcons.pencil;
+          }
         }
 
         Widget main = Padding(
           padding: EdgeInsets.all(Dimen.DEF_MARG/2),
           child:
           emptText!=null?
-          SizedBox(height: EMPTY_HEIGHT, child: Center(child: Text(
-            emptText,
-            style: AppTextStyle(color: hintEnabled(context)),
-            textAlign: TextAlign.center,
-          )))
+          SizedBox(height: EMPTY_HEIGHT, child: Row(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                emptText,
+                style: AppTextStyle(color: hintEnabled(context)),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(width: Dimen.MARG_ICON),
+              Icon(iconData, color: hintEnabled(context)),
+            ],
+          ))
               :
           Row(
             children: <Widget>[
