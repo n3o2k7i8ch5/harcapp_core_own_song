@@ -217,7 +217,7 @@ class RefrenPartProvider extends SongPartProvider{
   void setText(String text) => part.setText(text);
 
   void clear({bool notify: true}){
-    part = SongPart.empty(isRefren: true);
+    _part = SongPart.empty(isRefren: true);
     if(notify) notifyListeners();
   }
 
@@ -329,8 +329,14 @@ class AddPersCtrlProvider extends ChangeNotifier{
 
 class SongPartProvider extends ChangeNotifier{
 
-  SongPart part;
-  SongPartProvider(this.part);
+  SongPart _part;
+  SongPartProvider(this._part);
+
+  SongPart get part => _part;
+  set(SongPart part){
+    _part = part;
+    notifyListeners();
+  }
 
   void notify() => notifyListeners();
 
