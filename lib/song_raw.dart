@@ -76,7 +76,7 @@ class SongRaw implements SongCore{
       youtubeLink: '',
       tags: [],
       hasRefren: false,
-      refrenPart: SongPart.empty(),
+      refrenPart: SongPart.empty(isRefren: true),
       songParts: [],
     );
   }
