@@ -82,7 +82,7 @@ class SongPartCard extends StatelessWidget{
         }else if(type == SongPartType.REFREN){
           if(prov.refEnab) {
             if(songPart.isEmpty)
-              emptText = 'Brak refrenu, edytuj szablon refrenu powyżej.';
+              emptText = 'Refren pusty. Edytuj szablon powyżej.';
           }else
             emptText = 'Refren ukryty. Nie będzie wyświetlany w piosence.';
         }else if(type == SongPartType.REFREN_TEMPLATE){
