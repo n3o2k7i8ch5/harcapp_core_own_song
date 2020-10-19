@@ -117,7 +117,7 @@ packages:
       name: implicitly_animated_reorderable_list
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.5"
+    version: "0.3.0"
   linked_scroll_controller:
     dependency: "direct main"
     description:
