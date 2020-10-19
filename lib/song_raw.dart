@@ -209,12 +209,12 @@ class SongRaw implements SongCore{
     int refCount = 0;
     for (SongPart part in songParts) {
 
-      if(refCount>0) {
+      if(hasRefren && refCount>0) {
         parts.add({'refren': refCount});
         refCount = 0;
       }
 
-      if (part.element == refrenPart?.element) { //part.isRefren
+      if (hasRefren && part.element == refrenPart?.element) { //part.isRefren
         refCount++;
         continue;
 
@@ -228,7 +228,7 @@ class SongRaw implements SongCore{
 
     }
 
-    if(refCount>0)
+    if(hasRefren && refCount>0)
       parts.add({'refren': refCount});
 
     map['parts'] = parts;
