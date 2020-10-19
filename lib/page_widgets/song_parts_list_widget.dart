@@ -111,7 +111,7 @@ class SongPartsListWidget extends StatelessWidget{
                 duration: Duration(milliseconds: 300),
                 child: Center(
                   child: Text(
-                    'Pusto! Dodaj coś.\n',
+                    'Pusto! Dodaj coś poniższymi przyciskami.\n',
                     style: AppTextStyle(color: hintEnabled(context)),
                   ),
                 ),
