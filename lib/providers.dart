@@ -221,12 +221,6 @@ class RefrenPartProvider extends SongPartProvider{
     if(notify) notifyListeners();
   }
 
-  SongPart get part => _part;
-  set(SongPart part){
-    _part = part;
-    notifyListeners();
-  }
-
   bool isRefren(SongElement element) => element == part.element;
 
   SongElement get element => part.element;
@@ -339,7 +333,7 @@ class SongPartProvider extends ChangeNotifier{
   SongPartProvider(this._part);
 
   SongPart get part => _part;
-  set(SongPart part){
+  set part(SongPart part){
     _part = part;
     notifyListeners();
   }
