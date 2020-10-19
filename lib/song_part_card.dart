@@ -77,7 +77,7 @@ class SongPartCard extends StatelessWidget{
         if(type == SongPartType.ZWROTKA){
           if(songPart.isEmpty) {
             emptText = 'Edytuj zwrotkę.';
-            iconData = MdiIcons.pencil;
+            iconData = MdiIcons.pencilOutline;
           }
         }else if(type == SongPartType.REFREN){
           if(prov.refEnab) {
@@ -88,7 +88,7 @@ class SongPartCard extends StatelessWidget{
         }else if(type == SongPartType.REFREN_TEMPLATE){
           if(songPart.isEmpty) {
             emptText = 'Edytuj szablon refrenu.';
-            iconData = MdiIcons.pencil;
+            iconData = MdiIcons.pencilOutline;
           }
         }
 
@@ -106,7 +106,7 @@ class SongPartCard extends StatelessWidget{
                 textAlign: TextAlign.center,
               ),
               SizedBox(width: Dimen.MARG_ICON),
-              Icon(iconData, color: hintEnabled(context)),
+              Icon(iconData, color: hintEnabled(context), size: 20),
             ],
           ))
               :
