@@ -147,6 +147,9 @@ class SongRaw implements SongCore{
 
     for (SongPart part in songParts) {
 
+      if(!hasRefren && part.element == refrenPart.element)
+        continue;
+
       text += part.getText(withTabs: part.shift);
 
       int textLines =  part.getText(withTabs: part.shift).split("\n").length;
@@ -168,6 +171,9 @@ class SongRaw implements SongCore{
     String chords = '';
 
     for (SongPart part in songParts) {
+
+      if(!hasRefren && part.element == refrenPart.element)
+        continue;
 
       chords += part.chords;
 
