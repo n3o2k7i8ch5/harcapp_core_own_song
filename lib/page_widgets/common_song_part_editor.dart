@@ -312,11 +312,12 @@ class SongChordsWidget extends StatelessWidget{
 class ButtonsWidget extends StatelessWidget{
 
   final SongPartEditorTemplateState parent;
+  final Function() onCheckPressed;
 
   bool get isRefren => parent.isRefren;
   SongPart get songPart => parent.songPart;
 
-  ButtonsWidget(this.parent);
+  ButtonsWidget(this.parent, {this.onCheckPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -325,7 +326,7 @@ class ButtonsWidget extends StatelessWidget{
 
         IconButton(
             icon: Icon(MdiIcons.check),
-            onPressed: () => Navigator.pop(context)
+            onPressed: onCheckPressed
         ),
 
         isRefren?
