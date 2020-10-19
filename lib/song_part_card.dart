@@ -102,7 +102,7 @@ class SongPartCard extends StatelessWidget{
             children: [
               Text(
                 emptText,
-                style: AppTextStyle(color: hintEnabled(context)),
+                style: AppTextStyle(color: hintEnabled(context), fontWeight: weight.halfBold),
                 textAlign: TextAlign.center,
               ),
               SizedBox(width: Dimen.MARG_ICON),
