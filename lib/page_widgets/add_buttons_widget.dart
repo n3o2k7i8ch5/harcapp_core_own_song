@@ -18,6 +18,9 @@ class AddButtonsWidget extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
+
+    CurrentItemProvider currItemProv = Provider.of<CurrentItemProvider>(context, listen: false);
+
     return Row(
       children: [
 
@@ -25,8 +28,7 @@ class AddButtonsWidget extends StatelessWidget{
           child: SimpleButton(
             padding: EdgeInsets.all(Dimen.MARG_ICON),
             onTap: (){
-              CurrentItemProvider prov = Provider.of<CurrentItemProvider>(context, listen: false);
-              prov.addPart(SongPart.empty());
+              currItemProv.addPart(SongPart.empty());
               if(onPressed!=null) onPressed();
             },
             child: Row(
@@ -44,12 +46,11 @@ class AddButtonsWidget extends StatelessWidget{
         Expanded(
           child: SimpleButton(
             padding: EdgeInsets.all(Dimen.MARG_ICON),
-            onTap: (){
-              CurrentItemProvider prov = Provider.of<CurrentItemProvider>(context, listen: false);
+            onTap: currItemProv.hasRefren?(){
               RefrenPartProvider refPart = Provider.of<RefrenPartProvider>(context, listen: false);
-              prov.addPart(SongPart.from(refPart.part.element));
+              currItemProv.addPart(SongPart.from(refPart.part.element));
               if(onPressed!=null) onPressed();
-            },
+            }:null,
             child: Consumer<CurrentItemProvider>(
               builder: (context, currItemProv, child) => Row(
                 mainAxisAlignment: MainAxisAlignment.center,
