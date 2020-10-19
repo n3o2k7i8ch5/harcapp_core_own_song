@@ -50,15 +50,23 @@ class AddButtonsWidget extends StatelessWidget{
               prov.addPart(SongPart.from(refPart.part.element));
               if(onPressed!=null) onPressed();
             },
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(MdiIcons.plus, color: accentColor(context)),
-                Icon(MdiIcons.musicBoxOutline, color: accentColor(context)),
-                SizedBox(width: Dimen.MARG_ICON),
-                Text('Refren', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG))
-              ],
-            ),
+            child: Consumer<CurrentItemProvider>(
+              builder: (context, currItemProv, child) => Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(MdiIcons.plus, color: currItemProv.hasRefren?accentColor(context):iconDisabledColor(context)),
+                  Icon(MdiIcons.musicBoxOutline, color: currItemProv.hasRefren?accentColor(context):iconDisabledColor(context)),
+                  SizedBox(width: Dimen.MARG_ICON),
+                  Text(
+                    'Refren',
+                    style: AppTextStyle(
+                      fontSize: Dimen.TEXT_SIZE_BIG,
+                      color: currItemProv.hasRefren?textEnabled(context):iconDisabledColor(context)
+                    )
+                  )
+                ],
+              ),
+            )
           ),
         )
 
