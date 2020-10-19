@@ -22,7 +22,8 @@ class SongPartsListWidget extends StatelessWidget{
   final bool refrenTapable;
   final Function(SongPart, SongPartProvider) onPartTap;
   final bool shrinkWrap;
-  final Function() onChanged;
+  final Function() onDelete;
+  final Function() onDuplicate;
   final Function() onReorderFinished;
 
   const SongPartsListWidget({
@@ -32,7 +33,8 @@ class SongPartsListWidget extends StatelessWidget{
     this.refrenTapable: false,
     this.onPartTap,
     this.shrinkWrap: false,
-    this.onChanged,
+    this.onDelete,
+    this.onDuplicate,
     this.onReorderFinished,
   });
 
@@ -132,7 +134,7 @@ class SongPartsListWidget extends StatelessWidget{
         return TopRefrenButtons(
           part,
           onDelete: (songPart){
-            if(onChanged!=null) onChanged();
+            if(onDelete!=null) onDelete();
           },
         );
       else
@@ -140,10 +142,10 @@ class SongPartsListWidget extends StatelessWidget{
           part,
           onDuplicate: (SongPart part){
             scrollToBottom(controller);
-            if(onChanged!=null) onChanged();
+            if(onDuplicate!=null) onDuplicate();
           },
           onDelete: (SongPart part){
-            if(onChanged!=null) onChanged();
+            if(onDelete!=null) onDelete();
           },
         );
     },
