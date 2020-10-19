@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:harcapp_core_song/song_core.dart';
 import 'package:harcapp_core_song/song_element.dart';
 
@@ -147,7 +146,7 @@ class SongRaw implements SongCore{
 
     for (SongPart part in songParts) {
 
-      if(!hasRefren && part.element == refrenPart.element)
+      if(!hasRefren && part.element == refrenPart?.element)
         continue;
 
       text += part.getText(withTabs: part.shift);
@@ -172,7 +171,7 @@ class SongRaw implements SongCore{
 
     for (SongPart part in songParts) {
 
-      if(!hasRefren && part.element == refrenPart.element)
+      if(!hasRefren && part.element == refrenPart?.element)
         continue;
 
       chords += part.chords;
@@ -247,9 +246,6 @@ class SongRaw implements SongCore{
   String toCode(){
     return jsonEncode(toMap());
   }
-
-  @override
-  String getChords() => chords;
 
   @override
   int get rate => 0; //SongRate.RATE_NULL;
