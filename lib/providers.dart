@@ -215,6 +215,10 @@ class RefrenPartProvider extends SongPartProvider{
   String getText() => part.getText();
   void setText(String text) => part.setText(text);
 
+  void clear({bool notify: true}){
+    part = SongPart.empty(isRefren: true);
+    if(notify) notifyListeners();
+  }
 
   bool isRefren(SongElement element) => element == part.element;
 
