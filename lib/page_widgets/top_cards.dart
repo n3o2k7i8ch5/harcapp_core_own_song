@@ -76,7 +76,7 @@ class TopCards extends StatelessWidget{
                           IconButton(
                             icon: Icon(MdiIcons.informationOutline),
                             onPressed: (){
-                              AppScaffold.showSnackBar(context, 'Tytuły ukryte są dodatkowymi kluczami wyszukwiania piosneki.');
+                              AppScaffold.showMessage(context, 'Tytuły ukryte są dodatkowymi kluczami wyszukwiania piosneki.');
                             },
                           )
                         ],
