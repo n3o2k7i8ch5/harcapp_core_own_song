@@ -23,6 +23,7 @@ class SongPartsListWidget extends StatelessWidget{
   final Function(SongPart, SongPartProvider) onPartTap;
   final bool shrinkWrap;
   final Function() onChanged;
+  final Function() onReorderFinished;
 
   const SongPartsListWidget({
     this.controller,
@@ -32,6 +33,7 @@ class SongPartsListWidget extends StatelessWidget{
     this.onPartTap,
     this.shrinkWrap: false,
     this.onChanged,
+    this.onReorderFinished,
   });
 
   @override
@@ -46,6 +48,8 @@ class SongPartsListWidget extends StatelessWidget{
         areItemsTheSame: (oldItem, newItem) => oldItem.hashCode == newItem.hashCode,
         onReorderFinished: (item, from, to, newItems){
           prov.song.songParts = newItems;
+          prov.notifyListeners();
+          if(onReorderFinished != null) onReorderFinished();
         },
         itemBuilder: (context, itemAnimation, item, index) {
           return Reorderable(
