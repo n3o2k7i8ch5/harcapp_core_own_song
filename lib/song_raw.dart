@@ -18,6 +18,9 @@ class SongRaw implements SongCore{
 
   bool get isOwn => !isOfficial && !isConfid;
 
+  bool get isConfid => fileName.length >= 4 && fileName.substring(0, 4) == 'oc!_';
+  bool get isOfficial => fileName.length >= 3 && fileName.substring(0, 3) == 'o!_';
+
   List<String> tags;
 
   bool hasRefren;
@@ -26,9 +29,6 @@ class SongRaw implements SongCore{
   List<SongPart> songParts;
 
   bool get hasChords => chords.replaceAll('\n', '').replaceAll(' ', '').length!=0;
-
-  bool get isConfid => fileName.length >= 4 && fileName.substring(0, 4) == 'oc!_';
-  bool get isOfficial => fileName.length >= 3 && fileName.substring(0, 3) == 'o!_';
 
   void set(SongRaw song){
     this.fileName = song.fileName;
