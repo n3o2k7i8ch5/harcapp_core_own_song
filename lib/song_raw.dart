@@ -63,10 +63,10 @@ class SongRaw implements SongCore{
     this.songParts,
   });
 
-  static SongRaw empty(){
+  static SongRaw empty({fileName: ''}){
 
     return SongRaw(
-      fileName: '',
+      fileName: fileName,
       title: '',
       hidTitles: [],
       author: '',
