@@ -148,7 +148,7 @@ class SongRaw implements SongCore{
     String performer,
     String addPers,
     String youtubeLink,
-    String tags,
+    List<String> tags,
     String hasRefren,
     SongPart refrenPart,
     List<SongPart> songParts,
