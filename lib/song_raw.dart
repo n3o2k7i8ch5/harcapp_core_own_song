@@ -85,9 +85,9 @@ class SongRaw implements SongCore{
     return fromMap(fileName, map);
   }
 
-  static SongRaw from(String codeBase64){
+  static SongRaw from(String fileName, String codeBase64){
     String code = Utf8Decoder().convert(Base64Codec().decode(codeBase64).toList());
-    return SongRaw.parse('_shared', code);
+    return SongRaw.parse(fileName, code);
   }
 
   static SongRaw fromMap(String fileName, Map map){
