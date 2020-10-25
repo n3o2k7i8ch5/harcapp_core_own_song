@@ -162,8 +162,8 @@ class SongRaw implements SongCore{
       youtubeLink: youtubeLink??this.youtubeLink,
       tags: tags??this.tags,
       hasRefren: hasRefren??this.hasRefren,
-      refrenPart: refrenPart??this.refrenPart.copy(),
-      songParts: songParts??this.songParts.map((part) => part.copy()).toList(),
+      refrenPart: refrenPart??this.refrenPart,
+      songParts: songParts??this.songParts,
     );
 
   String get text{
