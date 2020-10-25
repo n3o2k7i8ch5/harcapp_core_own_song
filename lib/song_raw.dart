@@ -140,6 +140,32 @@ class SongRaw implements SongCore{
     );
   }
 
+  SongRaw copyWith({
+    String fileName,
+    String title,
+    List<String> hidTitles,
+    String author,
+    String performer,
+    String addPers,
+    String youtubeLink,
+    String tags,
+    String hasRefren,
+    SongPart refrenPart,
+    List<SongPart> songParts,
+  }) => SongRaw(
+      fileName: fileName??this.fileName,
+      title: title??this.title,
+      hidTitles: hidTitles??this.hidTitles,
+      author: author??this.author,
+      performer: performer??this.performer,
+      addPers: addPers??this.addPers,
+      youtubeLink: youtubeLink??this.youtubeLink,
+      tags: tags??this.tags,
+      hasRefren: hasRefren??this.hasRefren,
+      refrenPart: refrenPart??this.refrenPart.copy(),
+      songParts: songParts??this.songParts.map((part) => part.copy()).toList(),
+    );
+
   String get text{
 
     String text = '';
