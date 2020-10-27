@@ -228,7 +228,7 @@ class AddTextWidget extends StatelessWidget{
       children: [
 
         IconButton(
-          icon: Icon(MdiIcons.close),
+          icon: Icon(MdiIcons.trashCanOutline),
           onPressed: (){
             HidTitlesProvider prov = Provider.of<HidTitlesProvider>(context, listen: false);
             prov.remove(controller);
