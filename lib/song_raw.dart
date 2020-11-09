@@ -240,13 +240,10 @@ class SongRaw implements SongCore{
     int refCount = 0;
     for (SongPart part in songParts) {
 
-      if(part.element == refrenPart?.element)
-        if (hasRefren) { //part.isRefren
+      if(part.element == refrenPart?.element) {
+        if (hasRefren) //part.isRefren
           refCount++;
-          continue;
-        }
-
-      else {
+      } else {
 
           if (hasRefren && refCount > 0) {
             parts.add({'refren': refCount});
