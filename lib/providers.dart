@@ -217,7 +217,7 @@ class RefrenPartProvider extends SongPartProvider{
   void setText(String text) => part.setText(text);
 
   void clear({bool notify: true}){
-    _part = SongPart.empty(isRefren: true);
+    _part = SongPart.empty(isRefrenTemplate: true);
     if(notify) notifyListeners();
   }
 

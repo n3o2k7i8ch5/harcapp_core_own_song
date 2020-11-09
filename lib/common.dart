@@ -91,8 +91,8 @@ class SongPart{
     );
   }
 
-  static empty({isRefren: false}){
-    return SongPart.from(SongElement.empty(isRefren: isRefren));
+  static empty({isRefrenTemplate: false}){
+    return SongPart.from(SongElement.empty(isRefrenTemplate: isRefrenTemplate));
   }
 
   SongPart(this._songElement, this._isError);

@@ -40,7 +40,7 @@ class SongRaw implements SongCore{
     this.youtubeLink = song.youtubeLink;
     this.tags = song.tags?.toList();
 
-    this.hasRefren = song.hasRefren??SongPart.empty();
+    this.hasRefren = song.hasRefren??SongPart.empty(isRefrenTemplate: true);
     this.refrenPart = song.refrenPart?.copy();
 
     this.songParts = song.songParts;
@@ -75,7 +75,7 @@ class SongRaw implements SongCore{
       youtubeLink: '',
       tags: [],
       hasRefren: true,
-      refrenPart: SongPart.empty(),
+      refrenPart: SongPart.empty(isRefrenTemplate: true),
       songParts: [],
     );
   }
@@ -106,7 +106,7 @@ class SongRaw implements SongCore{
       Map refrenMap = map['refren'];
       refrenPart = SongPart.from(SongElement.from(refrenMap['text'], refrenMap['chords'], true));
     }else{
-      refrenPart = SongPart.empty();
+      refrenPart = SongPart.empty(isRefrenTemplate: true);
     }
 
     List<SongPart> songParts = [];
