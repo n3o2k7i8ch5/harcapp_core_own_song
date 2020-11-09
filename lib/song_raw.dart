@@ -249,13 +249,11 @@ class SongRaw implements SongCore{
             refCount = 0;
           }
 
-          if (part.element != refrenPart?.element) {
-            parts.add({
-              'text': part.getText(),
-              'chords': part.chords,
-              'shift': part.shift
-            });
-          }
+          parts.add({
+            'text': part.getText(),
+            'chords': part.chords,
+            'shift': part.shift
+          });
         }
     }
 
