@@ -228,7 +228,7 @@ class SongRaw implements SongCore{
 
     map['tags'] = tags;
 
-    if(hasRefren)
+    if(hasRefren && refrenPart != null && !refrenPart.isEmpty)
       map['refren'] = {
         'text': refrenPart.getText(),
         'chords': refrenPart.chords,
