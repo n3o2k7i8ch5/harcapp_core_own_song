@@ -1,7 +1,7 @@
 
 import 'package:flutter/widgets.dart';
-import 'package:harcapp_core/comm_widgets/tag_layout.dart';
 import 'package:harcapp_core/dimen.dart';
+import 'package:harcapp_core_tags/tag_layout.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 

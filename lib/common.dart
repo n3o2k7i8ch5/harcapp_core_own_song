@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/primitive_wrapper.dart';
-import 'package:harcapp_core/comm_widgets/tag_layout.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core_own_song/providers.dart';
 import 'package:harcapp_core_song/song_element.dart';

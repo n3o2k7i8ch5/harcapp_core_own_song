@@ -1,8 +1,8 @@
 
 import 'package:flutter/widgets.dart';
-import 'package:harcapp_core/comm_widgets/tag_layout.dart';
 import 'package:harcapp_core_own_song/song_raw.dart';
 import 'package:harcapp_core_song/song_element.dart';
+import 'package:harcapp_core_tags/tag_layout.dart';
 
 import 'common.dart';
 
