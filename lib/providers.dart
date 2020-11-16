@@ -36,6 +36,11 @@ class CurrentItemProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+  set composer(String value){
+    _song.composer = value;
+    notifyListeners();
+  }
+
   set performer(String value){
     _song.performer = value;
     notifyListeners();
