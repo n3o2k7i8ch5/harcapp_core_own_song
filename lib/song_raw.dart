@@ -99,11 +99,11 @@ class SongRaw implements SongCore{
 
     String title = map['title'];
     List<String> hidTitles = (map['hid_titles'] as List).cast<String>();
-    String author = map['text_author'];
-    String composer = map['composer'];
-    String performer = map['performer'];
-    String youtubeLink = map['yt_link'];
-    String addPers = map['add_pers'];
+    String author = map['text_author']??'';
+    String composer = map['composer']??'';
+    String performer = map['performer']??'';
+    String youtubeLink = map['yt_link']??'';
+    String addPers = map['add_pers']??'';
     List<String> tags = (map['tags'] as List).cast<String>();
     SongPart refrenPart;
     if (map.containsKey('refren')) {
