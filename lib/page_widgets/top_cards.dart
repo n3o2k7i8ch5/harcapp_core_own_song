@@ -19,6 +19,7 @@ class TopCards extends StatelessWidget{
 
   final Function(String) onChangedTitle;
   final Function(String) onChangedAuthor;
+  final Function(String) onChangedComposer;
   final Function(String) onChangedPerformer;
   final Function(String) onChangedYT;
   final Function(String) onChangedAddPers;
@@ -26,6 +27,7 @@ class TopCards extends StatelessWidget{
   const TopCards({
     this.onChangedTitle,
     this.onChangedAuthor,
+    this.onChangedComposer,
     this.onChangedPerformer,
     this.onChangedYT,
     this.onChangedAddPers,
@@ -156,6 +158,23 @@ class TopCards extends StatelessWidget{
                 color: hintEnabled(context),
               ),
               onChanged: onChangedAuthor,
+            ),
+          ),
+
+          Consumer<ComposerCtrlProvider>(
+            builder: (context, prov, child) => AppTextFieldHint(
+              controller: prov.controller,
+              hint: 'Kompozytor muzyki:',
+              style: AppTextStyle(
+                fontSize: Dimen.TEXT_SIZE_BIG,
+                fontWeight: weight.halfBold,
+                color: textEnabled(context),
+              ),
+              hintStyle: AppTextStyle(
+                fontSize: Dimen.TEXT_SIZE_NORMAL,
+                color: hintEnabled(context),
+              ),
+              onChanged: onChangedComposer,
             ),
           ),
 

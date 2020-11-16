@@ -291,6 +291,18 @@ class AuthorCtrlProvider extends ChangeNotifier{
   }
 }
 
+class ComposerCtrlProvider extends ChangeNotifier{
+  TextEditingController controller;
+  ComposerCtrlProvider({String text}){
+    controller = TextEditingController(text: text);
+  }
+
+  set text(String value){
+    controller.text = value;
+    notifyListeners();
+  }
+}
+
 class PerformerCtrlProvider extends ChangeNotifier{
   TextEditingController controller;
   PerformerCtrlProvider({String text}){

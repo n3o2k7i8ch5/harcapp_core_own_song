@@ -12,6 +12,7 @@ class SongRaw implements SongCore{
   String title;
   List<String> hidTitles;
   String author;
+  String composer;
   String performer;
   String addPers;
   String youtubeLink;
@@ -35,6 +36,7 @@ class SongRaw implements SongCore{
     this.title = song.title;
     this.hidTitles = song.hidTitles;
     this.author = song.author;
+    this.composer = song.composer;
     this.performer = song.performer;
     this.addPers = song.addPers;
     this.youtubeLink = song.youtubeLink;
@@ -51,6 +53,7 @@ class SongRaw implements SongCore{
     this.title,
     this.hidTitles,
     this.author,
+    this.composer,
     this.performer,
     this.addPers,
     this.youtubeLink,
@@ -70,6 +73,7 @@ class SongRaw implements SongCore{
       title: '',
       hidTitles: [],
       author: '',
+      composer: '',
       performer: '',
       addPers: '',
       youtubeLink: '',
@@ -96,6 +100,7 @@ class SongRaw implements SongCore{
     String title = map['title'];
     List<String> hidTitles = (map['hid_titles'] as List).cast<String>();
     String author = map['text_author'];
+    String composer = map['composer'];
     String performer = map['performer'];
     String youtubeLink = map['yt_link'];
     String addPers = map['add_pers'];
@@ -129,6 +134,7 @@ class SongRaw implements SongCore{
       title: title,
       hidTitles: hidTitles,
       author: author,
+      composer: composer,
       performer: performer,
       addPers: addPers,
       youtubeLink: youtubeLink,
@@ -147,6 +153,7 @@ class SongRaw implements SongCore{
     String title,
     List<String> hidTitles,
     String author,
+    String composer,
     String performer,
     String addPers,
     String youtubeLink,
@@ -159,6 +166,7 @@ class SongRaw implements SongCore{
       title: title??this.title,
       hidTitles: hidTitles??this.hidTitles,
       author: author??this.author,
+      composer: composer??this.composer,
       performer: performer??this.performer,
       addPers: addPers??this.addPers,
       youtubeLink: youtubeLink??this.youtubeLink,
@@ -224,6 +232,7 @@ class SongRaw implements SongCore{
     map['title'] = title;
     map['hid_titles'] = hidTitles;
     map['text_author'] = author;
+    map['composer'] = composer;
     map['performer'] = performer;
     map['yt_link'] = youtubeLink;
     map['add_pers'] = addPers;
