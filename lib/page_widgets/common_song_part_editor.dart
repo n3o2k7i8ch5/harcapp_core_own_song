@@ -172,7 +172,7 @@ class SongTextWidget extends StatelessWidget{
                   AnimatedContainer(
                       duration: Duration(milliseconds: 300),
                       curve: Curves.easeOutQuad,
-                      width: provider.shifted?Dimen.ICON_SIZE + Dimen.MARG_ICON:0
+                      width: provider.shifted?Dimen.ICON_SIZE + Dimen.ICON_MARG:0
                   ),
                   Expanded(child: Consumer<ChordsProvider>(
                     builder: (context, chordsProvider, child) => SingleChildScrollView(
@@ -331,7 +331,7 @@ class ButtonsWidget extends StatelessWidget{
 
         isRefren?
         Padding(
-          padding: EdgeInsets.all(Dimen.MARG_ICON),
+          padding: EdgeInsets.all(Dimen.ICON_MARG),
           child: Icon(
               MdiIcons.rayStartArrow,
               color: iconDisabledColor(context)
@@ -373,12 +373,12 @@ class ButtonsWidget extends StatelessWidget{
                 onTap: errCont==0?null:(){
                   parent.setState(() => parent.showErrBar = !parent.showErrBar);
                 },
-                padding: EdgeInsets.all(Dimen.MARG_ICON),
+                padding: EdgeInsets.all(Dimen.ICON_MARG),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Icon(MdiIcons.alertOutline, color: Colors.red),
-                    SizedBox(width: Dimen.MARG_ICON),
+                    SizedBox(width: Dimen.ICON_MARG),
                     Text('$errCont', style: AppTextStyle(fontWeight: weight.halfBold, color: Colors.red),)
                   ],
                 ),
@@ -508,7 +508,7 @@ class TextLengthWarning extends StatelessWidget{
           return Padding(
             padding: EdgeInsets.only(left: 3),
             child: SizedBox(
-              width: Dimen.MARG_ICON+2,
+              width: Dimen.ICON_MARG+2,
               child: Column(children: lineWidgets),
             ),
           );

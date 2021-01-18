@@ -117,19 +117,19 @@ class TopCards extends StatelessWidget{
                 AnimatedContainer(
                   duration: Duration(milliseconds: 500),
                   curve: Curves.easeInOut,
-                  height: provider.hasAny?2*Dimen.MARG_ICON+Dimen.ICON_FOOTPRINT:0,
+                  height: provider.hasAny?2*Dimen.ICON_MARG+Dimen.ICON_FOOTPRINT:0,
                   child: AnimatedOpacity(
                     opacity: provider.hasAny?1:0,
                     duration: Duration(milliseconds: 500),
                     curve: Curves.easeInOut,
                     child: SimpleButton(
                       margin: EdgeInsets.zero,
-                      padding: EdgeInsets.all(Dimen.MARG_ICON),
+                      padding: EdgeInsets.all(Dimen.ICON_MARG),
                       onTap: provider.isLastEmpty?null:() => provider.add(),
                       child: Row(
                         children: [
                           Icon(MdiIcons.plus, color: provider.isLastEmpty?iconDisabledColor(context):iconEnabledColor(context)),
-                          SizedBox(width: Dimen.MARG_ICON),
+                          SizedBox(width: Dimen.ICON_MARG),
                           Text(
                             'Dodaj tytuł ukryty',
                             style: AppTextStyle(color: provider.isLastEmpty?iconDisabledColor(context):iconEnabledColor(context)),

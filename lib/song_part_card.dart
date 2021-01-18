@@ -105,7 +105,7 @@ class SongPartCard extends StatelessWidget{
                 style: AppTextStyle(color: hintEnabled(context), fontWeight: weight.halfBold),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(width: Dimen.MARG_ICON),
+              SizedBox(width: Dimen.ICON_MARG),
               Icon(iconData, color: hintEnabled(context), size: 20),
             ],
           ))
@@ -258,7 +258,7 @@ class TopZwrotkaButtons extends StatelessWidget{
       children: <Widget>[
 
         Padding(
-          padding: EdgeInsets.all(Dimen.MARG_ICON),
+          padding: EdgeInsets.all(Dimen.ICON_MARG),
           child: Handle(child: Icon(MdiIcons.swapVertical, color: iconEnabledColor(context))),
         ),
 
@@ -269,7 +269,7 @@ class TopZwrotkaButtons extends StatelessWidget{
 
         if(songPart.isError)
           Padding(
-              padding: EdgeInsets.all(Dimen.MARG_ICON),
+              padding: EdgeInsets.all(Dimen.ICON_MARG),
               child: Icon(MdiIcons.alertOutline, color: Colors.red)
           ),
 
@@ -315,7 +315,7 @@ class TopRefrenButtons extends StatelessWidget{
       children: <Widget>[
 
         Padding(
-          padding: EdgeInsets.all(Dimen.MARG_ICON),
+          padding: EdgeInsets.all(Dimen.ICON_MARG),
           child: Handle(child: Icon(MdiIcons.swapVertical, color: iconEnabledColor(context))),
         ),
 

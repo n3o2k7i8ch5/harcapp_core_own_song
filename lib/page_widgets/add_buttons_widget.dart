@@ -26,7 +26,7 @@ class AddButtonsWidget extends StatelessWidget{
 
         Expanded(
           child: SimpleButton(
-            padding: EdgeInsets.all(Dimen.MARG_ICON),
+            padding: EdgeInsets.all(Dimen.ICON_MARG),
             onTap: (){
               currItemProv.addPart(SongPart.empty());
               if(onPressed!=null) onPressed();
@@ -36,7 +36,7 @@ class AddButtonsWidget extends StatelessWidget{
               children: [
                 Icon(MdiIcons.plus, color: accentColor(context)),
                 Icon(MdiIcons.musicBox, color: accentColor(context)),
-                SizedBox(width: Dimen.MARG_ICON),
+                SizedBox(width: Dimen.ICON_MARG),
                 Text('Zwrotka', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG))
               ],
             ),
@@ -46,7 +46,7 @@ class AddButtonsWidget extends StatelessWidget{
         Expanded(
           child: Consumer<CurrentItemProvider>(
               builder: (context, currItemProv, child) =>SimpleButton(
-                padding: EdgeInsets.all(Dimen.MARG_ICON),
+                padding: EdgeInsets.all(Dimen.ICON_MARG),
                 onTap: currItemProv.hasRefren?(){
                   RefrenPartProvider refPart = Provider.of<RefrenPartProvider>(context, listen: false);
                   currItemProv.addPart(SongPart.from(refPart.part.element));
@@ -57,7 +57,7 @@ class AddButtonsWidget extends StatelessWidget{
                   children: [
                     Icon(MdiIcons.plus, color: currItemProv.hasRefren?accentColor(context):iconDisabledColor(context)),
                     Icon(MdiIcons.musicBoxOutline, color: currItemProv.hasRefren?accentColor(context):iconDisabledColor(context)),
-                    SizedBox(width: Dimen.MARG_ICON),
+                    SizedBox(width: Dimen.ICON_MARG),
                     Text(
                         'Refren',
                         style: AppTextStyle(
