@@ -21,9 +21,11 @@ class TagsWidget extends StatelessWidget{
     return Consumer<TagsProvider>(
       builder: (context, prov, child){
 
-        Function onTagClick = (String tag, int i, bool checked){
-          prov.neg(i);
-          if(onChanged!=null) onChanged(prov.toList());
+        Function onTagTap = (String tag, bool checked){
+          if(checked) prov.checkedTags.remove(tag);
+          else prov.checkedTags.add(tag);
+
+          if(onChanged!=null) onChanged(prov.checkedTags);
         };
 
         return Column(
@@ -32,18 +34,14 @@ class TagsWidget extends StatelessWidget{
             HeaderWidget('Tagi${prov.count==0?'':' (${prov.count})'}', MdiIcons.tagOutline),
 
             if(linear)
-              TagLayout.linear(
-                onTagClick: onTagClick,
-                checked: prov.tagsChecked,
+              TagLayout(
+                onTagTap: onTagTap,
+                allTags: Tag.ALL_TAG_NAMES,
+                checkedTags: prov.checkedTags,
                 fontSize: Dimen.TEXT_SIZE_NORMAL,
+                layout: linear?Layout.LINEAR:Layout.WRAP,
               ),
 
-            if(!linear)
-              TagLayout.wrap(
-                onTagClick: onTagClick,
-                checked: prov.tagsChecked,
-                fontSize: Dimen.TEXT_SIZE_NORMAL,
-              )
           ],
         );
       },

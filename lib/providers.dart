@@ -236,38 +236,23 @@ class RefrenPartProvider extends SongPartProvider{
 }
 
 class TagsProvider extends ChangeNotifier{
-  List<bool> tagsChecked;
+  List<String> _checkedTags;
 
-  TagsProvider(List<String> allTagNames, List<String> tags){
-    tagsChecked = allTagNames.map((t) => tags.contains(t)).toList();
+  TagsProvider(List<String> allTags, List<String> checkedTags){
+    _checkedTags = checkedTags;
   }
 
-  set(List<String> allTagNames, List<String> tags){
-    tagsChecked = allTagNames.map((t) => tags.contains(t)).toList();
+  set(List<String> allTags, List<String> checkedTags){
+    _checkedTags = checkedTags;
     notifyListeners();
   }
 
-  neg(int idx){
-    tagsChecked[idx] = !tagsChecked[idx];
-    notifyListeners();
-  }
-  get(int idx) => tagsChecked[idx];
+  get(int idx) => _checkedTags[idx];
 
-  List<String> toList(){
-
-    List<String> list = [];
-
-    for(int i=0; i<tagsChecked.length; i++)
-      if(tagsChecked[i]) list.add(Tag.ALL_TAG_NAMES[i]);
-
-    return list;
-  }
+  List<String> get checkedTags => _checkedTags;
 
   int get count{
-    int count = 0;
-    for(int i=0; i<tagsChecked.length; i++)
-      if(tagsChecked[i]) count++;
-    return count;
+    _checkedTags.length;
   }
 }
 
