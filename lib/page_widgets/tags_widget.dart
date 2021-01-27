@@ -34,13 +34,19 @@ class TagsWidget extends StatelessWidget{
             HeaderWidget('Tagi${prov.count==0?'':' (${prov.count})'}', MdiIcons.tagOutline),
 
             if(linear)
-              TagLayout(
+              TagLayout.linear(
                 onTagTap: onTagTap,
                 allTags: Tag.ALL_TAG_NAMES,
                 checkedTags: prov.checkedTags,
                 fontSize: Dimen.TEXT_SIZE_NORMAL,
-                layout: linear?Layout.LINEAR:Layout.WRAP,
-              ),
+              )
+            else
+              TagLayout.wrap(
+                onTagTap: onTagTap,
+                allTags: Tag.ALL_TAG_NAMES,
+                checkedTags: prov.checkedTags,
+                fontSize: Dimen.TEXT_SIZE_NORMAL,
+              )
 
           ],
         );
