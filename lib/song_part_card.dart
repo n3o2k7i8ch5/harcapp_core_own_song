@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core_own_song/providers.dart';
 import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
@@ -124,9 +125,10 @@ class SongPartCard extends StatelessWidget{
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
             if(topBuilder!=null) topBuilder(context, songPart),
-            InkWell(
-                onTap: onTap,
-                child: main
+
+            SimpleButton(
+                child: main,
+                onTap: onTap
             )
           ],
         );
