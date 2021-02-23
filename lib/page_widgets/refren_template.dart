@@ -37,7 +37,10 @@ class RefrenTemplate extends StatelessWidget{
                 topBuilder: (context, part) => Consumer<CurrentItemProvider>(
                   builder: (context, currItemProv, child) => TitleShortcutRowWidget(title: 'Szablon refrenu',
                     icon: prov.isError?MdiIcons.alertOutline:MdiIcons.musicBoxOutline,
-                    iconColor: prov.isError?Colors.red:null,
+                    iconColor:
+                    prov.isError?
+                    Colors.red:
+                    (currItemProv.hasRefren?iconEnabledColor(context):iconDisabledColor(context)),
                     titleColor: currItemProv.hasRefren?textEnabled(context):hintEnabled(context),
                     trailing: Switch(
                         value: currItemProv.hasRefren,
