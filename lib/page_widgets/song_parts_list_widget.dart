@@ -1,5 +1,6 @@
 import 'dart:ui' as ui;
 
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
@@ -86,18 +87,28 @@ class SongPartsListWidget extends StatelessWidget{
                 sizeFraction: 0.7,
                 curve: Curves.easeInOut,
                 animation: itemAnimation,
-                child: AppCard(
-                    padding: EdgeInsets.zero,
-                    margin: EdgeInsets.only(
-                      top: ITEM_TOP_MARG,
-                      right: Dimen.DEF_MARG,
-                      left: Dimen.DEF_MARG,
-                      bottom: ITEM_BOTTOM_MARG
+                child: Stack(
+                  children: [
+                    AppCard(
+                        padding: EdgeInsets.zero,
+                        margin: EdgeInsets.only(
+                            top: ITEM_TOP_MARG,
+                            right: Dimen.DEF_MARG,
+                            left: Dimen.DEF_MARG,
+                            bottom: ITEM_BOTTOM_MARG
+                        ),
+                        radius: AppCard.BIG_RADIUS,
+                        elevation: elevation,
+                        color: color,
+                        child: child
                     ),
-                    radius: AppCard.BIG_RADIUS,
-                    elevation: elevation,
-                    color: color,
-                    child: child
+
+                    Container(
+                      width: 200,
+                      height: SongPartCard.EMPTY_HEIGHT + Dimen.ICON_FOOTPRINT + ITEM_TOP_MARG + ITEM_BOTTOM_MARG,
+                      color: Colors.red,
+                    )
+                  ],
                 )
             );
           },
@@ -114,10 +125,7 @@ class SongPartsListWidget extends StatelessWidget{
               prov.song.songParts.isEmpty?
               SongPartCard.EMPTY_HEIGHT + Dimen.ICON_FOOTPRINT + ITEM_TOP_MARG + ITEM_BOTTOM_MARG
                   :0,
-              child: AnimatedOpacity(
-                opacity: prov.song.songParts.isEmpty?1:0,
-                duration: Duration(milliseconds: 300),
-                child: Column(
+              child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
 
@@ -129,12 +137,11 @@ class SongPartsListWidget extends StatelessWidget{
                       'Pusto!\nUżyj poniższych przycisków.',
                       textAlign: TextAlign.center,
                       style: AppTextStyle(
-                          color: hintEnabled(context),
-                          fontSize: Dimen.TEXT_SIZE_BIG,
+                        color: hintEnabled(context),
+                        fontSize: Dimen.TEXT_SIZE_BIG,
                       ),
                     ),
                   ]
-                ),
               ),
             ),
 
