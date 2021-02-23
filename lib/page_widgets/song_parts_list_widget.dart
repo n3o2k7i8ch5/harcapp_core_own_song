@@ -115,7 +115,7 @@ class SongPartsListWidget extends StatelessWidget{
               SongPartCard.EMPTY_HEIGHT + Dimen.ICON_FOOTPRINT + ITEM_TOP_MARG + ITEM_BOTTOM_MARG
                   :0,
               child: AnimatedOpacity(
-                opacity: prov.song.songParts.length==0?1:0,
+                opacity: prov.song.songParts.isEmpty?1:0,
                 duration: Duration(milliseconds: 300),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

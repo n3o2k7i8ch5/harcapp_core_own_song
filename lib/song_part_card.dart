@@ -77,11 +77,13 @@ class SongPartCard extends StatelessWidget{
 
         String emptText;
         IconData iconData;
+        bool pressable = false;
 
         if(type == SongPartType.ZWROTKA){
           if(songPart.isEmpty) {
             emptText = 'Edytuj zwrotkę.';
             iconData = MdiIcons.pencilOutline;
+            pressable = true;
           }
         }else if(type == SongPartType.REFREN){
           if(prov.refEnab) {
@@ -93,6 +95,7 @@ class SongPartCard extends StatelessWidget{
           if(songPart.isEmpty) {
             emptText = 'Edytuj.';
             iconData = MdiIcons.pencilPlusOutline;
+            pressable = true;
           }
         }
 
@@ -106,24 +109,39 @@ class SongPartCard extends StatelessWidget{
               songChordsCard
             ],
           );
-        else
-          main = SizedBox(height: EMPTY_HEIGHT, child: Column(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(iconData, color: hintEnabled(context)),
-              SizedBox(height: Dimen.ICON_MARG),
-              Text(
-                emptText,
-                style: AppTextStyle(
-                    color: hintEnabled(context),
-                    fontSize: Dimen.TEXT_SIZE_BIG,
-                    fontWeight: weight.halfBold
-                ),
-                textAlign: TextAlign.center,
+        else{
+
+          List<Widget> children = [
+            Icon(iconData, color: pressable?iconEnabledColor(context):hintEnabled(context)),
+            SizedBox(height: Dimen.ICON_MARG, width: Dimen.ICON_MARG),
+            Text(
+              emptText,
+              style: AppTextStyle(
+                  color: pressable?iconEnabledColor(context):hintEnabled(context),
+                  fontSize: Dimen.TEXT_SIZE_BIG,
+                  fontWeight: weight.halfBold
               ),
-            ],
-          ));
+              textAlign: TextAlign.center,
+            ),
+          ];
+
+          main = SizedBox(
+              height: EMPTY_HEIGHT,
+              child:
+              pressable?
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: children,
+              ):
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: children,
+              )
+          );
+
+        }
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
