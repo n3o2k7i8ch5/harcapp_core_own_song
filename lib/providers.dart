@@ -239,7 +239,7 @@ class TagsProvider extends ChangeNotifier{
   List<String> _checkedTags;
 
   TagsProvider(List<String> allTags, List<String> checkedTags){
-    _checkedTags = checkedTags;
+    _checkedTags = checkedTags??[];
   }
 
   set(List<String> allTags, List<String> checkedTags){
