@@ -22,6 +22,7 @@ class SongPartsListWidget extends StatelessWidget{
   static const double ITEM_BOTTOM_MARG = 12.0;
 
   final ScrollController controller;
+  final ScrollPhysics physics;
   final Widget header;
   final Widget footer;
   final bool refrenTapable;
@@ -33,6 +34,7 @@ class SongPartsListWidget extends StatelessWidget{
 
   const SongPartsListWidget({
     this.controller,
+    this.physics,
     this.header,
     this.footer,
     this.refrenTapable: false,
@@ -47,7 +49,7 @@ class SongPartsListWidget extends StatelessWidget{
   Widget build(BuildContext context) {
     return Consumer<CurrentItemProvider>(
       builder: (context, prov, _) => ImplicitlyAnimatedReorderableList<SongPart>(
-        physics: BouncingScrollPhysics(),
+        physics: physics??BouncingScrollPhysics(),
         controller: controller,
         items: prov.song.songParts,
         insertDuration: Duration(milliseconds: prov.song.songParts.length<=1?0:200),
