@@ -22,7 +22,7 @@ class SongPartCard extends StatelessWidget{
 
   static const int MIN_LINE_CNT = 4;
 
-  static const double EMPTY_HEIGHT = MIN_LINE_CNT*Dimen.TEXT_SIZE_NORMAL+4;
+  static const double EMPTY_HEIGHT = MIN_LINE_CNT*Dimen.TEXT_SIZE_NORMAL+4*Dimen.DEF_MARG;
 
   final SongPart songPart;
   final SongPartType type;
