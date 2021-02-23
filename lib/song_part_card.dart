@@ -134,7 +134,7 @@ class SongPartCard extends StatelessWidget{
             SimpleButton(
               radius: AppCard.BIG_RADIUS,
               padding: EdgeInsets.all(Dimen.DEF_MARG),
-              margin: EdgeInsets.all(Dimen.DEF_MARG),
+              margin: EdgeInsets.only(top: Dimen.DEF_MARG, bottom: Dimen.DEF_MARG),
               child: main,
               onTap: onTap
             )
