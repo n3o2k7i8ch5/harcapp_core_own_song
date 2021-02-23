@@ -44,16 +44,13 @@ class RefrenTemplate extends StatelessWidget{
                               icon: prov.isError?MdiIcons.alertOutline:MdiIcons.musicBoxOutline,
                               iconColor: prov.isError?Colors.red:null,
                               titleColor: currItemProv.hasRefren?textEnabled(context):hintEnabled(context),
+                              trailing: Switch(
+                                  value: currItemProv.hasRefren,
+                                  onChanged: (bool value){
+                                    currItemProv.hasRefren = !currItemProv.hasRefren;
+                                    if(onRefrenEnabledChaned != null) onRefrenEnabledChaned(value);
+                                  }),
                             ),
-
-                            Expanded(child:Container()),
-                            SizedBox(width: 34),
-                            Switch(
-                                value: currItemProv.hasRefren,
-                                onChanged: (bool value){
-                                  currItemProv.hasRefren = !currItemProv.hasRefren;
-                                  if(onRefrenEnabledChaned != null) onRefrenEnabledChaned(value);
-                                }),
                           ]
                       ),
                     ),
