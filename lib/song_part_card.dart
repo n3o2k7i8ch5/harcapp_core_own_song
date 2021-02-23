@@ -19,7 +19,9 @@ enum SongPartType{
 
 class SongPartCard extends StatelessWidget{
 
-  static const double EMPTY_HEIGHT = 2*Dimen.TEXT_SIZE_NORMAL+4;
+  static const int MIN_LINE_CNT = 4;
+
+  static const double EMPTY_HEIGHT = MIN_LINE_CNT*Dimen.TEXT_SIZE_NORMAL+4;
 
   final SongPart songPart;
   final SongPartType type;
@@ -184,10 +186,10 @@ class SongTextWidget extends StatelessWidget{
 
     int newLinesCnt = 0;
     if(textLineCnt<chrdLineCnt) {
-      if(chrdLineCnt>2) newLinesCnt = chrdLineCnt - textLineCnt;
-      else newLinesCnt = 2 - textLineCnt;
+      if(chrdLineCnt>SongPartCard.MIN_LINE_CNT) newLinesCnt = chrdLineCnt - textLineCnt;
+      else newLinesCnt = SongPartCard.MIN_LINE_CNT - textLineCnt;
     }else{
-      if(textLineCnt<2) newLinesCnt = 2 - textLineCnt;
+      if(textLineCnt<SongPartCard.MIN_LINE_CNT) newLinesCnt = SongPartCard.MIN_LINE_CNT - textLineCnt;
     }
 
     return songText + '\n'*newLinesCnt;
@@ -231,10 +233,10 @@ class SongChordsWidget extends StatelessWidget{
 
     int newLinesCnt = 0;
     if(chrdLineCnt<textLineCnt) {
-      if(textLineCnt>2) newLinesCnt = textLineCnt - chrdLineCnt;
-      else newLinesCnt = 2 - chrdLineCnt;
+      if(textLineCnt>SongPartCard.MIN_LINE_CNT) newLinesCnt = textLineCnt - chrdLineCnt;
+      else newLinesCnt = SongPartCard.MIN_LINE_CNT - chrdLineCnt;
     }else{
-      if(chrdLineCnt<2) newLinesCnt = 2 - chrdLineCnt;
+      if(chrdLineCnt<SongPartCard.MIN_LINE_CNT) newLinesCnt = SongPartCard.MIN_LINE_CNT - chrdLineCnt;
     }
 
     return songChords + '\n'*newLinesCnt;
