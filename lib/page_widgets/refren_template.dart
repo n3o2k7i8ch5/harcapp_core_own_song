@@ -22,31 +22,34 @@ class RefrenTemplate extends StatelessWidget{
   Widget build(BuildContext context) {
 
     return Consumer<RefrenPartProvider>(
-        builder: (context, prov, child) => SongPartCard.from(
-          songPart: prov.part,
-          type: SongPartType.REFREN_TEMPLATE,
-          topBuilder: (context, part) => Padding(
-            padding: EdgeInsets.only(left: Dimen.ICON_MARG),
-            child: Consumer<CurrentItemProvider>(
-              builder: (context, currItemProv, child) => TitleShortcutRowWidget(
-                title: 'Szablon refrenu',
-                //icon: prov.isError?MdiIcons.alertOutline:MdiIcons.musicBoxOutline,
-                titleColor:
-                prov.isError?
-                Colors.red:
-                (currItemProv.hasRefren?textEnabled(context):textDisabled(context)),
-                //titleColor: currItemProv.hasRefren?textEnabled(context):hintEnabled(context),
-                textAlign: TextAlign.start,
-                trailing: Switch(
-                    value: currItemProv.hasRefren,
-                    onChanged: (bool value){
-                      currItemProv.hasRefren = !currItemProv.hasRefren;
-                      if(onRefrenEnabledChaned != null) onRefrenEnabledChaned(value);
-                    }),
+        builder: (context, prov, child) => Padding(
+          padding: EdgeInsets.only(left: Dimen.DEF_MARG, right: Dimen.DEF_MARG),
+          child: SongPartCard.from(
+            songPart: prov.part,
+            type: SongPartType.REFREN_TEMPLATE,
+            topBuilder: (context, part) => Padding(
+              padding: EdgeInsets.only(left: Dimen.ICON_MARG),
+              child: Consumer<CurrentItemProvider>(
+                builder: (context, currItemProv, child) => TitleShortcutRowWidget(
+                  title: 'Szablon refrenu',
+                  //icon: prov.isError?MdiIcons.alertOutline:MdiIcons.musicBoxOutline,
+                  titleColor:
+                  prov.isError?
+                  Colors.red:
+                  (currItemProv.hasRefren?textEnabled(context):textDisabled(context)),
+                  //titleColor: currItemProv.hasRefren?textEnabled(context):hintEnabled(context),
+                  textAlign: TextAlign.start,
+                  trailing: Switch(
+                      value: currItemProv.hasRefren,
+                      onChanged: (bool value){
+                        currItemProv.hasRefren = !currItemProv.hasRefren;
+                        if(onRefrenEnabledChaned != null) onRefrenEnabledChaned(value);
+                      }),
+                ),
               ),
             ),
+            onTap: () => onPartTap(prov.part, prov),
           ),
-          onTap: () => onPartTap(prov.part, prov),
         ),
     );
   }
