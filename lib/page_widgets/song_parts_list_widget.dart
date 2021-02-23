@@ -8,6 +8,7 @@ import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core_own_song/page_widgets/scroll_to_bottom.dart';
 import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
 import 'package:implicitly_animated_reorderable_list/transitions.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 
 import '../common.dart';
@@ -109,11 +110,21 @@ class SongPartsListWidget extends StatelessWidget{
               child: AnimatedOpacity(
                 opacity: prov.song.songParts.length==0?1:0,
                 duration: Duration(milliseconds: 300),
-                child: Center(
-                  child: Text(
-                    'Pusto! Dodaj coś poniższymi przyciskami.\n',
-                    style: AppTextStyle(color: hintEnabled(context)),
-                  ),
+                child: Column(
+                  children: [
+
+                    Icon(MdiIcons.musicNoteOffOutline, color: hintEnabled(context)),
+
+                    SizedBox(height: Dimen.ICON_MARG),
+
+                    Text(
+                      'Pusto! Dodaj coś poniższymi przyciskami.',
+                      style: AppTextStyle(
+                          color: hintEnabled(context),
+                          fontSize: Dimen.TEXT_SIZE_BIG
+                      ),
+                    ),
+                  ]
                 ),
               ),
             ),
