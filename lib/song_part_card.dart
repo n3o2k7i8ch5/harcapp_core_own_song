@@ -272,10 +272,11 @@ class TopZwrotkaButtons extends StatelessWidget{
           child: Handle(child: Icon(MdiIcons.swapVertical, color: iconEnabledColor(context))),
         ),
 
-        if(showName)
-          Text('Zwrotka', style: AppTextStyle()),
-
-        Expanded(child: Container()),
+        Expanded(
+            child: showName?
+            Text('Zwrotka', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold, color: hintEnabled(context))):
+            Container()
+        ),
 
         if(songPart.isError)
           Padding(
@@ -329,10 +330,11 @@ class TopRefrenButtons extends StatelessWidget{
           child: Handle(child: Icon(MdiIcons.swapVertical, color: iconEnabledColor(context))),
         ),
 
-        if(showName)
-          Text('Refren', style: AppTextStyle()),
-
-        Expanded(child: Container()),
+        Expanded(
+            child: showName?
+            Text('Refren', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold, color: hintEnabled(context))):
+            Container()
+        ),
 
         IconButton(
           icon: Icon(MdiIcons.trashCanOutline, color: iconEnabledColor(context)),
