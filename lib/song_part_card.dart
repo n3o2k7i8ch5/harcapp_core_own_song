@@ -276,7 +276,7 @@ class TopZwrotkaButtons extends StatelessWidget{
         if(songPart.isError)
           Padding(
               padding: EdgeInsets.all(Dimen.ICON_MARG),
-              child: Icon(MdiIcons.alertOutline, color: Colors.red)
+              child: Icon(MdiIcons.alertCircleOutline, color: Colors.red)
           ),
 
         IconButton(

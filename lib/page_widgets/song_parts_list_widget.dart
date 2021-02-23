@@ -118,7 +118,7 @@ class SongPartsListWidget extends StatelessWidget{
                     SizedBox(height: Dimen.ICON_MARG),
 
                     Text(
-                      'Pusto! Dodaj coś poniższymi przyciskami.',
+                      'Pusto!\nDodaj coś poniższymi przyciskami.',
                       style: AppTextStyle(
                           color: hintEnabled(context),
                           fontSize: Dimen.TEXT_SIZE_BIG

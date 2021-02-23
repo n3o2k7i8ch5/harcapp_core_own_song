@@ -251,9 +251,7 @@ class TagsProvider extends ChangeNotifier{
 
   List<String> get checkedTags => _checkedTags;
 
-  int get count{
-    _checkedTags.length;
-  }
+  int get count => _checkedTags.length;
 }
 
 class TitleCtrlProvider extends ChangeNotifier{

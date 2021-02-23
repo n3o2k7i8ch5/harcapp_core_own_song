@@ -377,7 +377,7 @@ class ButtonsWidget extends StatelessWidget{
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(MdiIcons.alertOutline, color: Colors.red),
+                    Icon(MdiIcons.alertCircleOutline, color: Colors.red),
                     SizedBox(width: Dimen.ICON_MARG),
                     Text('$errCont', style: AppTextStyle(fontWeight: weight.halfBold, color: Colors.red),)
                   ],
