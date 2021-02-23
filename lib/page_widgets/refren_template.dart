@@ -37,21 +37,16 @@ class RefrenTemplate extends StatelessWidget{
                     songPart: prov.part,
                     type: SongPartType.REFREN_TEMPLATE,
                     topBuilder: (context, part) => Consumer<CurrentItemProvider>(
-                      builder: (context, currItemProv, child) => Row(
-                          children: <Widget>[
-
-                            TitleShortcutRowWidget(title: 'Szablon refrenu',
-                              icon: prov.isError?MdiIcons.alertOutline:MdiIcons.musicBoxOutline,
-                              iconColor: prov.isError?Colors.red:null,
-                              titleColor: currItemProv.hasRefren?textEnabled(context):hintEnabled(context),
-                              trailing: Switch(
-                                  value: currItemProv.hasRefren,
-                                  onChanged: (bool value){
-                                    currItemProv.hasRefren = !currItemProv.hasRefren;
-                                    if(onRefrenEnabledChaned != null) onRefrenEnabledChaned(value);
-                                  }),
-                            ),
-                          ]
+                      builder: (context, currItemProv, child) => TitleShortcutRowWidget(title: 'Szablon refrenu',
+                        icon: prov.isError?MdiIcons.alertOutline:MdiIcons.musicBoxOutline,
+                        iconColor: prov.isError?Colors.red:null,
+                        titleColor: currItemProv.hasRefren?textEnabled(context):hintEnabled(context),
+                        trailing: Switch(
+                            value: currItemProv.hasRefren,
+                            onChanged: (bool value){
+                              currItemProv.hasRefren = !currItemProv.hasRefren;
+                              if(onRefrenEnabledChaned != null) onRefrenEnabledChaned(value);
+                            }),
                       ),
                     ),
                     onTap: () => onPartTap(prov.part, prov),
