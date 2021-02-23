@@ -50,7 +50,7 @@ class SongPartsListWidget extends StatelessWidget{
     return Consumer<CurrentItemProvider>(
       builder: (context, prov, _) => ImplicitlyAnimatedReorderableList<SongPart>(
         physics: physics??BouncingScrollPhysics(),
-        //controller: controller,
+        controller: controller,
         items: prov.song.songParts,
         insertDuration: Duration(milliseconds: prov.song.songParts.length<=1?0:200),
         removeDuration: Duration(milliseconds: prov.song.songParts.length==0?0:500),
