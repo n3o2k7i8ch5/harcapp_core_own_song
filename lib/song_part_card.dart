@@ -93,32 +93,34 @@ class SongPartCard extends StatelessWidget{
           }
         }
 
-        Widget main = Padding(
-          padding: EdgeInsets.all(Dimen.DEF_MARG/2),
-          child:
-          emptText!=null?
-          SizedBox(height: EMPTY_HEIGHT, child: Row(
-            mainAxisSize: MainAxisSize.min,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                emptText,
-                style: AppTextStyle(color: hintEnabled(context), fontWeight: weight.halfBold),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(width: Dimen.ICON_MARG),
-              Icon(iconData, color: hintEnabled(context), size: 20),
-            ],
-          ))
-              :
-          Row(
+        Widget main;
+
+        if(emptText==null)
+          main = Row(
             children: <Widget>[
               songTextCard,
               SizedBox(width: Dimen.DEF_MARG),
               songChordsCard
             ],
-          ),
-        );
+          );
+        else
+          main = SizedBox(height: EMPTY_HEIGHT, child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(iconData, color: hintEnabled(context)),
+              SizedBox(height: Dimen.ICON_MARG),
+              Text(
+                emptText,
+                style: AppTextStyle(
+                    color: hintEnabled(context),
+                    fontSize: Dimen.TEXT_SIZE_BIG,
+                    fontWeight: weight.halfBold
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ));
 
         return Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
