@@ -87,29 +87,19 @@ class SongPartsListWidget extends StatelessWidget{
                 sizeFraction: 0.7,
                 curve: Curves.easeInOut,
                 animation: itemAnimation,
-                child: Stack(
-                  children: [
-                    AppCard(
-                        padding: EdgeInsets.zero,
-                        margin: EdgeInsets.only(
-                            top: ITEM_TOP_MARG,
-                            right: Dimen.DEF_MARG,
-                            left: Dimen.DEF_MARG,
-                            bottom: ITEM_BOTTOM_MARG
-                        ),
-                        radius: AppCard.BIG_RADIUS,
-                        elevation: elevation,
-                        color: color,
-                        child: child
+                child: AppCard(
+                    padding: EdgeInsets.zero,
+                    margin: EdgeInsets.only(
+                        top: ITEM_TOP_MARG,
+                        right: Dimen.DEF_MARG,
+                        left: Dimen.DEF_MARG,
+                        bottom: ITEM_BOTTOM_MARG
                     ),
-
-                    Container(
-                      width: 200,
-                      height: SongPartCard.EMPTY_HEIGHT + Dimen.ICON_FOOTPRINT + ITEM_TOP_MARG + ITEM_BOTTOM_MARG,
-                      color: Colors.red,
-                    )
-                  ],
-                )
+                    radius: AppCard.BIG_RADIUS,
+                    elevation: elevation,
+                    color: color,
+                    child: child
+                ),
             );
           },
         ),

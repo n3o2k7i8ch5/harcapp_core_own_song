@@ -126,7 +126,7 @@ class SongPartCard extends StatelessWidget{
           ];
 
           main = SizedBox(
-              height: EMPTY_HEIGHT,
+              height: MIN_LINE_CNT*Dimen.TEXT_SIZE_NORMAL,
               child:
               pressable?
               Row(
