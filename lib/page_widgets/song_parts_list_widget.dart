@@ -17,6 +17,9 @@ import '../song_part_card.dart';
 
 class SongPartsListWidget extends StatelessWidget{
 
+  static const double ITEM_TOP_MARG = Dimen.DEF_MARG;
+  static const double ITEM_BOTTOM_MARG = 12.0;
+
   final ScrollController controller;
   final Widget header;
   final Widget footer;
@@ -86,10 +89,10 @@ class SongPartsListWidget extends StatelessWidget{
                 child: AppCard(
                     padding: EdgeInsets.zero,
                     margin: EdgeInsets.only(
-                      top: Dimen.DEF_MARG,
+                      top: ITEM_TOP_MARG,
                       right: Dimen.DEF_MARG,
                       left: Dimen.DEF_MARG,
-                      bottom: 10.0
+                      bottom: ITEM_BOTTOM_MARG
                     ),
                     radius: AppCard.BIG_RADIUS,
                     elevation: elevation,
@@ -109,12 +112,13 @@ class SongPartsListWidget extends StatelessWidget{
               duration: Duration(milliseconds: 1),
               height:
               prov.song.songParts.isEmpty?
-              SongPartCard.EMPTY_HEIGHT + Dimen.ICON_FOOTPRINT + 4*Dimen.DEF_MARG
+              SongPartCard.EMPTY_HEIGHT + Dimen.ICON_FOOTPRINT + ITEM_TOP_MARG + ITEM_BOTTOM_MARG
                   :0,
               child: AnimatedOpacity(
                 opacity: prov.song.songParts.length==0?1:0,
                 duration: Duration(milliseconds: 300),
                 child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
 
                     Icon(MdiIcons.musicNoteOffOutline, color: hintEnabled(context)),
