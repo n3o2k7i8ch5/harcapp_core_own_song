@@ -84,7 +84,7 @@ class SongPartsListWidget extends StatelessWidget{
                 curve: Curves.easeInOut,
                 animation: itemAnimation,
                 child: AppCard(
-                    padding: EdgeInsets.zero,
+                    padding: EdgeInsets.all(Dimen.DEF_MARG),
                     margin: EdgeInsets.all(Dimen.DEF_MARG),
                     radius: AppCard.BIG_RADIUS,
                     elevation: elevation,
@@ -117,10 +117,11 @@ class SongPartsListWidget extends StatelessWidget{
                     SizedBox(height: Dimen.ICON_MARG),
 
                     Text(
-                      'Pusto!\nDodaj coś poniższymi przyciskami.',
+                      'Pusto!\nUżyj poniższych przycisków.',
+                      textAlign: TextAlign.center,
                       style: AppTextStyle(
                           color: hintEnabled(context),
-                          fontSize: Dimen.TEXT_SIZE_BIG
+                          fontSize: Dimen.TEXT_SIZE_BIG,
                       ),
                     ),
                   ]
