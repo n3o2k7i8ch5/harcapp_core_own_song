@@ -93,7 +93,7 @@ class SongPartCard extends StatelessWidget{
             emptText = 'Refren ukryty. Nie będzie wyświetlany w piosence.';
         }else if(type == SongPartType.REFREN_TEMPLATE){
           if(songPart.isEmpty) {
-            emptText = 'Edytuj';
+            emptText = 'Edytuj szablon';
             iconData = MdiIcons.pencilPlusOutline;
             pressable = true;
           }

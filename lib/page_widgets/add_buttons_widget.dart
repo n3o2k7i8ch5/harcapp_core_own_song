@@ -3,6 +3,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -26,6 +27,7 @@ class AddButtonsWidget extends StatelessWidget{
 
         Expanded(
           child: SimpleButton(
+            radius: AppCard.BIG_RADIUS,
             padding: EdgeInsets.all(Dimen.ICON_MARG),
             onTap: (){
               currItemProv.addPart(SongPart.empty());
@@ -46,6 +48,7 @@ class AddButtonsWidget extends StatelessWidget{
         Expanded(
           child: Consumer<CurrentItemProvider>(
               builder: (context, currItemProv, child) =>SimpleButton(
+                radius: AppCard.BIG_RADIUS,
                 padding: EdgeInsets.all(Dimen.ICON_MARG),
                 onTap: currItemProv.hasRefren?(){
                   RefrenPartProvider refPart = Provider.of<RefrenPartProvider>(context, listen: false);
