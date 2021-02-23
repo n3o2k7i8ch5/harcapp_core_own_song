@@ -54,47 +54,45 @@ class SongPartsListWidget extends StatelessWidget{
           prov.notifyListeners();
           if(onReorderFinished != null) onReorderFinished();
         },
-        itemBuilder: (context, itemAnimation, item, index) {
-          return Reorderable(
-            key: ValueKey(item.hashCode),
-            builder: (context, dragAnimation, inDrag) {
-              final t = dragAnimation.value;
-              final elevation = ui.lerpDouble(0, AppCard.bigElevation, t);
-              final color = Color.lerp(background(context), defCardEnabled(context), t);
+        itemBuilder: (context, itemAnimation, item, index) => Reorderable(
+          key: ValueKey(item.hashCode),
+          builder: (context, dragAnimation, inDrag) {
+            final t = dragAnimation.value;
+            final elevation = ui.lerpDouble(0, AppCard.bigElevation, t);
+            final color = Color.lerp(background(context), defCardEnabled(context), t);
 
-              bool isRefren = item.isRefren(context);
+            bool isRefren = item.isRefren(context);
 
-              Widget child;
+            Widget child;
 
-              if(isRefren)
-                child = Consumer<RefrenPartProvider>(
-                    builder: (context, prov, child) => getSongPartCard<RefrenPartProvider>(item, item.isRefren(context), prov)
-                );
+            if(isRefren)
+              child = Consumer<RefrenPartProvider>(
+                  builder: (context, prov, child) => getSongPartCard<RefrenPartProvider>(item, item.isRefren(context), prov)
+              );
 
-              else
-                child = ChangeNotifierProvider<SongPartProvider>(
-                  create: (context) => SongPartProvider(item),
-                  builder: (context, child) => Consumer<SongPartProvider>(
-                      builder: (context, prov, child) => getSongPartCard<SongPartProvider>(item, item.isRefren(context), prov)
-                  ),
-                );
+            else
+              child = ChangeNotifierProvider<SongPartProvider>(
+                create: (context) => SongPartProvider(item),
+                builder: (context, child) => Consumer<SongPartProvider>(
+                    builder: (context, prov, child) => getSongPartCard<SongPartProvider>(item, item.isRefren(context), prov)
+                ),
+              );
 
 
-              return SizeFadeTransition(
+            return SizeFadeTransition(
                 sizeFraction: 0.7,
                 curve: Curves.easeInOut,
                 animation: itemAnimation,
                 child: AppCard(
-                  padding: EdgeInsets.only(left: Dimen.DEF_MARG/2, right: Dimen.DEF_MARG/2, bottom: Dimen.DEF_MARG/2),
-                  margin: AppCard.defMargin.copyWith(bottom: 12),//AppCard.defMargin.copyWith(bottom: 2*elevation),
-                  elevation: elevation,
-                  color: color,
-                  child: child
+                    padding: EdgeInsets.zero,
+                    margin: AppCard.defMargin.copyWith(bottom: 12),
+                    elevation: elevation,
+                    color: color,
+                    child: child
                 )
-              );
-            },
-          );
-        },
+            );
+          },
+        ),
         padding: EdgeInsets.only(bottom: Dimen.DEF_MARG/2),
         shrinkWrap: shrinkWrap,
         header: header,
@@ -104,7 +102,7 @@ class SongPartsListWidget extends StatelessWidget{
             AnimatedContainer(
               duration: Duration(milliseconds: 1),
               height:
-              prov.song.songParts.length==0?
+              prov.song.songParts.isEmpty?
               SongPartCard.EMPTY_HEIGHT + Dimen.ICON_FOOTPRINT + 4*Dimen.DEF_MARG
                   :0,
               child: AnimatedOpacity(
