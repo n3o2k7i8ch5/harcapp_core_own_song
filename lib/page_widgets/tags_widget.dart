@@ -1,5 +1,6 @@
 
 import 'package:flutter/widgets.dart';
+import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core_tags/tag_layout.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -31,7 +32,10 @@ class TagsWidget extends StatelessWidget{
         return Column(
           children: [
 
-            HeaderWidget('Tagi${prov.count==0?'':' (${prov.count})'}', MdiIcons.tagOutline),
+            TitleShortcutRowWidget(
+              title: 'Tagi${prov.count==0?'':' (${prov.count})'}',
+              icon: MdiIcons.tagOutline,
+            ),
 
             if(linear)
               TagLayout.linear(

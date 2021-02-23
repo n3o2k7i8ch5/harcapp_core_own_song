@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
+import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
@@ -38,12 +39,13 @@ class RefrenTemplate extends StatelessWidget{
                     topBuilder: (context, part) => Consumer<CurrentItemProvider>(
                       builder: (context, currItemProv, child) => Row(
                           children: <Widget>[
-                            HeaderWidget(
-                                'Szablon refrenu',
-                                prov.isError?MdiIcons.alertOutline:MdiIcons.musicBoxOutline,
-                                iconColor: prov.isError?Colors.red:null,
-                                enabled: currItemProv.hasRefren
+
+                            TitleShortcutRowWidget(title: 'Szablon refrenu',
+                              icon: prov.isError?MdiIcons.alertOutline:MdiIcons.musicBoxOutline,
+                              iconColor: prov.isError?Colors.red:null,
+                              titleColor: currItemProv.hasRefren?textEnabled(context):hintEnabled(context),
                             ),
+
                             Expanded(child:Container()),
                             SizedBox(width: 34),
                             Switch(

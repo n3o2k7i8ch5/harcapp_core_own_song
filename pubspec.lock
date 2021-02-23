@@ -49,7 +49,7 @@ packages:
       name: connectivity
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.0.2"
   connectivity_for_web:
     dependency: transitive
     description:
@@ -99,13 +99,13 @@ packages:
       name: fluttertoast
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.1.1"
+    version: "7.1.8"
   harcapp_core:
     dependency: "direct main"
     description:
       path: "."
       ref: HEAD
-      resolved-ref: b0a09fb30bedbe6af8ed2c61210f9ad839d44677
+      resolved-ref: "768ea50f5c17532fecc9de634d04e3469d604ae1"
       url: "git://github.com/n3o2k7i8ch5/harcapp_core.git"
     source: git
     version: "0.0.1"
@@ -114,7 +114,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: a218a5e2f2b84b9b286577eb3a1d5845a8e37437
+      resolved-ref: "2f59774ebd593fc9b37c2971a7a83e2d5a233455"
       url: "git://github.com/n3o2k7i8ch5/harcapp_core_song.git"
     source: git
     version: "0.0.1"
@@ -123,7 +123,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "5b2dd47d2a1951b275407e14e35be918229f211f"
+      resolved-ref: c1bd0ec206de4d3faf2559a6a43cca956d013102
       url: "git://github.com/n3o2k7i8ch5/harcapp_core_tags.git"
     source: git
     version: "0.0.1"
