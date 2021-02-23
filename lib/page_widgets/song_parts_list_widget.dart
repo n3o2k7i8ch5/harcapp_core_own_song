@@ -85,7 +85,8 @@ class SongPartsListWidget extends StatelessWidget{
                 animation: itemAnimation,
                 child: AppCard(
                     padding: EdgeInsets.zero,
-                    margin: AppCard.defMargin.copyWith(bottom: 12),
+                    margin: EdgeInsets.all(Dimen.DEF_MARG),
+                    radius: AppCard.BIG_RADIUS,
                     elevation: elevation,
                     color: color,
                     child: child
