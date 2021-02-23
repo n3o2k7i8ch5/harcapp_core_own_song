@@ -32,9 +32,13 @@ class TagsWidget extends StatelessWidget{
         return Column(
           children: [
 
-            TitleShortcutRowWidget(
-              title: 'Tagi${prov.count==0?'':' (${prov.count})'}',
-              icon: MdiIcons.tagOutline,
+            Padding(
+              padding: EdgeInsets.only(left: Dimen.ICON_MARG),
+              child: TitleShortcutRowWidget(
+                title: 'Tagi${prov.count==0?'':' (${prov.count})'}',
+                textAlign: TextAlign.start,
+                //icon: MdiIcons.tagOutline,
+              ),
             ),
 
             if(linear)
