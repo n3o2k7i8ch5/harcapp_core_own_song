@@ -279,8 +279,8 @@ class SongRaw implements SongCore{
     else return map;
   }
 
-  String toCode(){
-    return jsonEncode(toMap());
+  String toCode({bool withFileName: true}){
+    return jsonEncode(toMap(withFileName: withFileName));
   }
 
   @override
