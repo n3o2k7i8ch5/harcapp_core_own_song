@@ -36,8 +36,8 @@ class AddButtonsWidget extends StatelessWidget{
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(MdiIcons.plus, color: accentColor(context)),
-                Icon(MdiIcons.musicBox, color: accentColor(context)),
+                Icon(MdiIcons.plus, color: accent_(context)),
+                Icon(MdiIcons.musicBox, color: accent_(context)),
                 SizedBox(width: Dimen.ICON_MARG),
                 Text('Zwrotka', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG))
               ],
@@ -58,14 +58,14 @@ class AddButtonsWidget extends StatelessWidget{
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(MdiIcons.plus, color: currItemProv.hasRefren?accentColor(context):iconDisabledColor(context)),
-                    Icon(MdiIcons.musicBoxOutline, color: currItemProv.hasRefren?accentColor(context):iconDisabledColor(context)),
+                    Icon(MdiIcons.plus, color: currItemProv.hasRefren?accent_(context):iconDisab_(context)),
+                    Icon(MdiIcons.musicBoxOutline, color: currItemProv.hasRefren?accent_(context):iconDisab_(context)),
                     SizedBox(width: Dimen.ICON_MARG),
                     Text(
                         'Refren',
                         style: AppTextStyle(
                             fontSize: Dimen.TEXT_SIZE_BIG,
-                            color: currItemProv.hasRefren?textEnabled(context):iconDisabledColor(context)
+                            color: currItemProv.hasRefren?textEnab_(context):iconDisab_(context)
                         )
                     )
                   ],

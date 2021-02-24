@@ -36,8 +36,8 @@ class RefrenTemplate extends StatelessWidget{
                   titleColor:
                   prov.isError?
                   Colors.red:
-                  (currItemProv.hasRefren?textEnabled(context):textDisabled(context)),
-                  //titleColor: currItemProv.hasRefren?textEnabled(context):hintEnabled(context),
+                  (currItemProv.hasRefren?textEnab_(context):textDisabled(context)),
+                  //titleColor: currItemProv.hasRefren?textEnab_(context):hintEnabled(context),
                   textAlign: TextAlign.start,
                   trailing: Switch(
                       value: currItemProv.hasRefren,

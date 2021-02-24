@@ -65,7 +65,7 @@ class SongPartsListWidget extends StatelessWidget{
           builder: (context, dragAnimation, inDrag) {
             final t = dragAnimation.value;
             final elevation = ui.lerpDouble(0, AppCard.bigElevation, t);
-            final color = Color.lerp(background(context), defCardEnabled(context), t);
+            final color = Color.lerp(background_(context), cardEnab_(context), t);
 
             bool isRefren = item.isRefren(context);
 

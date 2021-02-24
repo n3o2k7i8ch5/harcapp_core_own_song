@@ -112,12 +112,12 @@ class SongPartCard extends StatelessWidget{
         else{
 
           List<Widget> children = [
-            Icon(iconData, color: pressable?iconEnabledColor(context):hintEnabled(context)),
+            Icon(iconData, color: pressable?iconEnab_(context):hintEnabled(context)),
             SizedBox(height: Dimen.ICON_MARG, width: Dimen.ICON_MARG),
             Text(
               emptText,
               style: AppTextStyle(
-                  color: pressable?iconEnabledColor(context):hintEnabled(context),
+                  color: pressable?iconEnab_(context):hintEnabled(context),
                   fontSize: Dimen.TEXT_SIZE_BIG,
                   fontWeight: pressable?weight.halfBold:weight.normal
               ),
@@ -183,9 +183,9 @@ class SongTextWidget extends StatelessWidget{
 
     Color textColor;
 
-    if(parent.type == SongPartType.ZWROTKA) textColor = textEnabled(context);
+    if(parent.type == SongPartType.ZWROTKA) textColor = textEnab_(context);
     else if(parent.type == SongPartType.REFREN) textColor = textDisabled(context);
-    else if(parent.type == SongPartType.REFREN_TEMPLATE) textColor = textEnabled(context);
+    else if(parent.type == SongPartType.REFREN_TEMPLATE) textColor = textEnab_(context);
 
     return Padding(
       padding: EdgeInsets.only(left: parent.songPart.shift?Dimen.ICON_SIZE:0),
@@ -233,9 +233,9 @@ class SongChordsWidget extends StatelessWidget{
 
     Color textColor;
 
-    if(parent.type == SongPartType.ZWROTKA) textColor = textEnabled(context);
+    if(parent.type == SongPartType.ZWROTKA) textColor = textEnab_(context);
     else if(parent.type == SongPartType.REFREN) textColor = textDisabled(context);
-    else if(parent.type == SongPartType.REFREN_TEMPLATE) textColor = textEnabled(context);
+    else if(parent.type == SongPartType.REFREN_TEMPLATE) textColor = textEnab_(context);
 
     return Text(
       text,
@@ -287,7 +287,7 @@ class TopZwrotkaButtons extends StatelessWidget{
 
         Padding(
           padding: EdgeInsets.all(Dimen.ICON_MARG),
-          child: Handle(child: Icon(MdiIcons.swapVertical, color: iconEnabledColor(context))),
+          child: Handle(child: Icon(MdiIcons.swapVertical, color: iconEnab_(context))),
         ),
 
         Expanded(
@@ -303,7 +303,7 @@ class TopZwrotkaButtons extends StatelessWidget{
           ),
 
         IconButton(
-          icon: Icon(MdiIcons.contentDuplicate, color: iconEnabledColor(context)),
+          icon: Icon(MdiIcons.contentDuplicate, color: iconEnab_(context)),
           onPressed: (){
             if(onDuplicate!=null) onDuplicate(songPart);
             Provider.of<CurrentItemProvider>(context, listen: false).addPart(songPart.copy());
@@ -312,7 +312,7 @@ class TopZwrotkaButtons extends StatelessWidget{
 
 
         IconButton(
-          icon: Icon(MdiIcons.trashCanOutline, color: iconEnabledColor(context)),
+          icon: Icon(MdiIcons.trashCanOutline, color: iconEnab_(context)),
           onPressed: (){
             if(onDelete!=null) onDelete(songPart);
             Provider.of<CurrentItemProvider>(context, listen: false).removePart(songPart);
@@ -345,7 +345,7 @@ class TopRefrenButtons extends StatelessWidget{
 
         Padding(
           padding: EdgeInsets.all(Dimen.ICON_MARG),
-          child: Handle(child: Icon(MdiIcons.swapVertical, color: iconEnabledColor(context))),
+          child: Handle(child: Icon(MdiIcons.swapVertical, color: iconEnab_(context))),
         ),
 
         Expanded(
@@ -355,7 +355,7 @@ class TopRefrenButtons extends StatelessWidget{
         ),
 
         IconButton(
-          icon: Icon(MdiIcons.trashCanOutline, color: iconEnabledColor(context)),
+          icon: Icon(MdiIcons.trashCanOutline, color: iconEnab_(context)),
           onPressed: (){
             if(onDelete!=null) onDelete(songPart);
             Provider.of<CurrentItemProvider>(context, listen: false).removePart(songPart);

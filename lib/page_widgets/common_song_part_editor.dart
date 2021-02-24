@@ -116,7 +116,7 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
                             child: AppCard(
                               padding: EdgeInsets.only(left: Dimen.DEF_MARG/2, right: Dimen.DEF_MARG/2, bottom: Dimen.DEF_MARG/2),
                               elevation: 0,
-                              color: background(context),
+                              color: background_(context),
                               child: SongTextWidget(this, boxConstraints),
                             ),
                           ),
@@ -124,7 +124,7 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
                           AppCard(
                             padding: EdgeInsets.only(left: Dimen.DEF_MARG/2, right: Dimen.DEF_MARG/2, bottom: Dimen.DEF_MARG/2),
                             elevation: 0,
-                            color: background(context),
+                            color: background_(context),
                             child: SongChordsWidget(this, boxConstraints),
                           )
 
@@ -161,7 +161,7 @@ class SongTextWidget extends StatelessWidget{
       child: AppCard(
         padding: EdgeInsets.only(left: Dimen.DEF_MARG/2, right: Dimen.DEF_MARG/2, bottom: Dimen.DEF_MARG/2),
         elevation: 0,
-        color: background(context),
+        color: background_(context),
         child: SingleChildScrollView(
             physics: BouncingScrollPhysics(),
             controller: parent.textController,
@@ -182,7 +182,7 @@ class SongTextWidget extends StatelessWidget{
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             fontSize: Dimen.TEXT_SIZE_NORMAL,
-                            color: textEnabled(context),
+                            color: textEnab_(context),
                           ),
                           decoration: InputDecoration(
                               hintText: 'Słowa ${parent.isRefren?'refrenu':'zwrotki'}',
@@ -252,7 +252,7 @@ class SongChordsWidget extends StatelessWidget{
       child: AppCard(
         padding: EdgeInsets.only(left: Dimen.DEF_MARG/2, right: Dimen.DEF_MARG/2, bottom: Dimen.DEF_MARG/2),
         elevation: 0,
-        color: background(context),
+        color: background_(context),
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
           controller: parent.chordsController,
@@ -272,7 +272,7 @@ class SongChordsWidget extends StatelessWidget{
                         style: TextStyle(
                           fontFamily: 'Roboto',
                           fontSize: Dimen.TEXT_SIZE_NORMAL,
-                          color: textEnabled(context),
+                          color: textEnab_(context),
                         ),
                         decoration: InputDecoration(
                             hintText: 'Chwyty ${parent.isRefren?'ref.':'zwr.'}',
@@ -334,7 +334,7 @@ class ButtonsWidget extends StatelessWidget{
           padding: EdgeInsets.all(Dimen.ICON_MARG),
           child: Icon(
               MdiIcons.rayStartArrow,
-              color: iconDisabledColor(context)
+              color: iconDisab_(context)
           ),
         )
             :
@@ -347,11 +347,11 @@ class ButtonsWidget extends StatelessWidget{
                 children: [
                   Icon(
                       MdiIcons.circleMedium,
-                      color: iconEnabledColor(context)
+                      color: iconEnab_(context)
                   ),
                   Icon(
                       MdiIcons.rayStartArrow,
-                      color: iconEnabledColor(context)
+                      color: iconEnab_(context)
                   )
                 ],
               ),
@@ -449,7 +449,7 @@ class ChordPresenceWarning extends StatelessWidget{
         int lines = Provider.of<TextProvider>(context).text.split('\n').length;
         for(int i=0; i<lines; i++){
           ChordsMissingError error = provider.errorAt(i);
-          lineWidgets.add(WarningShade(error==null?background(context).withOpacity(0):error.color));
+          lineWidgets.add(WarningShade(error==null?background_(context).withOpacity(0):error.color));
         }
 
         return Column(
@@ -502,7 +502,7 @@ class TextLengthWarning extends StatelessWidget{
           int lines = Provider.of<TextProvider>(context).text.split('\n').length;
           for(int i=0; i<lines; i++){
             TextTooLongError error = provider.errorAt(i);
-            lineWidgets.add(WarningShade(error==null?background(context).withOpacity(0):error.color));
+            lineWidgets.add(WarningShade(error==null?background_(context).withOpacity(0):error.color));
           }
 
           return Padding(
@@ -549,7 +549,7 @@ class LineCount extends StatelessWidget{
                   style: TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: Dimen.TEXT_SIZE_TINY,//initial font size
-                      color: hintDisabled(context),
+                      color: hintEnabled(context),
                       height: 1*Dimen.TEXT_SIZE_BIG/ Dimen.TEXT_SIZE_TINY
                   ),
                 );

@@ -51,7 +51,7 @@ class TopCards extends StatelessWidget{
                       style: AppTextStyle(
                         fontSize: Dimen.TEXT_SIZE_BIG,
                         fontWeight: weight.halfBold,
-                        color: textEnabled(context),
+                        color: textEnab_(context),
                       ),
                       hintStyle: AppTextStyle(
                         fontSize: Dimen.TEXT_SIZE_NORMAL,
@@ -128,11 +128,11 @@ class TopCards extends StatelessWidget{
                       onTap: provider.isLastEmpty?null:() => provider.add(),
                       child: Row(
                         children: [
-                          Icon(MdiIcons.plus, color: provider.isLastEmpty?iconDisabledColor(context):iconEnabledColor(context)),
+                          Icon(MdiIcons.plus, color: provider.isLastEmpty?iconDisab_(context):iconEnab_(context)),
                           SizedBox(width: Dimen.ICON_MARG),
                           Text(
                             'Dodaj tytuł ukryty',
-                            style: AppTextStyle(color: provider.isLastEmpty?iconDisabledColor(context):iconEnabledColor(context)),
+                            style: AppTextStyle(color: provider.isLastEmpty?iconDisab_(context):iconEnab_(context)),
                           )
                         ],
                       ),
@@ -151,7 +151,7 @@ class TopCards extends StatelessWidget{
               style: AppTextStyle(
                 fontSize: Dimen.TEXT_SIZE_BIG,
                 fontWeight: weight.halfBold,
-                color: textEnabled(context),
+                color: textEnab_(context),
               ),
               hintStyle: AppTextStyle(
                 fontSize: Dimen.TEXT_SIZE_NORMAL,
@@ -168,7 +168,7 @@ class TopCards extends StatelessWidget{
               style: AppTextStyle(
                 fontSize: Dimen.TEXT_SIZE_BIG,
                 fontWeight: weight.halfBold,
-                color: textEnabled(context),
+                color: textEnab_(context),
               ),
               hintStyle: AppTextStyle(
                 fontSize: Dimen.TEXT_SIZE_NORMAL,
@@ -185,7 +185,7 @@ class TopCards extends StatelessWidget{
                 style: AppTextStyle(
                   fontSize: Dimen.TEXT_SIZE_BIG,
                   fontWeight: weight.halfBold,
-                  color: textEnabled(context),
+                  color: textEnab_(context),
                 ),
                 hintStyle: AppTextStyle(
                   fontSize: Dimen.TEXT_SIZE_NORMAL,
@@ -202,7 +202,7 @@ class TopCards extends StatelessWidget{
               style: AppTextStyle(
                 fontSize: Dimen.TEXT_SIZE_BIG,
                 fontWeight: weight.halfBold,
-                color: textEnabled(context),
+                color: textEnab_(context),
               ),
               hintStyle: AppTextStyle(
                 fontSize: Dimen.TEXT_SIZE_NORMAL,
@@ -219,7 +219,7 @@ class TopCards extends StatelessWidget{
               style: AppTextStyle(
                 fontSize: Dimen.TEXT_SIZE_BIG,
                 fontWeight: weight.halfBold,
-                color: textEnabled(context),
+                color: textEnab_(context),
               ),
               hintStyle: AppTextStyle(
                 fontSize: Dimen.TEXT_SIZE_NORMAL,
@@ -261,7 +261,7 @@ class AddTextWidget extends StatelessWidget{
           style: AppTextStyle(
             fontSize: Dimen.TEXT_SIZE_BIG,
             //fontWeight: weight.halfBold,
-            color: textEnabled(context),
+            color: textEnab_(context),
           ),
           hintStyle: AppTextStyle(
             fontSize: Dimen.TEXT_SIZE_NORMAL,

@@ -36,7 +36,7 @@ class HeaderWidget extends StatelessWidget{
 
     Color color = iconColor;
     if(color==null){
-      color = enabled?textEnabled(context):hintEnabled(context);
+      color = enabled?textEnab_(context):hintEnabled(context);
     }
 
     return Padding(
@@ -48,7 +48,7 @@ class HeaderWidget extends StatelessWidget{
           SizedBox(width: Dimen.LIST_TILE_SEPARATOR),
           Text(title,
             style: AppTextStyle(
-                color: enabled?textEnabled(context):hintEnabled(context),
+                color: enabled?textEnab_(context):hintEnabled(context),
                 fontWeight: weight.halfBold,
                 fontSize: Dimen.TEXT_SIZE_BIG,
                 shadow: enabled
