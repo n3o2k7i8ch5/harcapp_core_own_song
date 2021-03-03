@@ -3,10 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:harcapp_core_tags/tag_layout.dart';
-import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../common.dart';
 import '../providers.dart';
 
 class TagsWidget extends StatelessWidget{

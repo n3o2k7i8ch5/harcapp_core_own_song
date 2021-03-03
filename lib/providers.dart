@@ -250,8 +250,10 @@ class TagsProvider extends ChangeNotifier{
   String get(int idx) => _checkedTags[idx];
 
   void add(String tag){
-    if(!_checkedTags.contains(tag))
+    if(!_checkedTags.contains(tag)) {
       _checkedTags.add(tag);
+      _checkedTags.sort();
+    }
     notifyListeners();
   }
 
