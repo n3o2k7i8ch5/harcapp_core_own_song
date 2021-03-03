@@ -23,8 +23,8 @@ class TagsWidget extends StatelessWidget{
       builder: (context, prov, child){
 
         Function onTagTap = (String tag, bool checked){
-          if(checked) prov.checkedTags.remove(tag);
-          else prov.checkedTags.add(tag);
+          if(checked) prov.remove(tag);
+          else prov.add(tag);
 
           if(onChanged!=null) onChanged(prov.checkedTags);
         };

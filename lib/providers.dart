@@ -247,7 +247,18 @@ class TagsProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  get(int idx) => _checkedTags[idx];
+  String get(int idx) => _checkedTags[idx];
+
+  void add(String tag){
+    if(!_checkedTags.contains(tag))
+      _checkedTags.add(tag);
+    notifyListeners();
+  }
+
+  void remove(String tag){
+    _checkedTags.remove(tag);
+    notifyListeners();
+  }
 
   List<String> get checkedTags => _checkedTags;
 
