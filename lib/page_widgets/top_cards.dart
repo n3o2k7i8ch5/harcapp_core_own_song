@@ -286,7 +286,7 @@ class TopCards extends StatelessWidget{
                                 onTap: () async {
                                   prov.releaseDate = await showDatePicker(
                                     context: context,
-                                    initialDate: DateTime.now(),
+                                    initialDate: prov.releaseDate??DateTime.now(),
                                     firstDate: DateTime(966),
                                     lastDate: DateTime.now(),
                                   );

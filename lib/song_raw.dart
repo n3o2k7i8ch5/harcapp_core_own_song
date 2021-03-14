@@ -259,7 +259,7 @@ class SongRaw implements SongCore{
     map[SongCore.PARAM_TEXT_AUTHOR] = author;
     map[SongCore.PARAM_COMPOSER] = composer;
     map[SongCore.PARAM_PERFORMER] = performer;
-    map[SongCore.PARAM_REL_DATE] = releaseDate.toIso8601String();
+    map[SongCore.PARAM_REL_DATE] = releaseDate?.toIso8601String();
     map[SongCore.PARAM_SHOW_REL_DATE_MONTH] = showRelDateMonth;
     map[SongCore.PARAM_SHOW_REL_DATE_DAY] = showRelDateDay;
     map[SongCore.PARAM_YT_LINK] = youtubeLink;
