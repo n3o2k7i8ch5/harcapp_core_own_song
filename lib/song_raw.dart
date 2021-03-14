@@ -15,6 +15,8 @@ class SongRaw implements SongCore{
   String performer;
   String composer;
   DateTime releaseDate;
+  bool showRelDateMonth;
+  bool showRelDateDay;
   String addPers;
   String youtubeLink;
 
@@ -40,6 +42,8 @@ class SongRaw implements SongCore{
     this.composer = song.composer;
     this.performer = song.performer;
     this.releaseDate = song.releaseDate;
+    this.showRelDateMonth = song.showRelDateMonth;
+    this.showRelDateDay = song.showRelDateDay;
     this.addPers = song.addPers;
     this.youtubeLink = song.youtubeLink;
     this.tags = song.tags?.toList();
@@ -58,6 +62,8 @@ class SongRaw implements SongCore{
     this.composer,
     this.performer,
     this.releaseDate,
+    this.showRelDateMonth,
+    this.showRelDateDay,
     this.addPers,
     this.youtubeLink,
 
@@ -79,6 +85,8 @@ class SongRaw implements SongCore{
       composer: '',
       performer: '',
       releaseDate: null,
+      showRelDateMonth: true,
+      showRelDateDay: true,
       addPers: '',
       youtubeLink: '',
       tags: [],
@@ -101,26 +109,28 @@ class SongRaw implements SongCore{
   static SongRaw fromMap(String fileName, Map map){
     bool hasRefren = false;
 
-    String title = map['title'];
-    List<String> hidTitles = (map['hid_titles'] as List).cast<String>();
-    String author = map['text_author']??'';
-    String composer = map['composer']??'';
-    String performer = map['performer']??'';
-    DateTime releaseDate = DateTime.tryParse(map['release_date']??'');
-    String youtubeLink = map['yt_link']??'';
-    String addPers = map['add_pers']??'';
-    List<String> tags = (map['tags'] as List).cast<String>();
+    String title = map[SongCore.PARAM_TITLE];
+    List<String> hidTitles = (map[SongCore.PARAM_HID_TITLES] as List).cast<String>();
+    String author = map[SongCore.PARAM_TEXT_AUTHOR]??'';
+    String composer = map[SongCore.PARAM_COMPOSER]??'';
+    String performer = map[SongCore.PARAM_PERFORMER]??'';
+    DateTime releaseDate = DateTime.tryParse(map[SongCore.PARAM_REL_DATE]??'');
+    bool showRelDateMonth = map[SongCore.PARAM_SHOW_REL_DATE_MONTH]??true;
+    bool showRelDateDay = map[SongCore.PARAM_SHOW_REL_DATE_DAY]??true;
+    String youtubeLink = map[SongCore.PARAM_YT_LINK]??'';
+    String addPers = map[SongCore.PARAM_ADD_PERS]??'';
+    List<String> tags = (map[SongCore.PARAM_TAGS] as List).cast<String>();
     SongPart refrenPart;
-    if (map.containsKey('refren')) {
+    if (map.containsKey(SongCore.PARAM_REFREN)) {
       hasRefren = true;
-      Map refrenMap = map['refren'];
+      Map refrenMap = map[SongCore.PARAM_REFREN];
       refrenPart = SongPart.from(SongElement.from(refrenMap['text'], refrenMap['chords'], true));
     }else{
       refrenPart = SongPart.empty(isRefrenTemplate: true);
     }
 
     List<SongPart> songParts = [];
-    List<dynamic> partsList = map['parts'];
+    List<dynamic> partsList = map[SongCore.PARAM_PARTS];
     for (Map partMap in partsList) {
       if (partMap.containsKey('refren'))
         for (int i = 0; i < partMap['refren']; i++) {
@@ -142,6 +152,9 @@ class SongRaw implements SongCore{
       composer: composer,
       performer: performer,
       releaseDate: releaseDate,
+      showRelDateMonth: showRelDateMonth,
+      showRelDateDay: showRelDateDay,
+
       addPers: addPers,
       youtubeLink: youtubeLink,
 
@@ -162,6 +175,8 @@ class SongRaw implements SongCore{
     String composer,
     String performer,
     DateTime releaseDate,
+    bool showRelDateMonth,
+    bool showRelDateDay,
     String addPers,
     String youtubeLink,
     List<String> tags,
@@ -176,6 +191,8 @@ class SongRaw implements SongCore{
       composer: composer??this.composer,
       performer: performer??this.performer,
       releaseDate: releaseDate??this.releaseDate,
+      showRelDateMonth: showRelDateMonth??this.showRelDateMonth,
+      showRelDateDay: showRelDateDay??this.showRelDateDay,
       addPers: addPers??this.addPers,
       youtubeLink: youtubeLink??this.youtubeLink,
       tags: tags??this.tags,
@@ -237,21 +254,23 @@ class SongRaw implements SongCore{
   Map toMap({bool withFileName: true}){
 
     Map map = {};
-    map['title'] = title;
-    map['hid_titles'] = hidTitles;
-    map['text_author'] = author;
-    map['composer'] = composer;
-    map['performer'] = performer;
-    map['release_date'] = releaseDate.toIso8601String();
-    map['yt_link'] = youtubeLink;
-    map['add_pers'] = addPers;
+    map[SongCore.PARAM_TITLE] = title;
+    map[SongCore.PARAM_HID_TITLES] = hidTitles;
+    map[SongCore.PARAM_TEXT_AUTHOR] = author;
+    map[SongCore.PARAM_COMPOSER] = composer;
+    map[SongCore.PARAM_PERFORMER] = performer;
+    map[SongCore.PARAM_REL_DATE] = releaseDate.toIso8601String();
+    map[SongCore.PARAM_SHOW_REL_DATE_MONTH] = showRelDateMonth;
+    map[SongCore.PARAM_SHOW_REL_DATE_DAY] = showRelDateDay;
+    map[SongCore.PARAM_YT_LINK] = youtubeLink;
+    map[SongCore.PARAM_ADD_PERS] = addPers;
 
-    map['tags'] = tags;
+    map[SongCore.PARAM_TAGS] = tags;
 
     hasRefren = hasRefren && refrenPart != null && !refrenPart.isEmpty;
 
     if(hasRefren)
-      map['refren'] = {
+      map[SongCore.PARAM_REFREN] = {
         'text': refrenPart.getText(),
         'chords': refrenPart.chords,
         'shift': true
@@ -282,7 +301,7 @@ class SongRaw implements SongCore{
     if(hasRefren && refCount>0)
       parts.add({'refren': refCount});
 
-    map['parts'] = parts;
+    map[SongCore.PARAM_PARTS] = parts;
 
     if(withFileName) return {fileName : map};
     else return map;
