@@ -308,29 +308,31 @@ class TopCards extends StatelessWidget{
 
                   ],
                 ),
-                Row(
-                  children: [
 
-                    SimpleButton.from(
-                        textColor: prov.showDay && prov.showMonth?iconEnab_(context):iconDisab_(context),
-                        dense: true,
-                        margin: EdgeInsets.zero,
-                        icon: MdiIcons.calendarOutline,
-                        text: 'Pok. dzień',
-                        onTap: () => prov.showDay = !prov.showDay
-                    ),
+                if(prov.releaseDate != null)
+                  Row(
+                    children: [
 
-                    SimpleButton.from(
-                        textColor: prov.showMonth?iconEnab_(context):iconDisab_(context),
-                        dense: true,
-                        margin: EdgeInsets.zero,
-                        icon: MdiIcons.calendarMonthOutline,
-                        text: 'Pok. miesiąc',
-                        onTap: () => prov.showMonth = !prov.showMonth
-                    )
+                      SimpleButton.from(
+                          textColor: prov.showDay && prov.showMonth?iconEnab_(context):iconDisab_(context),
+                          dense: true,
+                          margin: EdgeInsets.zero,
+                          icon: MdiIcons.calendarOutline,
+                          text: 'Pok. dzień',
+                          onTap: () => prov.showDay = !prov.showDay
+                      ),
 
-                  ],
-                )
+                      SimpleButton.from(
+                          textColor: prov.showMonth?iconEnab_(context):iconDisab_(context),
+                          dense: true,
+                          margin: EdgeInsets.zero,
+                          icon: MdiIcons.calendarMonthOutline,
+                          text: 'Pok. miesiąc',
+                          onTap: () => prov.showMonth = !prov.showMonth
+                      )
+
+                    ],
+                  )
               ],
             )
         )
