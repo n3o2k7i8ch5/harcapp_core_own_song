@@ -239,8 +239,9 @@ class TopCards extends StatelessWidget{
                 children: [
 
                   Expanded(
-                    child: InkWell(
+                    child: GestureDetector(
                       child: IgnorePointer(
+                        ignoring: false,
                         child: AppTextFieldHint(
                           controller: TextEditingController(text: prov.releaseDate==null?'':dateToString(prov.releaseDate)),
                           hint: 'Pierwsze wykonanie:',
