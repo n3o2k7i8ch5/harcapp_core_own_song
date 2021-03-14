@@ -300,6 +300,8 @@ class TopCards extends StatelessWidget{
                         }
                     ),
 
+                    SizedBox(width: Dimen.DEF_MARG),
+
                   ],
                 ),
                 Row(
