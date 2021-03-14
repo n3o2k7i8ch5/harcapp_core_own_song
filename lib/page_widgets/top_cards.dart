@@ -295,24 +295,18 @@ class TopCards extends StatelessWidget{
                   ),
                   Row(
                     children: [
-                      SimpleButton.from(
-                        context: context,
-                        icon: MdiIcons.key,
-                        text: 'Rok',
-                        onTap: (){}
-                      ),
 
                       SimpleButton.from(
                           context: context,
-                          icon: MdiIcons.key,
-                          text: 'Miesiąc',
+                          icon: MdiIcons.calendarOutline,
+                          text: 'Pok. dzień',
                           onTap: (){}
                       ),
 
                       SimpleButton.from(
                           context: context,
-                          icon: MdiIcons.key,
-                          text: 'Dzień',
+                          icon: MdiIcons.calendarMonthOutline,
+                          text: 'Pok. miesiąc',
                           onTap: (){}
                       )
 
