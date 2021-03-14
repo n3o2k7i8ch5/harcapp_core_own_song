@@ -246,13 +246,13 @@ class TopCards extends StatelessWidget{
             padding: EdgeInsets.only(
                 left: SimpleButton.DEF_PADDING,
                 right: SimpleButton.DEF_PADDING,
-                top: Dimen.TEXT_FIELD_PADD,
+                top: Dimen.TEXT_FIELD_PADD - 4,
                 bottom: Dimen.TEXT_FIELD_PADD
             ),
               child: Row(
                 children: [
                   Text(
-                    'Pierwsze wykonanie: ',
+                    'Pierwsze wykonanie:  ',
                     style: AppTextStyle(color: hintEnabled(context)),
                   ),
 
