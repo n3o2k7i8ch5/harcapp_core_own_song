@@ -46,6 +46,24 @@ class CurrentItemProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+  DateTime get releaseDate => _song.releaseDate;
+  set releaseDate(DateTime value){
+    _song.releaseDate = value;
+    notifyListeners();
+  }
+
+  bool get showRelDateMonth => _song.showRelDateMonth;
+  set showRelDateMonth(bool value){
+    _song.showRelDateMonth = value;
+    notifyListeners();
+  }
+
+  bool get showRelDateDay => _song.showRelDateDay;
+  set showRelDateDay(bool value){
+    _song.showRelDateDay = value;
+    notifyListeners();
+  }
+
   set youtubeLink(String value){
     _song.youtubeLink = value;
     notifyListeners();
@@ -312,37 +330,6 @@ class PerformerCtrlProvider extends ChangeNotifier{
 
   set text(String value){
     controller.text = value;
-    notifyListeners();
-  }
-}
-
-class ReleaseDateProvider extends ChangeNotifier{
-
-  DateTime _releaseDate;
-  bool _showDay;
-  bool _showMonth;
-
-  ReleaseDateProvider({DateTime releaseDate}){
-    _showDay = true;
-    _showMonth = true;
-    _releaseDate = releaseDate;
-  }
-
-  get showDay => _showDay;
-  set showDay(bool value){
-    _showDay = value;
-    notifyListeners();
-  }
-
-  get showMonth => _showMonth;
-  set showMonth(bool value){
-    _showMonth = value;
-    notifyListeners();
-  }
-
-  get releaseDate => _releaseDate;
-  set releaseDate(DateTime value){
-    _releaseDate = value;
     notifyListeners();
   }
 }

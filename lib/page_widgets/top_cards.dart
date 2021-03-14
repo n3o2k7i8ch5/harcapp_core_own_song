@@ -242,7 +242,7 @@ class TopCards extends StatelessWidget{
           ),
         ),
 
-        Consumer<ReleaseDateProvider>(
+        Consumer<CurrentItemProvider>(
             builder: (context, prov, child) => Column(
               children: [
                 Row(
@@ -261,7 +261,7 @@ class TopCards extends StatelessWidget{
                                   text:
                                   prov.releaseDate==null ?
                                   '':
-                                  dateToString(prov.releaseDate, showMonth: prov.showMonth, showDay: prov.showMonth&&prov.showDay)),
+                                  dateToString(prov.releaseDate, showMonth: prov.showRelDateMonth, showDay: prov.showRelDateMonth&&prov.showRelDateDay)),
                               hint: 'Pierwsze wykonanie:',
                               style: AppTextStyle(
                                 fontSize: Dimen.TEXT_SIZE_BIG,
@@ -276,7 +276,7 @@ class TopCards extends StatelessWidget{
                                 if(onChangedReleaseDate != null)
                                   onChangedReleaseDate(prov.releaseDate);
                               },
-                              key: ValueKey(Tuple3(prov.releaseDate, prov.showMonth, prov.showDay)),
+                              key: ValueKey(Tuple3(prov.releaseDate, prov.showRelDateMonth, prov.showRelDateDay)),
                             ),
                           ),
 
@@ -315,21 +315,21 @@ class TopCards extends StatelessWidget{
                     children: [
 
                       SimpleButton.from(
-                          textColor: prov.showDay && prov.showMonth?iconEnab_(context):iconDisab_(context),
+                          textColor: prov.showRelDateDay && prov.showRelDateMonth?iconEnab_(context):iconDisab_(context),
                           dense: true,
                           margin: EdgeInsets.zero,
                           icon: MdiIcons.calendarOutline,
                           text: 'Pok. dzień',
-                          onTap: prov.showMonth?() => prov.showDay = !prov.showDay : null
+                          onTap: prov.showRelDateMonth?() => prov.showRelDateDay = !prov.showRelDateDay : null
                       ),
 
                       SimpleButton.from(
-                          textColor: prov.showMonth?iconEnab_(context):iconDisab_(context),
+                          textColor: prov.showRelDateMonth?iconEnab_(context):iconDisab_(context),
                           dense: true,
                           margin: EdgeInsets.zero,
                           icon: MdiIcons.calendarMonthOutline,
                           text: 'Pok. miesiąc',
-                          onTap: () => prov.showMonth = !prov.showMonth
+                          onTap: () => prov.showRelDateMonth = !prov.showRelDateMonth
                       )
 
                     ],
