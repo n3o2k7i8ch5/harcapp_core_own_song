@@ -317,9 +317,27 @@ class PerformerCtrlProvider extends ChangeNotifier{
 }
 
 class ReleaseDateProvider extends ChangeNotifier{
+
   DateTime _releaseDate;
+  bool _showDay;
+  bool _showMonth;
+
   ReleaseDateProvider({DateTime releaseDate}){
+    _showDay = true;
+    _showMonth = true;
     _releaseDate = releaseDate;
+  }
+
+  get showDay => _showDay;
+  set showDay(bool value){
+    _showDay = value;
+    notifyListeners();
+  }
+
+  get showMonth => _showMonth;
+  set showMonth(bool value){
+    _showMonth = value;
+    notifyListeners();
   }
 
   get releaseDate => _releaseDate;
