@@ -15,7 +15,8 @@ import '../providers.dart';
 class AddButtonsWidget extends StatelessWidget{
 
   final Function onPressed;
-  const AddButtonsWidget({this.onPressed});
+  final Color accentColor;
+  const AddButtonsWidget({this.onPressed, this.accentColor});
 
   @override
   Widget build(BuildContext context) {
@@ -36,8 +37,8 @@ class AddButtonsWidget extends StatelessWidget{
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Icon(MdiIcons.plus, color: accent_(context)),
-                Icon(MdiIcons.musicBox, color: accent_(context)),
+                Icon(MdiIcons.plus, color: accentColor??accent_(context)),
+                Icon(MdiIcons.musicBox, color: accentColor??accent_(context)),
                 SizedBox(width: Dimen.ICON_MARG),
                 Text('Zwrotka', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG))
               ],
@@ -58,8 +59,8 @@ class AddButtonsWidget extends StatelessWidget{
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(MdiIcons.plus, color: currItemProv.hasRefren?accent_(context):iconDisab_(context)),
-                    Icon(MdiIcons.musicBoxOutline, color: currItemProv.hasRefren?accent_(context):iconDisab_(context)),
+                    Icon(MdiIcons.plus, color: currItemProv.hasRefren?(accentColor??accent_(context)):iconDisab_(context)),
+                    Icon(MdiIcons.musicBoxOutline, color: currItemProv.hasRefren?(accentColor??accent_(context)):iconDisab_(context)),
                     SizedBox(width: Dimen.ICON_MARG),
                     Text(
                         'Refren',

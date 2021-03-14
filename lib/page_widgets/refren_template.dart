@@ -15,8 +15,9 @@ class RefrenTemplate extends StatelessWidget{
 
   final Function(SongPart, RefrenPartProvider) onPartTap;
   final Function(bool value) onRefrenEnabledChaned;
+  final Color accentColor;
 
-  const RefrenTemplate({this.onPartTap, this.onRefrenEnabledChaned});
+  const RefrenTemplate({this.onPartTap, this.onRefrenEnabledChaned, this.accentColor});
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +41,13 @@ class RefrenTemplate extends StatelessWidget{
                   //titleColor: currItemProv.hasRefren?textEnab_(context):hintEnabled(context),
                   textAlign: TextAlign.start,
                   trailing: Switch(
-                      value: currItemProv.hasRefren,
-                      onChanged: (bool value){
-                        currItemProv.hasRefren = !currItemProv.hasRefren;
-                        if(onRefrenEnabledChaned != null) onRefrenEnabledChaned(value);
-                      }),
+                    value: currItemProv.hasRefren,
+                    onChanged: (bool value){
+                      currItemProv.hasRefren = !currItemProv.hasRefren;
+                      if(onRefrenEnabledChaned != null) onRefrenEnabledChaned(value);
+                    },
+                    activeColor: accentColor??accent_(context),
+                  ),
                 ),
               ),
             ),
