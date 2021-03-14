@@ -44,7 +44,7 @@ class TopCards extends StatelessWidget{
       children: [
 
         Padding(
-          padding: EdgeInsets.all(Dimen.DEF_MARG),
+          padding: EdgeInsets.only(left: Dimen.DEF_MARG, right: Dimen.DEF_MARG),
           child: Column(
             children: <Widget>[
 
