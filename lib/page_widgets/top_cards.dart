@@ -266,7 +266,7 @@ class TopCards extends StatelessWidget{
 
                         Positioned.fill(
                           child: GestureDetector(
-                              child: Container(),
+                              child: Container(color: Colors.green),
                               onTap: () async {
                                 prov.releaseDate = await showDatePicker(
                                   context: context,
