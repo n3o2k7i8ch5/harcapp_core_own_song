@@ -235,60 +235,89 @@ class TopCards extends StatelessWidget{
           ),
 
           Consumer<ReleaseDateProvider>(
-              builder: (context, prov, child) => Row(
+              builder: (context, prov, child) => Column(
                 children: [
+                  Row(
+                    children: [
 
-                  Expanded(
-                    child: Stack(
-                      children: [
+                      Expanded(
+                        child: Stack(
+                          children: [
 
-                        IgnorePointer(
-                          ignoring: true,
-                          child: AppTextFieldHint(
-                            controller: TextEditingController(text: prov.releaseDate==null?'':dateToString(prov.releaseDate)),
-                            hint: 'Pierwsze wykonanie:',
-                            style: AppTextStyle(
-                              fontSize: Dimen.TEXT_SIZE_BIG,
-                              fontWeight: weight.halfBold,
-                              color: textEnab_(context),
+                            IgnorePointer(
+                              ignoring: true,
+                              child: AppTextFieldHint(
+                                controller: TextEditingController(text: prov.releaseDate==null?'':dateToString(prov.releaseDate)),
+                                hint: 'Pierwsze wykonanie:',
+                                style: AppTextStyle(
+                                  fontSize: Dimen.TEXT_SIZE_BIG,
+                                  fontWeight: weight.halfBold,
+                                  color: textEnab_(context),
+                                ),
+                                hintStyle: AppTextStyle(
+                                  fontSize: Dimen.TEXT_SIZE_NORMAL,
+                                  color: hintEnabled(context),
+                                ),
+                                onChanged: (text){
+                                  if(onChangedReleaseDate != null)
+                                    onChangedReleaseDate(prov.releaseDate);
+                                },
+                                key: ValueKey(prov.releaseDate),
+                              ),
                             ),
-                            hintStyle: AppTextStyle(
-                              fontSize: Dimen.TEXT_SIZE_NORMAL,
-                              color: hintEnabled(context),
-                            ),
-                            onChanged: (text){
-                              if(onChangedReleaseDate != null)
-                                onChangedReleaseDate(prov.releaseDate);
-                            },
-                            key: ValueKey(prov.releaseDate),
-                          ),
+
+                            Positioned.fill(
+                              child: GestureDetector(
+                                  child: Container(color: Colors.transparent),
+                                  onTap: () async {
+                                    prov.releaseDate = await showDatePicker(
+                                      context: context,
+                                      initialDate: DateTime.now(),
+                                      firstDate: DateTime(966),
+                                      lastDate: DateTime.now(),
+                                    );
+                                  }
+                              ),
+                            )
+
+                          ],
                         ),
+                      ),
 
-                        Positioned.fill(
-                          child: GestureDetector(
-                              child: Container(color: Colors.transparent),
-                              onTap: () async {
-                                prov.releaseDate = await showDatePicker(
-                                  context: context,
-                                  initialDate: DateTime.now(),
-                                  firstDate: DateTime(966),
-                                  lastDate: DateTime.now(),
-                                );
-                              }
-                          ),
-                        )
+                      IconButton(
+                          icon: Icon(MdiIcons.close),
+                          onPressed: prov.releaseDate==null?null:(){
+                            prov.releaseDate = null;
+                          }
+                      ),
 
-                      ],
-                    ),
+                    ],
                   ),
+                  Row(
+                    children: [
+                      SimpleButton.from(
+                        context: context,
+                        icon: MdiIcons.key,
+                        text: 'Rok',
+                        onTap: (){}
+                      ),
 
-                  IconButton(
-                      icon: Icon(MdiIcons.close),
-                      onPressed: prov.releaseDate==null?null:(){
-                        prov.releaseDate = null;
-                      }
-                  ),
+                      SimpleButton.from(
+                          context: context,
+                          icon: MdiIcons.key,
+                          text: 'Miesiąc',
+                          onTap: (){}
+                      ),
 
+                      SimpleButton.from(
+                          context: context,
+                          icon: MdiIcons.key,
+                          text: 'Dzień',
+                          onTap: (){}
+                      )
+
+                    ],
+                  )
                 ],
               )
           )
