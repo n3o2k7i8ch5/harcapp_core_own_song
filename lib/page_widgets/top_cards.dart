@@ -319,7 +319,7 @@ class TopCards extends StatelessWidget{
                           margin: EdgeInsets.zero,
                           icon: MdiIcons.calendarOutline,
                           text: 'Pok. dzień',
-                          onTap: () => prov.showDay = !prov.showDay
+                          onTap: prov.showMonth?() => prov.showDay = !prov.showDay : null
                       ),
 
                       SimpleButton.from(
