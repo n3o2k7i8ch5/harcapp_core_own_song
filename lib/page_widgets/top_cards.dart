@@ -3,6 +3,7 @@ import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/comm_widgets/animated_child_slider.dart';
+import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
 import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
@@ -240,9 +241,10 @@ class TopCards extends StatelessWidget{
 
         Consumer<ReleaseDateProvider>(
           builder: (context, prov, child) => SimpleButton(
+            radius: AppCard.BIG_RADIUS,
+            padding: EdgeInsets.only(top: Dimen.TEXT_FIELD_PADD, bottom: Dimen.TEXT_FIELD_PADD),
               child: Row(
                 children: [
-                  SizedBox(height: Dimen.TEXT_SIZE_NORMAL + 2*Dimen.TEXT_FIELD_PADD),
                   Text(
                     'Pierwsze wykonanie: ',
                     style: AppTextStyle(color: hintEnabled(context)),
