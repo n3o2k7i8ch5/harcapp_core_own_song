@@ -12,8 +12,9 @@ class SongRaw implements SongCore{
   String title;
   List<String> hidTitles;
   String author;
-  String composer;
   String performer;
+  String composer;
+  DateTime releaseDate;
   String addPers;
   String youtubeLink;
 
@@ -38,6 +39,7 @@ class SongRaw implements SongCore{
     this.author = song.author;
     this.composer = song.composer;
     this.performer = song.performer;
+    this.releaseDate = song.releaseDate;
     this.addPers = song.addPers;
     this.youtubeLink = song.youtubeLink;
     this.tags = song.tags?.toList();
@@ -55,6 +57,7 @@ class SongRaw implements SongCore{
     this.author,
     this.composer,
     this.performer,
+    this.releaseDate,
     this.addPers,
     this.youtubeLink,
 
@@ -75,6 +78,7 @@ class SongRaw implements SongCore{
       author: '',
       composer: '',
       performer: '',
+      releaseDate: null,
       addPers: '',
       youtubeLink: '',
       tags: [],
@@ -102,6 +106,7 @@ class SongRaw implements SongCore{
     String author = map['text_author']??'';
     String composer = map['composer']??'';
     String performer = map['performer']??'';
+    DateTime releaseDate = DateTime.tryParse(map['release_date']??'');
     String youtubeLink = map['yt_link']??'';
     String addPers = map['add_pers']??'';
     List<String> tags = (map['tags'] as List).cast<String>();
@@ -136,6 +141,7 @@ class SongRaw implements SongCore{
       author: author,
       composer: composer,
       performer: performer,
+      releaseDate: releaseDate,
       addPers: addPers,
       youtubeLink: youtubeLink,
 
@@ -155,6 +161,7 @@ class SongRaw implements SongCore{
     String author,
     String composer,
     String performer,
+    DateTime releaseDate,
     String addPers,
     String youtubeLink,
     List<String> tags,
@@ -168,6 +175,7 @@ class SongRaw implements SongCore{
       author: author??this.author,
       composer: composer??this.composer,
       performer: performer??this.performer,
+      releaseDate: releaseDate??this.releaseDate,
       addPers: addPers??this.addPers,
       youtubeLink: youtubeLink??this.youtubeLink,
       tags: tags??this.tags,
@@ -234,6 +242,7 @@ class SongRaw implements SongCore{
     map['text_author'] = author;
     map['composer'] = composer;
     map['performer'] = performer;
+    map['release_date'] = releaseDate.toIso8601String();
     map['yt_link'] = youtubeLink;
     map['add_pers'] = addPers;
 
@@ -279,9 +288,7 @@ class SongRaw implements SongCore{
     else return map;
   }
 
-  String toCode({bool withFileName: true}){
-    return jsonEncode(toMap(withFileName: withFileName));
-  }
+  String toCode({bool withFileName: true}) => jsonEncode(toMap(withFileName: withFileName));
 
   @override
   int get rate => 0; //SongRate.RATE_NULL;

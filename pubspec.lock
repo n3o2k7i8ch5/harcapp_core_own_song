@@ -105,7 +105,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: ea4265fb2489c71a46e241616a5efb593acdb8c0
+      resolved-ref: a71a13cd92b9796d5b9db253bc9e94b5f50e434a
       url: "git://github.com/n3o2k7i8ch5/harcapp_core.git"
     source: git
     version: "0.0.1"
@@ -114,7 +114,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "2f59774ebd593fc9b37c2971a7a83e2d5a233455"
+      resolved-ref: "50d77740ebcba23df6a02bd92b123384ac1eec85"
       url: "git://github.com/n3o2k7i8ch5/harcapp_core_song.git"
     source: git
     version: "0.0.1"
@@ -123,7 +123,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: c1bd0ec206de4d3faf2559a6a43cca956d013102
+      resolved-ref: b8c313c39abf28a739e3cddf1177ae77ed616eda
       url: "git://github.com/n3o2k7i8ch5/harcapp_core_tags.git"
     source: git
     version: "0.0.1"
