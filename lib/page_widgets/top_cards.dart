@@ -242,7 +242,13 @@ class TopCards extends StatelessWidget{
         Consumer<ReleaseDateProvider>(
           builder: (context, prov, child) => SimpleButton(
             radius: AppCard.BIG_RADIUS,
-            padding: EdgeInsets.only(top: Dimen.TEXT_FIELD_PADD, bottom: Dimen.TEXT_FIELD_PADD),
+            margin: EdgeInsets.only(left: SimpleButton.DEF_MARG, right: Dimen.DEF_MARG),
+            padding: EdgeInsets.only(
+                left: SimpleButton.DEF_PADDING,
+                right: SimpleButton.DEF_PADDING,
+                top: Dimen.TEXT_FIELD_PADD,
+                bottom: Dimen.TEXT_FIELD_PADD
+            ),
               child: Row(
                 children: [
                   Text(
