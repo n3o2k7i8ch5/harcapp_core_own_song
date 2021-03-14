@@ -239,35 +239,35 @@ class TopCards extends StatelessWidget{
                 children: [
 
                   Expanded(
-                    child: GestureDetector(
-                        child: IgnorePointer(
-                          child: AppTextFieldHint(
-                            controller: TextEditingController(text: prov.releaseDate==null?'':dateToString(prov.releaseDate)),
-                            hint: 'Pierwsze wykonanie:',
-                            style: AppTextStyle(
-                              fontSize: Dimen.TEXT_SIZE_BIG,
-                              fontWeight: weight.halfBold,
-                              color: textEnab_(context),
-                            ),
-                            hintStyle: AppTextStyle(
-                              fontSize: Dimen.TEXT_SIZE_NORMAL,
-                              color: hintEnabled(context),
-                            ),
-                            onChanged: (text){
-                              if(onChangedReleaseDate != null)
-                                onChangedReleaseDate(prov.releaseDate);
-                            },
-                            key: ValueKey(prov.releaseDate),
+                    child: InkWell(
+                      child: IgnorePointer(
+                        child: AppTextFieldHint(
+                          controller: TextEditingController(text: prov.releaseDate==null?'':dateToString(prov.releaseDate)),
+                          hint: 'Pierwsze wykonanie:',
+                          style: AppTextStyle(
+                            fontSize: Dimen.TEXT_SIZE_BIG,
+                            fontWeight: weight.halfBold,
+                            color: textEnab_(context),
                           ),
+                          hintStyle: AppTextStyle(
+                            fontSize: Dimen.TEXT_SIZE_NORMAL,
+                            color: hintEnabled(context),
+                          ),
+                          onChanged: (text){
+                            if(onChangedReleaseDate != null)
+                              onChangedReleaseDate(prov.releaseDate);
+                          },
+                          key: ValueKey(prov.releaseDate),
                         ),
-                        onTap: () async {
-                          prov.releaseDate = await showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(966),
-                            lastDate: DateTime.now(),
-                          );
-                        }
+                      ),
+                      onTap: () async {
+                        prov.releaseDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(966),
+                          lastDate: DateTime.now(),
+                        );
+                      }
                     ),
                   ),
 
