@@ -256,7 +256,11 @@ class TopCards extends StatelessWidget{
                           IgnorePointer(
                             ignoring: true,
                             child: AppTextFieldHint(
-                              controller: TextEditingController(text: prov.releaseDate==null?'':dateToString(prov.releaseDate)),
+                              controller: TextEditingController(
+                                  text:
+                                  prov.releaseDate==null ?
+                                  '':
+                                  dateToString(prov.releaseDate, showMonth: prov.showMonth, showDay: prov.showMonth&&prov.showDay)),
                               hint: 'Pierwsze wykonanie:',
                               style: AppTextStyle(
                                 fontSize: Dimen.TEXT_SIZE_BIG,
@@ -308,7 +312,7 @@ class TopCards extends StatelessWidget{
                   children: [
 
                     SimpleButton.from(
-                        textColor: prov.showDay && prov.showDay?iconEnab_(context):iconDisab_(context),
+                        textColor: prov.showDay && prov.showMonth?iconEnab_(context):iconDisab_(context),
                         dense: true,
                         margin: EdgeInsets.zero,
                         icon: MdiIcons.calendarOutline,
