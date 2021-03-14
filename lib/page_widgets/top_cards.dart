@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
+import 'package:harcapp_core/comm_classes/common.dart';
 import 'package:harcapp_core/comm_widgets/animated_child_slider.dart';
 import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
 import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
@@ -23,6 +24,7 @@ class TopCards extends StatelessWidget{
   final Function(String) onChangedPerformer;
   final Function(String) onChangedYT;
   final Function(String) onChangedAddPers;
+  final Function(DateTime) onChangedReleaseDate;
 
   const TopCards({
     this.onChangedTitle,
@@ -31,6 +33,7 @@ class TopCards extends StatelessWidget{
     this.onChangedPerformer,
     this.onChangedYT,
     this.onChangedAddPers,
+    this.onChangedReleaseDate,
   });
 
   @override
@@ -228,6 +231,27 @@ class TopCards extends StatelessWidget{
               onChanged: onChangedAddPers,
             ),
           ),
+
+          Consumer<ReleaseDateProvider>(
+            builder: (context, prov, child) => SimpleButton(
+              child: Row(
+                children: [
+                  Text(
+                    'Pierwsze wykonanie: ',
+                    style: AppTextStyle(),
+                  ),
+
+                  Text(
+                    prov.releaseDate==null?'-':dateToString(prov.releaseDate),
+                    style: AppTextStyle(),
+                  )
+                ],
+              ),
+              onTap: (){
+
+              }
+            ),
+          )
 
         ],
       ),

@@ -313,7 +313,21 @@ class PerformerCtrlProvider extends ChangeNotifier{
   set text(String value){
     controller.text = value;
     notifyListeners();
-  }}
+  }
+}
+
+class ReleaseDateProvider extends ChangeNotifier{
+  DateTime _releaseDate;
+  ReleaseDateProvider({DateTime releaseDate}){
+    _releaseDate = releaseDate;
+  }
+
+  get releaseDate => _releaseDate;
+  set releaseDate(DateTime value){
+    _releaseDate = value;
+    notifyListeners();
+  }
+}
 
 class YTCtrlProvider extends ChangeNotifier{
   TextEditingController controller;
