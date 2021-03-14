@@ -240,32 +240,52 @@ class TopCards extends StatelessWidget{
         ),
 
         Consumer<ReleaseDateProvider>(
-          builder: (context, prov, child) => SimpleButton(
-            radius: AppCard.BIG_RADIUS,
-            margin: EdgeInsets.only(left: SimpleButton.DEF_MARG, right: Dimen.DEF_MARG),
-            padding: EdgeInsets.only(
-                left: SimpleButton.DEF_PADDING,
-                right: SimpleButton.DEF_PADDING,
-                top: Dimen.TEXT_FIELD_PADD - 4,
-                bottom: Dimen.TEXT_FIELD_PADD
-            ),
-              child: Row(
-                children: [
-                  Text(
-                    'Pierwsze wykonanie:  ',
-                    style: AppTextStyle(color: hintEnabled(context)),
-                  ),
+          builder: (context, prov, child) => Row(
+            children: [
 
-                  Text(
-                    prov.releaseDate==null?'-':dateToString(prov.releaseDate),
-                    style: AppTextStyle(fontWeight: weight.halfBold),
-                  )
-                ],
+              Expanded(
+                child: SimpleButton(
+                    radius: AppCard.BIG_RADIUS,
+                    margin: EdgeInsets.only(left: SimpleButton.DEF_MARG, right: Dimen.DEF_MARG),
+                    padding: EdgeInsets.only(
+                        left: SimpleButton.DEF_PADDING,
+                        right: SimpleButton.DEF_PADDING,
+                        top: Dimen.TEXT_FIELD_PADD - 4,
+                        bottom: Dimen.TEXT_FIELD_PADD - 4
+                    ),
+                    child: Row(
+                      children: [
+                        Text(
+                          'Pierwsze wykonanie:  ',
+                          style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, color: hintEnabled(context)),
+                        ),
+
+                        Text(
+                          prov.releaseDate==null?'-':dateToString(prov.releaseDate),
+                          style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
+                        ),
+                      ],
+                    ),
+                    onTap: () async {
+                      prov.releaseDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(966),
+                        lastDate: DateTime.now(),
+                      );
+                    }
+                ),
               ),
-              onTap: () async {
-                prov.releaseDate = await showDatePicker(context: context, initialDate: DateTime.now(), firstDate: DateTime(966), lastDate: DateTime.now());
-              }
-          ),
+
+              IconButton(
+                  icon: Icon(MdiIcons.close),
+                  onPressed: (){
+                    prov.releaseDate = null;
+                  }
+              )
+
+            ],
+          )
         )
 
       ],
