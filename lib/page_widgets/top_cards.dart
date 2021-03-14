@@ -99,6 +99,7 @@ class TopCards extends StatelessWidget{
                   children: [
 
                     ImplicitlyAnimatedList<TextEditingController>(
+                      physics: BouncingScrollPhysics(),
                       items: provider.controllers,
                       areItemsTheSame: (a, b) => a.hashCode == b.hashCode,
                       itemBuilder: (context, animation, item, index) {
@@ -243,39 +244,45 @@ class TopCards extends StatelessWidget{
           builder: (context, prov, child) => Row(
             children: [
 
-              Expanded(
-                child: SimpleButton(
-                    radius: AppCard.BIG_RADIUS,
-                    margin: EdgeInsets.only(left: SimpleButton.DEF_MARG, right: Dimen.DEF_MARG),
-                    padding: EdgeInsets.only(
-                        left: SimpleButton.DEF_PADDING,
-                        right: SimpleButton.DEF_PADDING,
-                        top: Dimen.TEXT_FIELD_PADD - 4,
-                        bottom: Dimen.TEXT_FIELD_PADD - 4
+              SimpleButton(
+                  radius: AppCard.BIG_RADIUS,
+                  margin: EdgeInsets.only(left: SimpleButton.DEF_MARG, right: Dimen.DEF_MARG),
+                  padding: EdgeInsets.only(
+                      left: SimpleButton.DEF_PADDING,
+                      right: SimpleButton.DEF_PADDING,
+                      top: Dimen.TEXT_FIELD_PADD - 4,
+                      bottom: Dimen.TEXT_FIELD_PADD - 4
+                  ),
+                  child: IgnorePointer(
+                    child: AppTextFieldHint(
+                      controller: TextEditingController(text: prov.releaseDate==null?'':dateToString(prov.releaseDate)),
+                      hint: 'Pierwsze wykonanie:',
+                      style: AppTextStyle(
+                        fontSize: Dimen.TEXT_SIZE_BIG,
+                        fontWeight: weight.halfBold,
+                        color: textEnab_(context),
+                      ),
+                      hintStyle: AppTextStyle(
+                        fontSize: Dimen.TEXT_SIZE_NORMAL,
+                        color: hintEnabled(context),
+                      ),
+                      onChanged: (text){
+                        if(onChangedReleaseDate != null)
+                          onChangedReleaseDate(prov.releaseDate);
+                      },
                     ),
-                    child: Row(
-                      children: [
-                        Text(
-                          'Pierwsze wykonanie:  ',
-                          style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, color: hintEnabled(context)),
-                        ),
-
-                        Text(
-                          prov.releaseDate==null?'-':dateToString(prov.releaseDate),
-                          style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold),
-                        ),
-                      ],
-                    ),
-                    onTap: () async {
-                      prov.releaseDate = await showDatePicker(
-                        context: context,
-                        initialDate: DateTime.now(),
-                        firstDate: DateTime(966),
-                        lastDate: DateTime.now(),
-                      );
-                    }
-                ),
+                  ),
+                  onTap: () async {
+                    prov.releaseDate = await showDatePicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                      firstDate: DateTime(966),
+                      lastDate: DateTime.now(),
+                    );
+                  }
               ),
+
+              Expanded(child: Container()),
 
               IconButton(
                   icon: Icon(MdiIcons.close),
