@@ -12,6 +12,7 @@ import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorder
 import 'package:implicitly_animated_reorderable_list/transitions.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 import '../providers.dart';
 
@@ -275,7 +276,7 @@ class TopCards extends StatelessWidget{
                                 if(onChangedReleaseDate != null)
                                   onChangedReleaseDate(prov.releaseDate);
                               },
-                              key: ValueKey(prov.releaseDate),
+                              key: ValueKey(Tuple3(prov.releaseDate, prov.showMonth, prov.showDay)),
                             ),
                           ),
 
