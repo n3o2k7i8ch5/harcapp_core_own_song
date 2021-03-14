@@ -22,45 +22,6 @@ Color COLOR_ERR = Colors.red.withOpacity(0.7);
 
 TextInputFormatter ALLOWED_TEXT_REGEXP = FilteringTextInputFormatter.allow(RegExp(r'[a-zA-Z0-9ĄąĆćĘęŁłŃńÓóŚśŹźŻż \(\)\-\.\,\!\?\n]'));
 
-
-class HeaderWidget extends StatelessWidget{
-
-  final String title;
-  final IconData icon;
-  final Color iconColor;
-  final bool enabled;
-  const HeaderWidget(this.title, this.icon, {this.iconColor, this.enabled: true});
-
-  @override
-  Widget build(BuildContext context) {
-
-    Color color = iconColor;
-    if(color==null){
-      color = enabled?textEnab_(context):hintEnabled(context);
-    }
-
-    return Padding(
-      padding: EdgeInsets.all(2*Dimen.DEF_MARG),
-      child: Row(
-        children: [
-          SizedBox(height: Dimen.ICON_FOOTPRINT),
-          Icon(icon, color: color),
-          SizedBox(width: Dimen.LIST_TILE_SEPARATOR),
-          Text(title,
-            style: AppTextStyle(
-                color: enabled?textEnab_(context):hintEnabled(context),
-                fontWeight: weight.halfBold,
-                fontSize: Dimen.TEXT_SIZE_BIG,
-                shadow: enabled
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-}
-
 class SongPart{
 
   final SongElement _songElement;
