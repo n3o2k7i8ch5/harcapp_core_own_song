@@ -299,6 +299,7 @@ class TopCards extends StatelessWidget{
                       SimpleButton.from(
                           context: context,
                           dense: true,
+                          margin: EdgeInsets.zero,
                           icon: MdiIcons.calendarOutline,
                           text: 'Pok. dzień',
                           onTap: (){}
@@ -307,6 +308,7 @@ class TopCards extends StatelessWidget{
                       SimpleButton.from(
                           context: context,
                           dense: true,
+                          margin: EdgeInsets.zero,
                           icon: MdiIcons.calendarMonthOutline,
                           text: 'Pok. miesiąc',
                           onTap: (){}
