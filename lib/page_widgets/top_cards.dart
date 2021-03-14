@@ -244,45 +244,45 @@ class TopCards extends StatelessWidget{
           builder: (context, prov, child) => Row(
             children: [
 
-              SimpleButton(
-                  radius: AppCard.BIG_RADIUS,
-                  margin: EdgeInsets.only(left: SimpleButton.DEF_MARG, right: Dimen.DEF_MARG),
-                  padding: EdgeInsets.only(
-                      left: SimpleButton.DEF_PADDING,
-                      right: SimpleButton.DEF_PADDING,
-                      top: Dimen.TEXT_FIELD_PADD - 4,
-                      bottom: Dimen.TEXT_FIELD_PADD - 4
-                  ),
-                  child: IgnorePointer(
-                    child: AppTextFieldHint(
-                      controller: TextEditingController(text: prov.releaseDate==null?'':dateToString(prov.releaseDate)),
-                      hint: 'Pierwsze wykonanie:',
-                      style: AppTextStyle(
-                        fontSize: Dimen.TEXT_SIZE_BIG,
-                        fontWeight: weight.halfBold,
-                        color: textEnab_(context),
-                      ),
-                      hintStyle: AppTextStyle(
-                        fontSize: Dimen.TEXT_SIZE_NORMAL,
-                        color: hintEnabled(context),
-                      ),
-                      onChanged: (text){
-                        if(onChangedReleaseDate != null)
-                          onChangedReleaseDate(prov.releaseDate);
-                      },
+              Expanded(
+                child: SimpleButton(
+                    radius: AppCard.BIG_RADIUS,
+                    margin: EdgeInsets.only(left: SimpleButton.DEF_MARG, right: Dimen.DEF_MARG),
+                    padding: EdgeInsets.only(
+                        left: SimpleButton.DEF_PADDING,
+                        right: SimpleButton.DEF_PADDING,
+                        top: Dimen.TEXT_FIELD_PADD - 4,
+                        bottom: Dimen.TEXT_FIELD_PADD - 4
                     ),
-                  ),
-                  onTap: () async {
-                    prov.releaseDate = await showDatePicker(
-                      context: context,
-                      initialDate: DateTime.now(),
-                      firstDate: DateTime(966),
-                      lastDate: DateTime.now(),
-                    );
-                  }
+                    child: IgnorePointer(
+                      child: AppTextFieldHint(
+                        controller: TextEditingController(text: prov.releaseDate==null?'':dateToString(prov.releaseDate)),
+                        hint: 'Pierwsze wykonanie:',
+                        style: AppTextStyle(
+                          fontSize: Dimen.TEXT_SIZE_BIG,
+                          fontWeight: weight.halfBold,
+                          color: textEnab_(context),
+                        ),
+                        hintStyle: AppTextStyle(
+                          fontSize: Dimen.TEXT_SIZE_NORMAL,
+                          color: hintEnabled(context),
+                        ),
+                        onChanged: (text){
+                          if(onChangedReleaseDate != null)
+                            onChangedReleaseDate(prov.releaseDate);
+                        },
+                      ),
+                    ),
+                    onTap: () async {
+                      prov.releaseDate = await showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(966),
+                        lastDate: DateTime.now(),
+                      );
+                    }
+                ),
               ),
-
-              Expanded(child: Container()),
 
               IconButton(
                   icon: Icon(MdiIcons.close),
