@@ -279,10 +279,12 @@ class TopCards extends StatelessWidget{
 
               IconButton(
                   icon: Icon(MdiIcons.close),
-                  onPressed: (){
+                  onPressed: prov.releaseDate==null?null:(){
                     prov.releaseDate = null;
                   }
-              )
+              ),
+
+              SizedBox(width: Dimen.DEF_MARG),
 
             ],
           )
