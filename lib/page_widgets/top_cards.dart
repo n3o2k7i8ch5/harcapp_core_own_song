@@ -251,8 +251,8 @@ class TopCards extends StatelessWidget{
                     padding: EdgeInsets.only(
                         left: SimpleButton.DEF_PADDING,
                         right: SimpleButton.DEF_PADDING,
-                        top: Dimen.TEXT_FIELD_PADD - 4,
-                        bottom: Dimen.TEXT_FIELD_PADD - 4
+                        top: SimpleButton.DEF_PADDING,
+                        bottom: SimpleButton.DEF_PADDING
                     ),
                     child: IgnorePointer(
                       child: AppTextFieldHint(
@@ -271,6 +271,7 @@ class TopCards extends StatelessWidget{
                           if(onChangedReleaseDate != null)
                             onChangedReleaseDate(prov.releaseDate);
                         },
+                        key: ValueKey(prov.releaseDate),
                       ),
                     ),
                     onTap: () async {
