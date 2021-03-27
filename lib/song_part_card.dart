@@ -112,12 +112,12 @@ class SongPartCard extends StatelessWidget{
         else{
 
           List<Widget> children = [
-            Icon(iconData, color: pressable?iconEnab_(context):hintEnabled(context)),
+            Icon(iconData, color: pressable?iconEnab_(context):hintEnab_(context)),
             SizedBox(height: Dimen.ICON_MARG, width: Dimen.ICON_MARG),
             Text(
               emptText,
               style: AppTextStyle(
-                  color: pressable?iconEnab_(context):hintEnabled(context),
+                  color: pressable?iconEnab_(context):hintEnab_(context),
                   fontSize: Dimen.TEXT_SIZE_BIG,
                   fontWeight: pressable?weight.halfBold:weight.normal
               ),
@@ -184,7 +184,7 @@ class SongTextWidget extends StatelessWidget{
     Color textColor;
 
     if(parent.type == SongPartType.ZWROTKA) textColor = textEnab_(context);
-    else if(parent.type == SongPartType.REFREN) textColor = textDisabled(context);
+    else if(parent.type == SongPartType.REFREN) textColor = textDisab_(context);
     else if(parent.type == SongPartType.REFREN_TEMPLATE) textColor = textEnab_(context);
 
     return Padding(
@@ -234,7 +234,7 @@ class SongChordsWidget extends StatelessWidget{
     Color textColor;
 
     if(parent.type == SongPartType.ZWROTKA) textColor = textEnab_(context);
-    else if(parent.type == SongPartType.REFREN) textColor = textDisabled(context);
+    else if(parent.type == SongPartType.REFREN) textColor = textDisab_(context);
     else if(parent.type == SongPartType.REFREN_TEMPLATE) textColor = textEnab_(context);
 
     return Text(
@@ -292,7 +292,7 @@ class TopZwrotkaButtons extends StatelessWidget{
 
         Expanded(
             child: showName?
-            Text('Zwrotka', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold, color: hintEnabled(context))):
+            Text('Zwrotka', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold, color: hintEnab_(context))):
             Container()
         ),
 
@@ -350,7 +350,7 @@ class TopRefrenButtons extends StatelessWidget{
 
         Expanded(
             child: showName?
-            Text('Refren', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold, color: hintEnabled(context))):
+            Text('Refren', style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG, fontWeight: weight.halfBold, color: hintEnab_(context))):
             Container()
         ),
 

@@ -63,7 +63,7 @@ class TopCards extends StatelessWidget{
                           ),
                           hintStyle: AppTextStyle(
                             fontSize: Dimen.TEXT_SIZE_NORMAL,
-                            color: hintEnabled(context),
+                            color: hintEnab_(context),
                           ),
                           onChanged: onChangedTitle,
                         )
@@ -164,7 +164,7 @@ class TopCards extends StatelessWidget{
                   ),
                   hintStyle: AppTextStyle(
                     fontSize: Dimen.TEXT_SIZE_NORMAL,
-                    color: hintEnabled(context),
+                    color: hintEnab_(context),
                   ),
                   onChanged: onChangedAuthor,
                 ),
@@ -181,7 +181,7 @@ class TopCards extends StatelessWidget{
                   ),
                   hintStyle: AppTextStyle(
                     fontSize: Dimen.TEXT_SIZE_NORMAL,
-                    color: hintEnabled(context),
+                    color: hintEnab_(context),
                   ),
                   onChanged: onChangedComposer,
                 ),
@@ -198,7 +198,7 @@ class TopCards extends StatelessWidget{
                     ),
                     hintStyle: AppTextStyle(
                       fontSize: Dimen.TEXT_SIZE_NORMAL,
-                      color: hintEnabled(context),
+                      color: hintEnab_(context),
                     ),
                     onChanged: onChangedPerformer
                 ),
@@ -215,7 +215,7 @@ class TopCards extends StatelessWidget{
                   ),
                   hintStyle: AppTextStyle(
                     fontSize: Dimen.TEXT_SIZE_NORMAL,
-                    color: hintEnabled(context),
+                    color: hintEnab_(context),
                   ),
                   onChanged: onChangedYT,
                 ),
@@ -232,7 +232,7 @@ class TopCards extends StatelessWidget{
                   ),
                   hintStyle: AppTextStyle(
                     fontSize: Dimen.TEXT_SIZE_NORMAL,
-                    color: hintEnabled(context),
+                    color: hintEnab_(context),
                   ),
                   onChanged: onChangedAddPers,
                 ),
@@ -270,7 +270,7 @@ class TopCards extends StatelessWidget{
                               ),
                               hintStyle: AppTextStyle(
                                 fontSize: Dimen.TEXT_SIZE_NORMAL,
-                                color: hintEnabled(context),
+                                color: hintEnab_(context),
                               ),
                               onChanged: (text){
                                 if(onChangedReleaseDate != null)
@@ -373,7 +373,7 @@ class AddTextWidget extends StatelessWidget{
           ),
           hintStyle: AppTextStyle(
             fontSize: Dimen.TEXT_SIZE_NORMAL,
-            color: hintEnabled(context),
+            color: hintEnab_(context),
           ),
         )),
 

@@ -189,7 +189,7 @@ class SongTextWidget extends StatelessWidget{
                               hintStyle: TextStyle(
                                   fontFamily: 'Roboto',
                                   fontSize: Dimen.TEXT_SIZE_NORMAL,
-                                  color: hintEnabled(context)
+                                  color: hintEnab_(context)
                               ),
                               border: InputBorder.none,
                               isDense: true
@@ -279,7 +279,7 @@ class SongChordsWidget extends StatelessWidget{
                             hintStyle: TextStyle(
                                 fontFamily: 'Roboto',
                                 fontSize: Dimen.TEXT_SIZE_NORMAL,
-                                color: hintEnabled(context)
+                                color: hintEnab_(context)
                             ),
                             border: InputBorder.none,
                             isDense: true
@@ -549,7 +549,7 @@ class LineCount extends StatelessWidget{
                   style: TextStyle(
                       fontFamily: 'Roboto',
                       fontSize: Dimen.TEXT_SIZE_TINY,//initial font size
-                      color: hintEnabled(context),
+                      color: hintEnab_(context),
                       height: 1*Dimen.TEXT_SIZE_BIG/ Dimen.TEXT_SIZE_TINY
                   ),
                 );

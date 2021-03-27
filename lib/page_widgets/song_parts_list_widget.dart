@@ -121,7 +121,7 @@ class SongPartsListWidget extends StatelessWidget{
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
 
-                    Icon(MdiIcons.musicNoteOffOutline, color: hintEnabled(context)),
+                    Icon(MdiIcons.musicNoteOffOutline, color: hintEnab_(context)),
 
                     SizedBox(height: Dimen.ICON_MARG),
 
@@ -129,7 +129,7 @@ class SongPartsListWidget extends StatelessWidget{
                       'Pusto!\nUżyj poniższych przycisków.',
                       textAlign: TextAlign.center,
                       style: AppTextStyle(
-                        color: hintEnabled(context),
+                        color: hintEnab_(context),
                         fontSize: Dimen.TEXT_SIZE_BIG,
                       ),
                     ),
