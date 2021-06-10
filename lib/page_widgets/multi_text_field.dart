@@ -37,7 +37,7 @@ class MultiTextFieldState extends State<MultiTextField>{
       texts.addAll(initVals);
 
     keys = [];
-    for(int i=0; i<initVals.length; i++)
+    for(int i=0; i<texts.length; i++)
       keys.add(GlobalKey());
 
     super.initState();
