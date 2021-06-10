@@ -88,6 +88,7 @@ class ItemState extends State<Item>{
   @override
   void initState() {
     text = initText;
+    editing = false;
     super.initState();
   }
   
