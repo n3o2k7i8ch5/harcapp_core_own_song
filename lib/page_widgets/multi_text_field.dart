@@ -48,6 +48,7 @@ class MultiTextFieldState extends State<MultiTextField>{
 
     children.add(
       SimpleButton.from(
+        context: context,
         text: 'Dodaj',
         icon: MdiIcons.plus,
         onTap: () => setState(() => texts.add('')), 
