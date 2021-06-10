@@ -103,16 +103,18 @@ class ItemState extends State<Item>{
         children: [
 
           if(editing)
-            TextFieldFit(
-              decoration: InputDecoration(
-                  hintText: hint,
-                  hintStyle: AppTextStyle(
-                    color: hintEnab_(context),
-                    fontSize: Dimen.TEXT_SIZE_BIG,
-                  ),
-                  border: InputBorder.none
+            IntrinsicWidth(
+              child: TextField(
+                decoration: InputDecoration(
+                    hintText: hint,
+                    hintStyle: AppTextStyle(
+                      color: hintEnab_(context),
+                      fontSize: Dimen.TEXT_SIZE_BIG,
+                    ),
+                    border: InputBorder.none
+                ),
+                onChanged: (text) => this.text = text,
               ),
-              onChanged: (text) => this.text = text,
             )
           else
             Text(
