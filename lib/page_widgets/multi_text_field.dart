@@ -95,27 +95,31 @@ class ItemState extends State<Item>{
   @override
   Widget build(BuildContext context) {
     return AppCard(
+      onTap: () => setState(() => editing = true),
+      radius: AppCard.BIG_RADIUS,
+      padding: EdgeInsets.only(left: Dimen.ICON_MARG),
       child: Row(
+        mainAxisSize: MainAxisSize.min,
         children: [
 
           if(editing)
+            TextFieldFit(
+              decoration: InputDecoration(
+                  hintText: hint,
+                  hintStyle: AppTextStyle(
+                    color: hintEnab_(context),
+                    fontSize: Dimen.TEXT_SIZE_BIG,
+                  ),
+                  border: InputBorder.none
+              ),
+              onChanged: (text) => this.text = text,
+            )
+          else
             Text(
               text,
               style: AppTextStyle(
                 fontSize: Dimen.TEXT_SIZE_BIG,
               ),
-            )
-          else
-            TextFieldFit(
-              decoration: InputDecoration(
-                hintText: hint,
-                hintStyle: AppTextStyle(
-                  color: hintEnab_(context),
-                  fontSize: Dimen.TEXT_SIZE_BIG,
-                ),
-                border: InputBorder.none
-              ),
-              onChanged: (text) => this.text = text,
             ),
 
           if(editing)
