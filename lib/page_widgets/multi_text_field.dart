@@ -125,6 +125,7 @@ class ItemState extends State<Item>{
                     child: TextField(
                       controller: controller,
                       style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG),
+                      textAlignVertical: TextAlignVertical.center,
                       decoration: InputDecoration(
                           contentPadding: EdgeInsets.zero,
                           hintText: hint,
