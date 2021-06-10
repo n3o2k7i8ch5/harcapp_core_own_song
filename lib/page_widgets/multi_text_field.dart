@@ -179,4 +179,6 @@ class ItemState extends State<Item>{
     );
   }
 
+  void setEditing(editing) => setState(() => this.editing = editing);
+
 }
