@@ -67,7 +67,10 @@ class MultiTextFieldState extends State<MultiTextField>{
         icon: MdiIcons.plus,
         iconLeading: false,
         iconSize: 20.0,
-        onTap: () => setState(() => texts.add('')), 
+        onTap: () => setState((){
+          texts.add('');
+          keys.add(GlobalKey<ItemState>());
+        }),
       )
     );
     
