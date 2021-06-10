@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
@@ -29,7 +31,10 @@ class MultiTextFieldState extends State<MultiTextField>{
   
   @override
   void initState() {
-    texts = initVals??[];
+    texts = [];
+    if(initVals != null)
+      texts.addAll(initVals);
+
     super.initState();
   }
   
@@ -42,7 +47,7 @@ class MultiTextFieldState extends State<MultiTextField>{
       children.add(Item(
         initText: text,
         hint: hint,
-        onRemoveTap: () => setState(() => initVals.removeAt(i)),
+        onRemoveTap: () => setState(() => texts.removeAt(i)),
       ));
     }
 
@@ -105,33 +110,33 @@ class ItemState extends State<Item>{
         mainAxisSize: MainAxisSize.min,
         children: [
 
+          ConstrainedBox(
+              constraints: BoxConstraints(minWidth: 30.0),
+              child:
+              editing?
 
+              IntrinsicWidth(
+                  child: TextField(
+                    controller: controller,
+                    style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG),
+                    decoration: InputDecoration(
+                        hintText: hint,
+                        hintStyle: AppTextStyle(
+                          color: hintEnab_(context),
+                          fontSize: Dimen.TEXT_SIZE_BIG,
+                        ),
+                        border: InputBorder.none
+                    ),
+                  )
+              ):
 
-          if(editing)
-            IntrinsicWidth(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(minWidth: 30.0),
-                child: TextField(
-                  controller: controller,
-                  style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG),
-                  decoration: InputDecoration(
-                      hintText: hint,
-                      hintStyle: AppTextStyle(
-                        color: hintEnab_(context),
-                        fontSize: Dimen.TEXT_SIZE_BIG,
-                      ),
-                      border: InputBorder.none
-                  ),
+              Text(
+                controller.text,
+                style: AppTextStyle(
+                  fontSize: Dimen.TEXT_SIZE_BIG,
                 ),
-              )
-            )
-          else
-            Text(
-              controller.text,
-              style: AppTextStyle(
-                fontSize: Dimen.TEXT_SIZE_BIG,
               ),
-            ),
+          ),
 
           if(editing)
             IconButton(
