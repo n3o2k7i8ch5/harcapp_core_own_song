@@ -28,12 +28,17 @@ class MultiTextFieldState extends State<MultiTextField>{
   String get hint => widget.hint;
 
   List<String> texts;
+  List<GlobalKey<ItemState>> keys;
   
   @override
   void initState() {
     texts = [];
     if(initVals != null)
       texts.addAll(initVals);
+
+    keys = [];
+    for(int i=0; i<initVals.length; i++)
+      keys.add(GlobalKey());
 
     super.initState();
   }
@@ -48,6 +53,7 @@ class MultiTextFieldState extends State<MultiTextField>{
         initText: text,
         hint: hint,
         onRemoveTap: () => setState(() => texts.removeAt(i)),
+        key: keys[i],
       ));
     }
 
@@ -123,26 +129,23 @@ class ItemState extends State<Item>{
               editing?
 
               IntrinsicWidth(
-                  child: Container(
-                    color: Colors.red,
-                    child: TextField(
-                      focusNode: focusNode,
-                      controller: controller,
-                      style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG),
-                      textAlignVertical: TextAlignVertical.center,
-                      scrollPadding: EdgeInsets.zero,
-                      decoration: InputDecoration(
-                          isCollapsed: true,
-                          //contentPadding: EdgeInsets.zero,
-                          hintText: hint,
-                          hintStyle: AppTextStyle(
-                            color: hintEnab_(context),
-                            fontSize: Dimen.TEXT_SIZE_BIG,
-                          ),
-                          border: InputBorder.none
-                      ),
+                  child: TextField(
+                    focusNode: focusNode,
+                    controller: controller,
+                    style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG),
+                    textAlignVertical: TextAlignVertical.center,
+                    scrollPadding: EdgeInsets.zero,
+                    decoration: InputDecoration(
+                        isCollapsed: true,
+                        //contentPadding: EdgeInsets.zero,
+                        hintText: hint,
+                        hintStyle: AppTextStyle(
+                          color: hintEnab_(context),
+                          fontSize: Dimen.TEXT_SIZE_BIG,
+                        ),
+                        border: InputBorder.none
                     ),
-                  )
+                  ),
               ):
 
               Text(
