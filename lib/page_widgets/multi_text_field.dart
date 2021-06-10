@@ -57,6 +57,8 @@ class MultiTextFieldState extends State<MultiTextField>{
     
     return Wrap(
       children: children,
+      runSpacing: Dimen.DEF_MARG,
+      spacing: Dimen.DEF_MARG,
     );
   }
 

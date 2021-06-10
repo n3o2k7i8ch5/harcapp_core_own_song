@@ -43,6 +43,7 @@ class TopCards extends StatelessWidget{
   Widget build(BuildContext context) {
 
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
 
         Padding(
