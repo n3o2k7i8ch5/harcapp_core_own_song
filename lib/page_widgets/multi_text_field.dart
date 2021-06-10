@@ -81,13 +81,13 @@ class ItemState extends State<Item>{
   String get initText => widget.initText;
   String get hint => widget.hint;
   void Function() get onRemoveTap => widget.onRemoveTap;
-  
-  String text;
+
+  TextEditingController controller;
   bool editing;
 
   @override
   void initState() {
-    text = initText;
+    controller = TextEditingController(text: initText);
     editing = false;
     super.initState();
   }
@@ -105,6 +105,7 @@ class ItemState extends State<Item>{
           if(editing)
             IntrinsicWidth(
               child: TextField(
+                controller: controller,
                 decoration: InputDecoration(
                     hintText: hint,
                     hintStyle: AppTextStyle(
@@ -113,12 +114,11 @@ class ItemState extends State<Item>{
                     ),
                     border: InputBorder.none
                 ),
-                onChanged: (text) => this.text = text,
               ),
             )
           else
             Text(
-              text,
+              controller.text,
               style: AppTextStyle(
                 fontSize: Dimen.TEXT_SIZE_BIG,
               ),
