@@ -56,6 +56,7 @@ class MultiTextFieldState extends State<MultiTextField>{
         textColor: accent_(context),
         text: 'Dodaj',
         icon: MdiIcons.plus,
+        iconLeading: false,
         iconSize: 20.0,
         onTap: () => setState(() => texts.add('')), 
       )
@@ -104,6 +105,7 @@ class ItemState extends State<Item>{
   @override
   Widget build(BuildContext context) {
     return AppCard(
+      elevation: 0,
       onTap: () => setState(() => editing = true),
       radius: AppCard.BIG_RADIUS,
       padding: EdgeInsets.only(left: Dimen.ICON_MARG),
@@ -118,6 +120,7 @@ class ItemState extends State<Item>{
 
               IntrinsicWidth(
                   child: TextField(
+                    scrollPadding: EdgeInsets.zero,
                     controller: controller,
                     style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG),
                     decoration: InputDecoration(
