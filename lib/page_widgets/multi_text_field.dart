@@ -132,7 +132,8 @@ class ItemState extends State<Item>{
                       textAlignVertical: TextAlignVertical.center,
                       scrollPadding: EdgeInsets.zero,
                       decoration: InputDecoration(
-                          contentPadding: EdgeInsets.zero,
+                          isCollapsed: true,
+                          //contentPadding: EdgeInsets.zero,
                           hintText: hint,
                           hintStyle: AppTextStyle(
                             color: hintEnab_(context),
