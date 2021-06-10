@@ -38,7 +38,7 @@ class MultiTextFieldState extends State<MultiTextField>{
 
     keys = [];
     for(int i=0; i<texts.length; i++)
-      keys.add(GlobalKey());
+      keys.add(GlobalKey<ItemState>());
 
     super.initState();
   }
@@ -52,7 +52,10 @@ class MultiTextFieldState extends State<MultiTextField>{
       children.add(Item(
         initText: text,
         hint: hint,
-        onRemoveTap: () => setState(() => texts.removeAt(i)),
+        onRemoveTap: () => setState((){
+          texts.removeAt(i);
+          keys.removeAt(i);
+        }),
         key: keys[i],
       ));
     }
