@@ -110,6 +110,7 @@ class ItemState extends State<Item>{
       radius: AppCard.BIG_RADIUS,
       padding: EdgeInsets.only(left: Dimen.ICON_MARG),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisSize: MainAxisSize.min,
         children: [
 
@@ -120,10 +121,10 @@ class ItemState extends State<Item>{
 
               IntrinsicWidth(
                   child: TextField(
-                    scrollPadding: EdgeInsets.zero,
                     controller: controller,
                     style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG),
                     decoration: InputDecoration(
+                        contentPadding: EdgeInsets.zero,
                         hintText: hint,
                         hintStyle: AppTextStyle(
                           color: hintEnab_(context),
@@ -135,9 +136,10 @@ class ItemState extends State<Item>{
               ):
 
               Text(
-                controller.text,
+                controller.text.length==0?hint:controller.text,
                 style: AppTextStyle(
                   fontSize: Dimen.TEXT_SIZE_BIG,
+                  color: controller.text.length==0?hintEnab_(context):textEnab_(context)
                 ),
               ),
           ),
