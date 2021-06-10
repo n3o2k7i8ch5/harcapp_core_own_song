@@ -53,9 +53,10 @@ class MultiTextFieldState extends State<MultiTextField>{
 
     children.add(
       SimpleButton.from(
-        context: context,
+        textColor: accent_(context),
         text: 'Dodaj',
         icon: MdiIcons.plus,
+        iconSize: 20.0,
         onTap: () => setState(() => texts.add('')), 
       )
     );
@@ -143,6 +144,7 @@ class ItemState extends State<Item>{
               context: context,
               icon: MdiIcons.check,
               iconSize: 20,
+              margin: EdgeInsets.zero,
               onTap: () => setState(() => editing = false),
             )
           else
@@ -150,6 +152,7 @@ class ItemState extends State<Item>{
               context: context,
               icon: MdiIcons.close,
               iconSize: 20,
+              margin: EdgeInsets.zero,
               onTap: onRemoveTap,
             )
 
