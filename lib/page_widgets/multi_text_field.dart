@@ -109,6 +109,7 @@ class ItemState extends State<Item>{
             IntrinsicWidth(
               child: TextField(
                 controller: controller,
+                style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG),
                 decoration: InputDecoration(
                     hintText: hint,
                     hintStyle: AppTextStyle(
