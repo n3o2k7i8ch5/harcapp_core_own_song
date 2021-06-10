@@ -109,7 +109,12 @@ class TopCards extends StatelessWidget{
                           sizeFraction: 0.7,
                           curve: Curves.easeInOut,
                           animation: animation,
-                          child: AddTextWidget(item),
+                          child: AddTextWidget(
+                            item,
+                            onRemoved: (){
+
+                            },
+                          ),
                         );
                       },
                       removeItemBuilder: (context, animation, oldItem) {
@@ -347,7 +352,8 @@ class TopCards extends StatelessWidget{
 class AddTextWidget extends StatelessWidget{
 
   final TextEditingController controller;
-  const AddTextWidget(this.controller);
+  final void Function() onRemoved;
+  const AddTextWidget(this.controller, {this.onRemoved});
 
   @override
   Widget build(BuildContext context) {
@@ -359,6 +365,7 @@ class AddTextWidget extends StatelessWidget{
           onPressed: (){
             HidTitlesProvider prov = Provider.of<HidTitlesProvider>(context, listen: false);
             prov.remove(controller);
+            if(onRemoved != null) onRemoved();
           },
         ),
 
