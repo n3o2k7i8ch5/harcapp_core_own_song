@@ -105,20 +105,25 @@ class ItemState extends State<Item>{
         mainAxisSize: MainAxisSize.min,
         children: [
 
+
+
           if(editing)
             IntrinsicWidth(
-              child: TextField(
-                controller: controller,
-                style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG),
-                decoration: InputDecoration(
-                    hintText: hint,
-                    hintStyle: AppTextStyle(
-                      color: hintEnab_(context),
-                      fontSize: Dimen.TEXT_SIZE_BIG,
-                    ),
-                    border: InputBorder.none
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minWidth: 30.0),
+                child: TextField(
+                  controller: controller,
+                  style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG),
+                  decoration: InputDecoration(
+                      hintText: hint,
+                      hintStyle: AppTextStyle(
+                        color: hintEnab_(context),
+                        fontSize: Dimen.TEXT_SIZE_BIG,
+                      ),
+                      border: InputBorder.none
+                  ),
                 ),
-              ),
+              )
             )
           else
             Text(
