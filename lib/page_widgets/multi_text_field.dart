@@ -114,7 +114,7 @@ class ItemState extends State<Item>{
         children: [
 
           ConstrainedBox(
-              constraints: BoxConstraints(minWidth: 40.0),
+              constraints: BoxConstraints(minWidth: 40.0, maxHeight: Dimen.TEXT_SIZE_BIG),
               child:
               editing?
 

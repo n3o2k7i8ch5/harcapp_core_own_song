@@ -161,7 +161,9 @@ class TopCards extends StatelessWidget{
                 ),
               ),
 
-              MultiTextField(),
+              MultiTextField(
+                hint: 'Autor',
+              ),
 
               Consumer<AuthorCtrlProvider>(
                 builder: (context, prov, child) => AppTextFieldHint(
