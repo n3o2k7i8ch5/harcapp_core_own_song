@@ -124,12 +124,13 @@ class ItemState extends State<Item>{
 
               IntrinsicWidth(
                   child: Container(
-                    color: Colors.blue,
+                    color: Colors.red,
                     child: TextField(
                       focusNode: focusNode,
                       controller: controller,
                       style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG),
                       textAlignVertical: TextAlignVertical.center,
+                      scrollPadding: EdgeInsets.zero,
                       decoration: InputDecoration(
                           contentPadding: EdgeInsets.zero,
                           hintText: hint,
