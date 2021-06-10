@@ -99,18 +99,20 @@ class CurrentItemProvider extends ChangeNotifier{
 class HidTitlesProvider extends ChangeNotifier{
 
   List<TextEditingController> _controllers;
-  // ignore: unrelated_type_equality_checks
-  bool get _isLastEmpty => controllers.isEmpty || controllers.last.text.length==0;
+  bool _isLastEmpty;
 
   HidTitlesProvider({List<String> hidTitles}){
     if(hidTitles == null)
       _controllers = [];
     else
       _controllers = hidTitles.map((hidTitle) => TextEditingController(text: hidTitle)).toList();
+
+    _isLastEmpty = hidTitles==null || (hidTitles.length > 0 && hidTitles.last.length==0);
   }
 
   void add({String hidTitle, Function() onChanged}){
     TextEditingController controller = TextEditingController(text: hidTitle??'');
+    _isLastEmpty = controller.text.length==0;
     controller.addListener(() {
       if(controller == _controllers.last){
 
@@ -119,6 +121,7 @@ class HidTitlesProvider extends ChangeNotifier{
         else if(controller.text.length!=0 && _isLastEmpty)
           notifyListeners();
 
+        _isLastEmpty = controller.text.length==0;
       }
     });
 
@@ -132,6 +135,7 @@ class HidTitlesProvider extends ChangeNotifier{
 
   void remove(TextEditingController controller){
     _controllers.remove(controller);
+    _isLastEmpty = controllers.isEmpty || controllers.last.text.length==0;
     notifyListeners();
   }
 
