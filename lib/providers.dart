@@ -100,7 +100,7 @@ class HidTitlesProvider extends ChangeNotifier{
 
   List<TextEditingController> _controllers;
   // ignore: unrelated_type_equality_checks
-  bool get _isLastEmpty => controllers==0 || controllers.last.text.length==0;
+  bool get _isLastEmpty => controllers.isEmpty || controllers.last.text.length==0;
 
   HidTitlesProvider({List<String> hidTitles}){
     if(hidTitles == null)
