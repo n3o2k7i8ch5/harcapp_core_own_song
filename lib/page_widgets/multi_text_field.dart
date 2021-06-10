@@ -120,17 +120,20 @@ class ItemState extends State<Item>{
               editing?
 
               IntrinsicWidth(
-                  child: TextField(
-                    controller: controller,
-                    style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG),
-                    decoration: InputDecoration(
-                        contentPadding: EdgeInsets.zero,
-                        hintText: hint,
-                        hintStyle: AppTextStyle(
-                          color: hintEnab_(context),
-                          fontSize: Dimen.TEXT_SIZE_BIG,
-                        ),
-                        border: InputBorder.none
+                  child: Container(
+                    color: Colors.red,
+                    child: TextField(
+                      controller: controller,
+                      style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG),
+                      decoration: InputDecoration(
+                          contentPadding: EdgeInsets.zero,
+                          hintText: hint,
+                          hintStyle: AppTextStyle(
+                            color: hintEnab_(context),
+                            fontSize: Dimen.TEXT_SIZE_BIG,
+                          ),
+                          border: InputBorder.none
+                      ),
                     ),
                   )
               ):
