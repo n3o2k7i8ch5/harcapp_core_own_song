@@ -111,7 +111,7 @@ class ItemState extends State<Item>{
         children: [
 
           ConstrainedBox(
-              constraints: BoxConstraints(minWidth: 30.0),
+              constraints: BoxConstraints(minWidth: 40.0),
               child:
               editing?
 
@@ -139,14 +139,18 @@ class ItemState extends State<Item>{
           ),
 
           if(editing)
-            IconButton(
-              icon: Icon(MdiIcons.check, size: 20),
-              onPressed: () => setState(() => editing = false),
+            SimpleButton.from(
+              context: context,
+              icon: MdiIcons.check,
+              iconSize: 20,
+              onTap: () => setState(() => editing = false),
             )
           else
-            IconButton(
-              icon: Icon(MdiIcons.close, size: 20),
-              onPressed: onRemoveTap,
+            SimpleButton.from(
+              context: context,
+              icon: MdiIcons.close,
+              iconSize: 20,
+              onTap: onRemoveTap,
             )
 
         ],
