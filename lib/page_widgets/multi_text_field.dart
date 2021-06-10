@@ -79,7 +79,7 @@ class Item extends StatefulWidget{
   final String hint;
   final void Function() onRemoveTap;
 
-  const Item({@required this.initText, @required this.hint, this.onRemoveTap});
+  const Item({@required this.initText, @required this.hint, this.onRemoveTap, Key key}):super(key: key);
 
   @override
   State<StatefulWidget> createState() => ItemState();
@@ -87,7 +87,9 @@ class Item extends StatefulWidget{
 }
 
 class ItemState extends State<Item>{
-  
+
+  FocusNode focusNode;
+
   String get initText => widget.initText;
   String get hint => widget.hint;
   void Function() get onRemoveTap => widget.onRemoveTap;
@@ -97,6 +99,7 @@ class ItemState extends State<Item>{
 
   @override
   void initState() {
+    focusNode = FocusNode();
     controller = TextEditingController(text: initText);
     editing = false;
     super.initState();
@@ -121,8 +124,9 @@ class ItemState extends State<Item>{
 
               IntrinsicWidth(
                   child: Container(
-                    color: Colors.red,
+                    color: Colors.blue,
                     child: TextField(
+                      focusNode: focusNode,
                       controller: controller,
                       style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG),
                       textAlignVertical: TextAlignVertical.center,
