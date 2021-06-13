@@ -131,7 +131,7 @@ class ItemState extends State<Item>{
         children: [
 
           ConstrainedBox(
-              constraints: BoxConstraints(minWidth: 40.0, maxHeight: Dimen.TEXT_SIZE_BIG),
+              constraints: BoxConstraints(minWidth: 40.0, maxHeight: Dimen.TEXT_SIZE_NORMAL),
               child:
               editing?
 
@@ -139,7 +139,7 @@ class ItemState extends State<Item>{
                   child: TextField(
                     focusNode: focusNode,
                     controller: controller,
-                    style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_BIG),
+                    style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_NORMAL),
                     textAlignVertical: TextAlignVertical.center,
                     scrollPadding: EdgeInsets.zero,
                     decoration: InputDecoration(
@@ -148,7 +148,7 @@ class ItemState extends State<Item>{
                         hintText: hint,
                         hintStyle: AppTextStyle(
                           color: hintEnab_(context),
-                          fontSize: Dimen.TEXT_SIZE_BIG,
+                          fontSize: Dimen.TEXT_SIZE_NORMAL,
                         ),
                         border: InputBorder.none
                     ),
@@ -158,7 +158,7 @@ class ItemState extends State<Item>{
               Text(
                 controller.text.length==0?hint:controller.text,
                 style: AppTextStyle(
-                  fontSize: Dimen.TEXT_SIZE_BIG,
+                  fontSize: Dimen.TEXT_SIZE_NORMAL,
                   color: controller.text.length==0?hintEnab_(context):textEnab_(context)
                 ),
               ),
