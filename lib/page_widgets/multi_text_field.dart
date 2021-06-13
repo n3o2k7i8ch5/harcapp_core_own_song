@@ -57,6 +57,9 @@ class MultiTextFieldState extends State<MultiTextField>{
         }),
         key: keys[i],
       ));
+
+      if(linear && i < text.length-1)
+        children.add(SizedBox(width: Dimen.DEF_MARG));
     }
 
     children.add(
@@ -76,12 +79,9 @@ class MultiTextFieldState extends State<MultiTextField>{
     );
 
     if(linear)
-      return ListView.separated(
-        itemCount: children.length,
-        itemBuilder: (context, index) => children[index],
-        separatorBuilder: (context, index) => SizedBox(width: Dimen.DEF_MARG),
-        shrinkWrap: true,
+      return SingleChildScrollView(
         scrollDirection: Axis.horizontal,
+        child: Row(children: children,),
       );
     else
       return Wrap(
