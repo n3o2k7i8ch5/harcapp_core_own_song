@@ -113,6 +113,11 @@ class ItemState extends State<Item>{
   @override
   void initState() {
     focusNode = FocusNode();
+    focusNode.addListener(() {
+      if(!focusNode.hasFocus)
+        setState(() => editing = false);
+    });
+
     controller = TextEditingController(text: initText);
     editing = false;
     super.initState();
@@ -165,7 +170,7 @@ class ItemState extends State<Item>{
               ),
           ),
 
-          if(editing)
+          if(focusNode.hasFocus && editing)
             SimpleButton.from(
               context: context,
               icon: MdiIcons.check,
@@ -173,7 +178,7 @@ class ItemState extends State<Item>{
               margin: EdgeInsets.zero,
               onTap: () => setState(() => editing = false),
             )
-          else
+          else if(focusNode.hasFocus && !editing)
             SimpleButton.from(
               context: context,
               icon: MdiIcons.close,
