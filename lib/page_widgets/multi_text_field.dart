@@ -201,27 +201,19 @@ class ItemState extends State<Item>{
     return Stack(
       children: [
 
-        AppCard(
-          //elevation: selected?AppCard.bigElevation:0,
-          //color: selected?cardEnab_(context):background_(context),
-          color: background_(context),
+        GestureDetector(
           onTap: (){
             setState(() => selected = true);
             focusNode.requestFocus();
           },
-          radius: AppCard.BIG_RADIUS,
-          padding: EdgeInsets.zero,
-          elevation: 0,
-          //padding: EdgeInsets.only(left: Dimen.ICON_MARG),
           child: child,
-          clipBehavior: Clip.none,
         ),
 
         if(focusNode.hasFocus)
           Positioned(
             left: 0,
-            right: 0,
-            bottom: 4,
+            right: Dimen.ICON_MARG,
+            bottom: 8,
             child: Container(
               height: 2,
               color: accent_(context),
