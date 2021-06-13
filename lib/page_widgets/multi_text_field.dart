@@ -197,7 +197,26 @@ class ItemState extends State<Item>{
 
       ],
     );
-    
+
+    child = Stack(
+      children: [
+
+        child,
+
+        if(focusNode.hasFocus)
+          Positioned(
+            left: 0,
+            right: 0,
+            bottom: 4,
+            child: Container(
+              height: 4,
+              color: accent_(context),
+            ),
+          )
+
+      ],
+    );
+
     return AppCard(
       //elevation: selected?AppCard.bigElevation:0,
       //color: selected?cardEnab_(context):background_(context),
@@ -207,6 +226,8 @@ class ItemState extends State<Item>{
         focusNode.requestFocus();
       },
       radius: AppCard.BIG_RADIUS,
+      padding: EdgeInsets.zero,
+      elevation: 0,
       //padding: EdgeInsets.only(left: Dimen.ICON_MARG),
       child: child
     );
