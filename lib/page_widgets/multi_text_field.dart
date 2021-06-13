@@ -121,7 +121,8 @@ class ItemState extends State<Item>{
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      elevation: 0,
+      elevation: editing?AppCard.bigElevation:0,
+      color: editing?cardEnab_(context):background_(context),
       onTap: () => setState(() => editing = true),
       radius: AppCard.BIG_RADIUS,
       padding: EdgeInsets.only(left: Dimen.ICON_MARG),
