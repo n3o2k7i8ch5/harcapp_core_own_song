@@ -209,7 +209,7 @@ class ItemState extends State<Item>{
             right: 0,
             bottom: 4,
             child: Container(
-              height: 4,
+              height: 2,
               color: accent_(context),
             ),
           )
@@ -229,7 +229,8 @@ class ItemState extends State<Item>{
       padding: EdgeInsets.zero,
       elevation: 0,
       //padding: EdgeInsets.only(left: Dimen.ICON_MARG),
-      child: child
+      child: child,
+      clipBehavior: Clip.none,
     );
   }
 
