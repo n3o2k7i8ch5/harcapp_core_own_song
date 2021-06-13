@@ -216,7 +216,10 @@ class ItemState extends State<Item>{
             bottom: 8,
             child: Container(
               height: 2,
-              color: accent_(context),
+              decoration: BoxDecoration(
+                color: accent_(context),
+                borderRadius: BorderRadius.all(Radius.circular(20))
+              ),
             ),
           )
 
