@@ -68,6 +68,7 @@ class MultiTextFieldState extends State<MultiTextField>{
         iconLeading: false,
         textSize: Dimen.TEXT_SIZE_NORMAL,
         iconSize: 20.0,
+        margin: EdgeInsets.zero,
         onTap: () => setState((){
           texts.add('');
           keys.add(GlobalKey<ItemState>());
