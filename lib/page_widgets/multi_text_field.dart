@@ -215,9 +215,9 @@ class ItemState extends State<Item>{
             right: Dimen.ICON_MARG,
             bottom: 8,
             child: Container(
-              height: 2,
+              height: 1,
               decoration: BoxDecoration(
-                color: accent_(context),
+                color: hintEnab_(context), //accent_(context),
                 borderRadius: BorderRadius.all(Radius.circular(20))
               ),
             ),
