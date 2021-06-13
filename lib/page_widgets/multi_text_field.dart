@@ -108,29 +108,34 @@ class ItemState extends State<Item>{
   void Function() get onRemoveTap => widget.onRemoveTap;
 
   TextEditingController controller;
-  bool editing;
+  bool selected;
 
   @override
   void initState() {
     focusNode = FocusNode();
     focusNode.addListener(() {
       if(!focusNode.hasFocus)
-        editing = false;
+        selected = false;
 
       setState((){});
     });
 
     controller = TextEditingController(text: initText);
-    editing = false;
+    selected = false;
     super.initState();
   }
   
   @override
   Widget build(BuildContext context) {
     return AppCard(
-      elevation: editing?AppCard.bigElevation:0,
-      color: editing?cardEnab_(context):background_(context),
-      onTap: () => setState(() => editing = true),
+      elevation: selected?AppCard.bigElevation:0,
+      color: selected?cardEnab_(context):background_(context),
+      onTap: (){
+        if(selected)
+          focusNode.requestFocus();
+        else
+          setState(() => selected = true);
+      },
       radius: AppCard.BIG_RADIUS,
       padding: EdgeInsets.only(left: Dimen.ICON_MARG),
       child: Row(
@@ -141,7 +146,7 @@ class ItemState extends State<Item>{
           ConstrainedBox(
               constraints: BoxConstraints(minWidth: 40.0, maxHeight: Dimen.TEXT_SIZE_NORMAL),
               child:
-              editing?
+              selected?
 
               IntrinsicWidth(
                   child: TextField(
@@ -172,15 +177,15 @@ class ItemState extends State<Item>{
               ),
           ),
 
-          if(focusNode.hasFocus && editing)
+          if(selected && focusNode.hasFocus)
             SimpleButton.from(
               context: context,
               icon: MdiIcons.check,
               iconSize: 20,
               margin: EdgeInsets.zero,
-              onTap: () => setState(() => editing = false),
+              onTap: () => setState(() => selected = false),
             )
-          else if(focusNode.hasFocus && !editing)
+          else if(selected && !focusNode.hasFocus)
             SimpleButton.from(
               context: context,
               icon: MdiIcons.close,
@@ -199,6 +204,6 @@ class ItemState extends State<Item>{
     );
   }
 
-  void setEditing(editing) => setState(() => this.editing = editing);
+  void setEditing(editing) => setState(() => this.selected = editing);
 
 }
