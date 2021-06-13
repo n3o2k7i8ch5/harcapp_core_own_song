@@ -198,10 +198,24 @@ class ItemState extends State<Item>{
       ],
     );
 
-    child = Stack(
+    return Stack(
       children: [
 
-        child,
+        AppCard(
+          //elevation: selected?AppCard.bigElevation:0,
+          //color: selected?cardEnab_(context):background_(context),
+          color: background_(context),
+          onTap: (){
+            setState(() => selected = true);
+            focusNode.requestFocus();
+          },
+          radius: AppCard.BIG_RADIUS,
+          padding: EdgeInsets.zero,
+          elevation: 0,
+          //padding: EdgeInsets.only(left: Dimen.ICON_MARG),
+          child: child,
+          clipBehavior: Clip.none,
+        ),
 
         if(focusNode.hasFocus)
           Positioned(
@@ -217,21 +231,6 @@ class ItemState extends State<Item>{
       ],
     );
 
-    return AppCard(
-      //elevation: selected?AppCard.bigElevation:0,
-      //color: selected?cardEnab_(context):background_(context),
-      color: background_(context),
-      onTap: (){
-        setState(() => selected = true);
-        focusNode.requestFocus();
-      },
-      radius: AppCard.BIG_RADIUS,
-      padding: EdgeInsets.zero,
-      elevation: 0,
-      //padding: EdgeInsets.only(left: Dimen.ICON_MARG),
-      child: child,
-      clipBehavior: Clip.none,
-    );
   }
 
   void setEditing(editing) => setState(() => this.selected = editing);
