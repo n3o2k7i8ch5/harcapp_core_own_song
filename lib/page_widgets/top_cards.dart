@@ -43,170 +43,173 @@ class TopCards extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
+    return Material(
+      color: Colors.transparent,
+      clipBehavior: Clip.none,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
 
-        Padding(
-          padding: EdgeInsets.only(left: Dimen.DEF_MARG, right: Dimen.DEF_MARG),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(left: Dimen.DEF_MARG, right: Dimen.DEF_MARG),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: <Widget>[
 
-              Row(
-                children: [
-                  Expanded(
-                    child: Consumer<TitleCtrlProvider>(
-                        builder: (context, prov, child) => AppTextFieldHint(
-                          accentColor: accentColor,
-                          controller: prov.controller,
-                          hint: 'Tytuł:',
-                          style: AppTextStyle(
-                            fontSize: Dimen.TEXT_SIZE_BIG,
-                            fontWeight: weight.halfBold,
-                            color: textEnab_(context),
-                          ),
-                          hintStyle: AppTextStyle(
-                            fontSize: Dimen.TEXT_SIZE_BIG,
-                            color: hintEnab_(context),
-                          ),
-                          onChanged: (values) => onChangedTitle?.call(values[0]),
-                        )
-                    ),
-                  ),
-
-                  Consumer<HidTitlesProvider>(
-                      builder: (context, provider, child) =>
-                          AnimatedChildSlider(
-                            index: provider.hasAny?1:0,
-                            children: [
-                              IconButton(
-                                icon: Icon(MdiIcons.plus),
-                                onPressed: (){
-                                  HidTitlesProvider prov = Provider.of<HidTitlesProvider>(context, listen: false);
-                                  prov.add();
-                                },
-                              ),
-
-                              IconButton(
-                                icon: Icon(MdiIcons.informationOutline),
-                                onPressed: (){
-                                  AppScaffold.showMessage(context, 'Tytuły ukryte są dodatkowymi kluczami wyszukwiania piosneki.');
-                                },
-                              )
-                            ],
-                          )
-                  )
-                ],
-              ),
-
-              Consumer<HidTitlesProvider>(
-                builder: (context, provider, child) => Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                Row(
                   children: [
-
-                    ImplicitlyAnimatedList<TextEditingController>(
-                      physics: BouncingScrollPhysics(),
-                      items: provider.controllers,
-                      areItemsTheSame: (a, b) => a.hashCode == b.hashCode,
-                      itemBuilder: (context, animation, item, index) {
-                        return SizeFadeTransition(
-                          sizeFraction: 0.7,
-                          curve: Curves.easeInOut,
-                          animation: animation,
-                          child: AddTextWidget(
-                            item,
-                            onRemoved: (){
-
-                            },
-                          ),
-                        );
-                      },
-                      removeItemBuilder: (context, animation, oldItem) {
-                        return SizeFadeTransition(
-                          sizeFraction: 0.7,
-                          curve: Curves.easeInOut,
-                          animation: animation,
-                          child: AddTextWidget(oldItem),
-                        );
-                      },
-                      shrinkWrap: true,
+                    Expanded(
+                      child: Consumer<TitleCtrlProvider>(
+                          builder: (context, prov, child) => AppTextFieldHint(
+                            accentColor: accentColor,
+                            controller: prov.controller,
+                            hint: 'Tytuł:',
+                            style: AppTextStyle(
+                              fontSize: Dimen.TEXT_SIZE_BIG,
+                              fontWeight: weight.halfBold,
+                              color: textEnab_(context),
+                            ),
+                            hintStyle: AppTextStyle(
+                              fontSize: Dimen.TEXT_SIZE_BIG,
+                              color: hintEnab_(context),
+                            ),
+                            onChanged: (values) => onChangedTitle?.call(values[0]),
+                          )
+                      ),
                     ),
 
-                    AnimatedContainer(
-                        duration: Duration(milliseconds: 500),
-                        curve: Curves.easeInOut,
-                        height: provider.hasAny?2*Dimen.ICON_MARG+Dimen.ICON_FOOTPRINT:0,
-                        child: AnimatedOpacity(
-                          opacity: provider.hasAny?1:0,
-                          duration: Duration(milliseconds: 500),
-                          curve: Curves.easeInOut,
-                          child: SimpleButton(
-                            margin: EdgeInsets.zero,
-                            padding: EdgeInsets.all(Dimen.ICON_MARG),
-                            onTap: provider.isLastEmpty?null:() => provider.add(),
-                            child: Row(
+                    Consumer<HidTitlesProvider>(
+                        builder: (context, provider, child) =>
+                            AnimatedChildSlider(
+                              index: provider.hasAny?1:0,
                               children: [
-                                Icon(MdiIcons.plus, color: provider.isLastEmpty?iconDisab_(context):iconEnab_(context)),
-                                SizedBox(width: Dimen.ICON_MARG),
-                                Text(
-                                  'Dodaj tytuł ukryty',
-                                  style: AppTextStyle(color: provider.isLastEmpty?iconDisab_(context):iconEnab_(context)),
+                                IconButton(
+                                  icon: Icon(MdiIcons.plus),
+                                  onPressed: (){
+                                    HidTitlesProvider prov = Provider.of<HidTitlesProvider>(context, listen: false);
+                                    prov.add();
+                                  },
+                                ),
+
+                                IconButton(
+                                  icon: Icon(MdiIcons.informationOutline),
+                                  onPressed: (){
+                                    AppScaffold.showMessage(context, 'Tytuły ukryte są dodatkowymi kluczami wyszukwiania piosneki.');
+                                  },
                                 )
                               ],
-                            ),
-                          ),
-                        )
-                    ),
-
+                            )
+                    )
                   ],
                 ),
-              ),
 
-              Consumer<CurrentItemProvider>(
-                builder: (context, prov, child) => AppTextFieldHint(
-                  accentColor: accentColor,
-                  hint: 'Autor słów:',
-                  style: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_BIG,
-                    fontWeight: weight.halfBold,
-                    color: textEnab_(context),
+                Consumer<HidTitlesProvider>(
+                  builder: (context, provider, child) => Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+
+                      ImplicitlyAnimatedList<TextEditingController>(
+                        physics: BouncingScrollPhysics(),
+                        items: provider.controllers,
+                        areItemsTheSame: (a, b) => a.hashCode == b.hashCode,
+                        itemBuilder: (context, animation, item, index) {
+                          return SizeFadeTransition(
+                            sizeFraction: 0.7,
+                            curve: Curves.easeInOut,
+                            animation: animation,
+                            child: AddTextWidget(
+                              item,
+                              onRemoved: (){
+
+                              },
+                            ),
+                          );
+                        },
+                        removeItemBuilder: (context, animation, oldItem) {
+                          return SizeFadeTransition(
+                            sizeFraction: 0.7,
+                            curve: Curves.easeInOut,
+                            animation: animation,
+                            child: AddTextWidget(oldItem),
+                          );
+                        },
+                        shrinkWrap: true,
+                      ),
+
+                      AnimatedContainer(
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.easeInOut,
+                          height: provider.hasAny?2*Dimen.ICON_MARG+Dimen.ICON_FOOTPRINT:0,
+                          child: AnimatedOpacity(
+                            opacity: provider.hasAny?1:0,
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.easeInOut,
+                            child: SimpleButton(
+                              margin: EdgeInsets.zero,
+                              padding: EdgeInsets.all(Dimen.ICON_MARG),
+                              onTap: provider.isLastEmpty?null:() => provider.add(),
+                              child: Row(
+                                children: [
+                                  Icon(MdiIcons.plus, color: provider.isLastEmpty?iconDisab_(context):iconEnab_(context)),
+                                  SizedBox(width: Dimen.ICON_MARG),
+                                  Text(
+                                    'Dodaj tytuł ukryty',
+                                    style: AppTextStyle(color: provider.isLastEmpty?iconDisab_(context):iconEnab_(context)),
+                                  )
+                                ],
+                              ),
+                            ),
+                          )
+                      ),
+
+                    ],
                   ),
-                  hintStyle: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_BIG,
-                    color: hintEnab_(context),
-                  ),
-                  multi: true,
-                  multiHintTop: 'Autorzy słów',
-                  initVals: prov.song.authors,
-                  onChanged: onChangedAuthor,
-                  key: ValueKey(prov.song),
                 ),
-              ),
 
-              Consumer<CurrentItemProvider>(
-                builder: (context, prov, child) => AppTextFieldHint(
-                  accentColor: accentColor,
-                  hint: 'Kompozytor muzyki:',
-                  style: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_BIG,
-                    fontWeight: weight.halfBold,
-                    color: textEnab_(context),
+                Consumer<CurrentItemProvider>(
+                  builder: (context, prov, child) => AppTextFieldHint(
+                    accentColor: accentColor,
+                    hint: 'Autor słów:',
+                    style: AppTextStyle(
+                      fontSize: Dimen.TEXT_SIZE_BIG,
+                      fontWeight: weight.halfBold,
+                      color: textEnab_(context),
+                    ),
+                    hintStyle: AppTextStyle(
+                      fontSize: Dimen.TEXT_SIZE_BIG,
+                      color: hintEnab_(context),
+                    ),
+                    multi: true,
+                    multiHintTop: 'Autorzy słów',
+                    initVals: prov.song.authors,
+                    onChanged: onChangedAuthor,
+                    key: ValueKey(prov.song),
                   ),
-                  hintStyle: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_BIG,
-                    color: hintEnab_(context),
-                  ),
-                  multi: true,
-                  multiHintTop: 'Kompozytorzy muzyki',
-                  initVals: prov.song.composers,
-                  onChanged: onChangedComposer,
-                  key: ValueKey(prov.song),
                 ),
-              ),
 
-              Consumer<CurrentItemProvider>(
-                builder: (context, prov, child) => AppTextFieldHint(
+                Consumer<CurrentItemProvider>(
+                  builder: (context, prov, child) => AppTextFieldHint(
+                    accentColor: accentColor,
+                    hint: 'Kompozytor muzyki:',
+                    style: AppTextStyle(
+                      fontSize: Dimen.TEXT_SIZE_BIG,
+                      fontWeight: weight.halfBold,
+                      color: textEnab_(context),
+                    ),
+                    hintStyle: AppTextStyle(
+                      fontSize: Dimen.TEXT_SIZE_BIG,
+                      color: hintEnab_(context),
+                    ),
+                    multi: true,
+                    multiHintTop: 'Kompozytorzy muzyki',
+                    initVals: prov.song.composers,
+                    onChanged: onChangedComposer,
+                    key: ValueKey(prov.song),
+                  ),
+                ),
+
+                Consumer<CurrentItemProvider>(
+                  builder: (context, prov, child) => AppTextFieldHint(
                     accentColor: accentColor,
                     hint: 'Wykonawca:',
                     style: AppTextStyle(
@@ -223,151 +226,152 @@ class TopCards extends StatelessWidget{
                     initVals: prov.song.performers,
                     onChanged: onChangedPerformer,
                     key: ValueKey(prov.song),
+                  ),
                 ),
-              ),
 
-              Consumer<CurrentItemProvider>(
-                builder: (context, prov, child) => AppTextFieldHint(
-                  accentColor: accentColor,
-                  controller: TextEditingController(text: prov.youtubeLink),
-                  hint: 'Link YouTube:',
-                  style: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_BIG,
-                    fontWeight: weight.halfBold,
-                    color: textEnab_(context),
+                Consumer<CurrentItemProvider>(
+                  builder: (context, prov, child) => AppTextFieldHint(
+                    accentColor: accentColor,
+                    controller: TextEditingController(text: prov.youtubeLink),
+                    hint: 'Link YouTube:',
+                    style: AppTextStyle(
+                      fontSize: Dimen.TEXT_SIZE_BIG,
+                      fontWeight: weight.halfBold,
+                      color: textEnab_(context),
+                    ),
+                    hintStyle: AppTextStyle(
+                      fontSize: Dimen.TEXT_SIZE_BIG,
+                      color: hintEnab_(context),
+                    ),
+                    onChanged: (values) => onChangedYT?.call(values[0]),
+                    key: ValueKey(prov.song),
                   ),
-                  hintStyle: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_BIG,
-                    color: hintEnab_(context),
-                  ),
-                  onChanged: (values) => onChangedYT?.call(values[0]),
-                  key: ValueKey(prov.song),
                 ),
-              ),
 
-              Consumer<CurrentItemProvider>(
-                builder: (context, prov, child) => AppTextFieldHint(
-                  accentColor: accentColor,
-                  hint: 'Os. dodająca:',
-                  style: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_BIG,
-                    fontWeight: weight.halfBold,
-                    color: textEnab_(context),
+                Consumer<CurrentItemProvider>(
+                  builder: (context, prov, child) => AppTextFieldHint(
+                    accentColor: accentColor,
+                    hint: 'Os. dodająca:',
+                    style: AppTextStyle(
+                      fontSize: Dimen.TEXT_SIZE_BIG,
+                      fontWeight: weight.halfBold,
+                      color: textEnab_(context),
+                    ),
+                    hintStyle: AppTextStyle(
+                      fontSize: Dimen.TEXT_SIZE_BIG,
+                      color: hintEnab_(context),
+                    ),
+                    multi: true,
+                    multiHintTop: 'Os. dodające',
+                    initVals: prov.song.addPers,
+                    onChanged: onChangedAddPers,
+                    key: ValueKey(prov.song),
                   ),
-                  hintStyle: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_BIG,
-                    color: hintEnab_(context),
-                  ),
-                  multi: true,
-                  multiHintTop: 'Os. dodające',
-                  initVals: prov.song.addPers,
-                  onChanged: onChangedAddPers,
-                  key: ValueKey(prov.song),
                 ),
-              ),
 
-            ],
+              ],
+            ),
           ),
-        ),
 
-        Consumer<CurrentItemProvider>(
-            builder: (context, prov, child) => Column(
-              children: [
-                Row(
-                  children: [
-
-                    SizedBox(width: Dimen.DEF_MARG),
-
-                    Expanded(
-                      child: Stack(
-                        children: [
-
-                          IgnorePointer(
-                            ignoring: true,
-                            child: AppTextFieldHint(
-                              accentColor: accentColor,
-                              controller: TextEditingController(
-                                  text:
-                                  prov.releaseDate==null ?
-                                  '':
-                                  dateToString(prov.releaseDate, showMonth: prov.showRelDateMonth, showDay: prov.showRelDateMonth&&prov.showRelDateDay)),
-                              hint: 'Data pierwszego wykonania:',
-                              style: AppTextStyle(
-                                fontSize: Dimen.TEXT_SIZE_BIG,
-                                fontWeight: weight.halfBold,
-                                color: textEnab_(context),
-                              ),
-                              hintStyle: AppTextStyle(
-                                fontSize: Dimen.TEXT_SIZE_BIG,
-                                color: hintEnab_(context),
-                              ),
-                              onChanged: (text){
-                                if(onChangedReleaseDate != null)
-                                  onChangedReleaseDate(prov.releaseDate);
-                              },
-                              key: ValueKey(Tuple3(prov.releaseDate, prov.showRelDateMonth, prov.showRelDateDay)),
-                            ),
-                          ),
-
-                          Positioned.fill(
-                            child: GestureDetector(
-                                child: Container(color: Colors.transparent),
-                                onTap: () async {
-                                  prov.releaseDate = await showDatePicker(
-                                    context: context,
-                                    initialDate: prov.releaseDate??DateTime.now(),
-                                    firstDate: DateTime(966),
-                                    lastDate: DateTime.now(),
-                                  );
-                                }
-                            ),
-                          )
-
-                        ],
-                      ),
-                    ),
-
-                    IconButton(
-                        icon: Icon(MdiIcons.close),
-                        onPressed: prov.releaseDate==null?null:(){
-                          prov.releaseDate = null;
-                        }
-                    ),
-
-                    SizedBox(width: Dimen.DEF_MARG),
-
-                  ],
-                ),
-
-                if(prov.releaseDate != null)
+          Consumer<CurrentItemProvider>(
+              builder: (context, prov, child) => Column(
+                children: [
                   Row(
                     children: [
 
-                      SimpleButton.from(
-                          textColor: prov.showRelDateDay && prov.showRelDateMonth?iconEnab_(context):iconDisab_(context),
-                          dense: true,
-                          margin: EdgeInsets.zero,
-                          icon: MdiIcons.calendarOutline,
-                          text: 'Pok. dzień',
-                          onTap: prov.showRelDateMonth?() => prov.showRelDateDay = !prov.showRelDateDay : null
+                      SizedBox(width: Dimen.DEF_MARG),
+
+                      Expanded(
+                        child: Stack(
+                          children: [
+
+                            IgnorePointer(
+                              ignoring: true,
+                              child: AppTextFieldHint(
+                                accentColor: accentColor,
+                                controller: TextEditingController(
+                                    text:
+                                    prov.releaseDate==null ?
+                                    '':
+                                    dateToString(prov.releaseDate, showMonth: prov.showRelDateMonth, showDay: prov.showRelDateMonth&&prov.showRelDateDay)),
+                                hint: 'Data pierwszego wykonania:',
+                                style: AppTextStyle(
+                                  fontSize: Dimen.TEXT_SIZE_BIG,
+                                  fontWeight: weight.halfBold,
+                                  color: textEnab_(context),
+                                ),
+                                hintStyle: AppTextStyle(
+                                  fontSize: Dimen.TEXT_SIZE_BIG,
+                                  color: hintEnab_(context),
+                                ),
+                                onChanged: (text){
+                                  if(onChangedReleaseDate != null)
+                                    onChangedReleaseDate(prov.releaseDate);
+                                },
+                                key: ValueKey(Tuple3(prov.releaseDate, prov.showRelDateMonth, prov.showRelDateDay)),
+                              ),
+                            ),
+
+                            Positioned.fill(
+                              child: GestureDetector(
+                                  child: Container(color: Colors.transparent),
+                                  onTap: () async {
+                                    prov.releaseDate = await showDatePicker(
+                                      context: context,
+                                      initialDate: prov.releaseDate??DateTime.now(),
+                                      firstDate: DateTime(966),
+                                      lastDate: DateTime.now(),
+                                    );
+                                  }
+                              ),
+                            )
+
+                          ],
+                        ),
                       ),
 
-                      SimpleButton.from(
-                          textColor: prov.showRelDateMonth?iconEnab_(context):iconDisab_(context),
-                          dense: true,
-                          margin: EdgeInsets.zero,
-                          icon: MdiIcons.calendarMonthOutline,
-                          text: 'Pok. miesiąc',
-                          onTap: () => prov.showRelDateMonth = !prov.showRelDateMonth
-                      )
+                      IconButton(
+                          icon: Icon(MdiIcons.close),
+                          onPressed: prov.releaseDate==null?null:(){
+                            prov.releaseDate = null;
+                          }
+                      ),
+
+                      SizedBox(width: Dimen.DEF_MARG),
 
                     ],
-                  )
-              ],
-            )
-        )
+                  ),
 
-      ],
+                  if(prov.releaseDate != null)
+                    Row(
+                      children: [
+
+                        SimpleButton.from(
+                            textColor: prov.showRelDateDay && prov.showRelDateMonth?iconEnab_(context):iconDisab_(context),
+                            dense: true,
+                            margin: EdgeInsets.zero,
+                            icon: MdiIcons.calendarOutline,
+                            text: 'Pok. dzień',
+                            onTap: prov.showRelDateMonth?() => prov.showRelDateDay = !prov.showRelDateDay : null
+                        ),
+
+                        SimpleButton.from(
+                            textColor: prov.showRelDateMonth?iconEnab_(context):iconDisab_(context),
+                            dense: true,
+                            margin: EdgeInsets.zero,
+                            icon: MdiIcons.calendarMonthOutline,
+                            text: 'Pok. miesiąc',
+                            onTap: () => prov.showRelDateMonth = !prov.showRelDateMonth
+                        )
+
+                      ],
+                    )
+                ],
+              )
+          )
+
+        ],
+      ),
     );
   }
 
