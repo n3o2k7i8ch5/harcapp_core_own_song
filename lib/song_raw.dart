@@ -111,14 +111,14 @@ class SongRaw extends SongCore{
 
     String title = map[SongCore.PARAM_TITLE];
     List<String> hidTitles = (map[SongCore.PARAM_HID_TITLES] as List).cast<String>();
-    List<String> authors = map[SongCore.PARAM_TEXT_AUTHORS]??'';
-    List<String> composers = map[SongCore.PARAM_COMPOSERS]??'';
-    List<String> performers = map[SongCore.PARAM_PERFORMERS]??'';
+    List<String> authors = ((map[SongCore.PARAM_TEXT_AUTHORS]??[]) as List).cast<String>();
+    List<String> composers = ((map[SongCore.PARAM_COMPOSERS]??[]) as List).cast<String>();
+    List<String> performers = ((map[SongCore.PARAM_PERFORMERS]??[]) as List).cast<String>();
     DateTime releaseDate = DateTime.tryParse(map[SongCore.PARAM_REL_DATE]??'');
     bool showRelDateMonth = map[SongCore.PARAM_SHOW_REL_DATE_MONTH]??true;
     bool showRelDateDay = map[SongCore.PARAM_SHOW_REL_DATE_DAY]??true;
     String youtubeLink = map[SongCore.PARAM_YT_LINK]??'';
-    List<String> addPers = map[SongCore.PARAM_ADD_PERS]??'';
+    List<String> addPers = ((map[SongCore.PARAM_ADD_PERS]??[]) as List).cast<String>();
     List<String> tags = (map[SongCore.PARAM_TAGS] as List).cast<String>();
     SongPart refrenPart;
     if (map.containsKey(SongCore.PARAM_REFREN)) {
