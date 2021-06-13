@@ -347,18 +347,6 @@ class YTCtrlProvider extends ChangeNotifier{
   }
 }
 
-class AddPersCtrlProvider extends ChangeNotifier{
-  TextEditingController controller;
-  AddPersCtrlProvider({String text}){
-    controller = TextEditingController(text: text);
-  }
-
-  set text(String value){
-    controller.text = value;
-    notifyListeners();
-  }
-}
-
 
 class SongPartProvider extends ChangeNotifier{
 
