@@ -67,7 +67,7 @@ class TopCards extends StatelessWidget{
                             color: textEnab_(context),
                           ),
                           hintStyle: AppTextStyle(
-                            fontSize: Dimen.TEXT_SIZE_NORMAL,
+                            fontSize: Dimen.TEXT_SIZE_BIG,
                             color: hintEnab_(context),
                           ),
                           onChanged: (values) => onChangedTitle?.call(values[0]),
@@ -173,7 +173,7 @@ class TopCards extends StatelessWidget{
                     color: textEnab_(context),
                   ),
                   hintStyle: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_NORMAL,
+                    fontSize: Dimen.TEXT_SIZE_BIG,
                     color: hintEnab_(context),
                   ),
                   multi: true,
@@ -193,7 +193,7 @@ class TopCards extends StatelessWidget{
                     color: textEnab_(context),
                   ),
                   hintStyle: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_NORMAL,
+                    fontSize: Dimen.TEXT_SIZE_BIG,
                     color: hintEnab_(context),
                   ),
                   multi: true,
@@ -213,7 +213,7 @@ class TopCards extends StatelessWidget{
                       color: textEnab_(context),
                     ),
                     hintStyle: AppTextStyle(
-                      fontSize: Dimen.TEXT_SIZE_NORMAL,
+                      fontSize: Dimen.TEXT_SIZE_BIG,
                       color: hintEnab_(context),
                     ),
                     multi: true,
@@ -234,7 +234,7 @@ class TopCards extends StatelessWidget{
                     color: textEnab_(context),
                   ),
                   hintStyle: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_NORMAL,
+                    fontSize: Dimen.TEXT_SIZE_BIG,
                     color: hintEnab_(context),
                   ),
                   onChanged: (values) => onChangedYT?.call(values[0]),
@@ -251,7 +251,7 @@ class TopCards extends StatelessWidget{
                     color: textEnab_(context),
                   ),
                   hintStyle: AppTextStyle(
-                    fontSize: Dimen.TEXT_SIZE_NORMAL,
+                    fontSize: Dimen.TEXT_SIZE_BIG,
                     color: hintEnab_(context),
                   ),
                   multi: true,
@@ -280,6 +280,7 @@ class TopCards extends StatelessWidget{
                           IgnorePointer(
                             ignoring: true,
                             child: AppTextFieldHint(
+                              accentColor: accentColor,
                               controller: TextEditingController(
                                   text:
                                   prov.releaseDate==null ?
@@ -292,7 +293,7 @@ class TopCards extends StatelessWidget{
                                 color: textEnab_(context),
                               ),
                               hintStyle: AppTextStyle(
-                                fontSize: Dimen.TEXT_SIZE_NORMAL,
+                                fontSize: Dimen.TEXT_SIZE_BIG,
                                 color: hintEnab_(context),
                               ),
                               onChanged: (text){
