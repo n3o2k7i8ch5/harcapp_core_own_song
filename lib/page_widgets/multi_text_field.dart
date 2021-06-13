@@ -135,6 +135,71 @@ class ItemState extends State<Item>{
   
   @override
   Widget build(BuildContext context) {
+
+    Widget child = Row(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+
+        ConstrainedBox(
+          constraints: BoxConstraints(minWidth: 40.0, maxHeight: Dimen.TEXT_SIZE_NORMAL),
+          child:
+          selected?
+
+          IntrinsicWidth(
+            child: TextField(
+              focusNode: focusNode,
+              controller: controller,
+              style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_NORMAL),
+              textAlignVertical: TextAlignVertical.center,
+              scrollPadding: EdgeInsets.zero,
+              decoration: InputDecoration(
+                  isCollapsed: true,
+                  //contentPadding: EdgeInsets.zero,
+                  hintText: hint,
+                  hintStyle: AppTextStyle(
+                    color: hintEnab_(context),
+                    fontSize: Dimen.TEXT_SIZE_NORMAL,
+                  ),
+                  border: InputBorder.none
+              ),
+            ),
+          ):
+
+          Text(
+            controller.text.length==0?hint:controller.text,
+            style: AppTextStyle(
+                fontSize: Dimen.TEXT_SIZE_NORMAL,
+                color: controller.text.length==0?hintEnab_(context):textEnab_(context)
+            ),
+          ),
+        ),
+
+        if(focusNode.hasFocus)
+          SimpleButton.from(
+            context: context,
+            icon: MdiIcons.check,
+            iconSize: 20,
+            margin: EdgeInsets.zero,
+            onTap: (){
+              setState(() => selected = false);
+              focusNode.unfocus();
+            },
+          )
+        else
+          SimpleButton.from(
+            context: context,
+            icon: MdiIcons.close,
+            iconSize: 20,
+            margin: EdgeInsets.zero,
+            onTap: onRemoveTap,
+          )
+
+      ],
+    );
+
+    return child;
+
     return AppCard(
       elevation: selected?AppCard.bigElevation:0,
       color: selected?cardEnab_(context):background_(context),
@@ -144,67 +209,7 @@ class ItemState extends State<Item>{
       },
       radius: AppCard.BIG_RADIUS,
       padding: EdgeInsets.only(left: Dimen.ICON_MARG),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisSize: MainAxisSize.min,
-        children: [
-
-          ConstrainedBox(
-              constraints: BoxConstraints(minWidth: 40.0, maxHeight: Dimen.TEXT_SIZE_NORMAL),
-              child:
-              selected?
-
-              IntrinsicWidth(
-                  child: TextField(
-                    focusNode: focusNode,
-                    controller: controller,
-                    style: AppTextStyle(fontSize: Dimen.TEXT_SIZE_NORMAL),
-                    textAlignVertical: TextAlignVertical.center,
-                    scrollPadding: EdgeInsets.zero,
-                    decoration: InputDecoration(
-                        isCollapsed: true,
-                        //contentPadding: EdgeInsets.zero,
-                        hintText: hint,
-                        hintStyle: AppTextStyle(
-                          color: hintEnab_(context),
-                          fontSize: Dimen.TEXT_SIZE_NORMAL,
-                        ),
-                        border: InputBorder.none
-                    ),
-                  ),
-              ):
-
-              Text(
-                controller.text.length==0?hint:controller.text,
-                style: AppTextStyle(
-                  fontSize: Dimen.TEXT_SIZE_NORMAL,
-                  color: controller.text.length==0?hintEnab_(context):textEnab_(context)
-                ),
-              ),
-          ),
-
-          if(focusNode.hasFocus)
-            SimpleButton.from(
-              context: context,
-              icon: MdiIcons.check,
-              iconSize: 20,
-              margin: EdgeInsets.zero,
-              onTap: (){
-                setState(() => selected = false);
-                focusNode.unfocus();
-              },
-            )
-          else
-            SimpleButton.from(
-              context: context,
-              icon: MdiIcons.close,
-              iconSize: 20,
-              margin: EdgeInsets.zero,
-              onTap: onRemoveTap,
-            )
-
-        ],
-      )
+      child: child
     );
   }
 
