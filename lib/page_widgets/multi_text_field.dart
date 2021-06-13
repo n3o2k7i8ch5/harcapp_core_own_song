@@ -131,10 +131,7 @@ class ItemState extends State<Item>{
       elevation: selected?AppCard.bigElevation:0,
       color: selected?cardEnab_(context):background_(context),
       onTap: (){
-        if(selected)
-          focusNode.requestFocus();
-        else
-          setState(() => selected = true);
+        focusNode.requestFocus();
       },
       radius: AppCard.BIG_RADIUS,
       padding: EdgeInsets.only(left: Dimen.ICON_MARG),
