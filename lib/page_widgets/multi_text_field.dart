@@ -177,26 +177,24 @@ class ItemState extends State<Item>{
               ),
           ),
 
-          if(selected && focusNode.hasFocus)
+          if(focusNode.hasFocus)
             SimpleButton.from(
               context: context,
               icon: MdiIcons.check,
               iconSize: 20,
               margin: EdgeInsets.zero,
-              onTap: () => setState(() => selected = false),
+              onTap: (){
+                setState(() => selected = false);
+                focusNode.unfocus();
+              },
             )
-          else if(selected && !focusNode.hasFocus)
+          else
             SimpleButton.from(
               context: context,
               icon: MdiIcons.close,
               iconSize: 20,
               margin: EdgeInsets.zero,
               onTap: onRemoveTap,
-            )
-          else
-            SizedBox(
-              height: 20 + 2*Dimen.ICON_MARG,
-              width: Dimen.ICON_MARG,
             )
 
         ],
