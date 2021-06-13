@@ -31,18 +31,18 @@ class CurrentItemProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  set author(String value){
-    _song.author = value;
+  set authors(List<String> value){
+    _song.authors = value;
     notifyListeners();
   }
 
-  set composer(String value){
-    _song.composer = value;
+  set composers(List<String> value){
+    _song.composers = value;
     notifyListeners();
   }
 
-  set performer(String value){
-    _song.performer = value;
+  set performers(List<String> value){
+    _song.performers = value;
     notifyListeners();
   }
 
@@ -69,7 +69,7 @@ class CurrentItemProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  set addPers(String value){
+  set addPers(List<String> value){
     _song.addPers = value;
     notifyListeners();
   }
