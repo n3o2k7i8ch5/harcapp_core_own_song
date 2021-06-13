@@ -58,7 +58,7 @@ class MultiTextFieldState extends State<MultiTextField>{
         key: keys[i],
       ));
 
-      if(linear && i < text.length-1)
+      if(linear && i < texts.length-1)
         children.add(SizedBox(width: Dimen.DEF_MARG));
     }
 
