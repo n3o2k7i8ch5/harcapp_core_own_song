@@ -15,7 +15,6 @@ import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
 import '../providers.dart';
-import 'multi_text_field.dart';
 
 
 
@@ -159,10 +158,6 @@ class TopCards extends StatelessWidget{
 
                   ],
                 ),
-              ),
-
-              MultiTextField(
-                hint: 'Autor słów:',
               ),
 
               Consumer<AuthorCtrlProvider>(
