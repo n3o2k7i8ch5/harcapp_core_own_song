@@ -20,6 +20,7 @@ import '../providers.dart';
 
 class TopCards extends StatelessWidget{
 
+  final Color accentColor;
   final Function(String) onChangedTitle;
   final Function(List<String>) onChangedAuthor;
   final Function(List<String>) onChangedComposer;
@@ -29,6 +30,7 @@ class TopCards extends StatelessWidget{
   final Function(DateTime) onChangedReleaseDate;
 
   const TopCards({
+    this.accentColor,
     this.onChangedTitle,
     this.onChangedAuthor,
     this.onChangedComposer,
@@ -56,6 +58,7 @@ class TopCards extends StatelessWidget{
                   Expanded(
                     child: Consumer<TitleCtrlProvider>(
                         builder: (context, prov, child) => AppTextFieldHint(
+                          accentColor: accentColor,
                           controller: prov.controller,
                           hint: 'Tytuł:',
                           style: AppTextStyle(
@@ -162,6 +165,7 @@ class TopCards extends StatelessWidget{
 
               Consumer<CurrentItemProvider>(
                 builder: (context, prov, child) => AppTextFieldHint(
+                  accentColor: accentColor,
                   hint: 'Autor słów:',
                   style: AppTextStyle(
                     fontSize: Dimen.TEXT_SIZE_BIG,
@@ -173,6 +177,7 @@ class TopCards extends StatelessWidget{
                     color: hintEnab_(context),
                   ),
                   multi: true,
+                  multiHintTop: 'Autorzy słów',
                   initVals: prov.song.authors,
                   onChanged: onChangedAuthor,
                 ),
@@ -180,6 +185,7 @@ class TopCards extends StatelessWidget{
 
               Consumer<CurrentItemProvider>(
                 builder: (context, prov, child) => AppTextFieldHint(
+                  accentColor: accentColor,
                   hint: 'Kompozytor muzyki:',
                   style: AppTextStyle(
                     fontSize: Dimen.TEXT_SIZE_BIG,
@@ -191,6 +197,7 @@ class TopCards extends StatelessWidget{
                     color: hintEnab_(context),
                   ),
                   multi: true,
+                  multiHintTop: 'Kompozytorzy muzyki',
                   initVals: prov.song.composers,
                   onChanged: onChangedComposer,
                 ),
@@ -198,6 +205,7 @@ class TopCards extends StatelessWidget{
 
               Consumer<CurrentItemProvider>(
                 builder: (context, prov, child) => AppTextFieldHint(
+                    accentColor: accentColor,
                     hint: 'Wykonawca:',
                     style: AppTextStyle(
                       fontSize: Dimen.TEXT_SIZE_BIG,
@@ -209,6 +217,7 @@ class TopCards extends StatelessWidget{
                       color: hintEnab_(context),
                     ),
                     multi: true,
+                    multiHintTop: 'Wykonawcy',
                     initVals: prov.song.performers,
                     onChanged: onChangedPerformer
                 ),
@@ -216,6 +225,7 @@ class TopCards extends StatelessWidget{
 
               Consumer<CurrentItemProvider>(
                 builder: (context, prov, child) => AppTextFieldHint(
+                  accentColor: accentColor,
                   controller: TextEditingController(text: prov.youtubeLink),
                   hint: 'Link YouTube:',
                   style: AppTextStyle(
@@ -233,6 +243,7 @@ class TopCards extends StatelessWidget{
 
               Consumer<CurrentItemProvider>(
                 builder: (context, prov, child) => AppTextFieldHint(
+                  accentColor: accentColor,
                   hint: 'Os. dodająca:',
                   style: AppTextStyle(
                     fontSize: Dimen.TEXT_SIZE_BIG,
@@ -244,6 +255,7 @@ class TopCards extends StatelessWidget{
                     color: hintEnab_(context),
                   ),
                   multi: true,
+                  multiHintTop: 'Os. dodające',
                   initVals: prov.song.addPers,
                   onChanged: onChangedAddPers,
                 ),
