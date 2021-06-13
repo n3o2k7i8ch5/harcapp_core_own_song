@@ -80,8 +80,10 @@ class MultiTextFieldState extends State<MultiTextField>{
 
     if(linear)
       return SingleChildScrollView(
+        physics: BouncingScrollPhysics(),
         scrollDirection: Axis.horizontal,
-        child: Row(children: children,),
+        child: Row(children: children),
+        clipBehavior: Clip.none,
       );
     else
       return Wrap(
