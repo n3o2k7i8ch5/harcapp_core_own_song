@@ -21,12 +21,12 @@ import 'multi_text_field.dart';
 
 class TopCards extends StatelessWidget{
 
-  final Function(String) onChangedTitle;
-  final Function(String) onChangedAuthor;
-  final Function(String) onChangedComposer;
-  final Function(String) onChangedPerformer;
+  final Function(List<String>) onChangedTitle;
+  final Function(List<String>) onChangedAuthor;
+  final Function(List<String>) onChangedComposer;
+  final Function(List<String>) onChangedPerformer;
   final Function(String) onChangedYT;
-  final Function(String) onChangedAddPers;
+  final Function(List<String>) onChangedAddPers;
   final Function(DateTime) onChangedReleaseDate;
 
   const TopCards({
@@ -162,7 +162,7 @@ class TopCards extends StatelessWidget{
               ),
 
               MultiTextField(
-                hint: 'Wpisz autora...',
+                hint: 'Autor słów:',
               ),
 
               Consumer<AuthorCtrlProvider>(
@@ -178,6 +178,7 @@ class TopCards extends StatelessWidget{
                     fontSize: Dimen.TEXT_SIZE_NORMAL,
                     color: hintEnab_(context),
                   ),
+                  multi: true,
                   onChanged: onChangedAuthor,
                 ),
               ),
@@ -195,6 +196,7 @@ class TopCards extends StatelessWidget{
                     fontSize: Dimen.TEXT_SIZE_NORMAL,
                     color: hintEnab_(context),
                   ),
+                  multi: true,
                   onChanged: onChangedComposer,
                 ),
               ),
@@ -212,6 +214,7 @@ class TopCards extends StatelessWidget{
                       fontSize: Dimen.TEXT_SIZE_NORMAL,
                       color: hintEnab_(context),
                     ),
+                    multi: true,
                     onChanged: onChangedPerformer
                 ),
               ),
@@ -229,7 +232,7 @@ class TopCards extends StatelessWidget{
                     fontSize: Dimen.TEXT_SIZE_NORMAL,
                     color: hintEnab_(context),
                   ),
-                  onChanged: onChangedYT,
+                  onChanged: (values) => onChangedYT?.call(values[0]),
                 ),
               ),
 
@@ -274,7 +277,7 @@ class TopCards extends StatelessWidget{
                                   prov.releaseDate==null ?
                                   '':
                                   dateToString(prov.releaseDate, showMonth: prov.showRelDateMonth, showDay: prov.showRelDateMonth&&prov.showRelDateDay)),
-                              hint: 'Pierwsze wykonanie:',
+                              hint: 'Data pierwszego wykonania:',
                               style: AppTextStyle(
                                 fontSize: Dimen.TEXT_SIZE_BIG,
                                 fontWeight: weight.halfBold,

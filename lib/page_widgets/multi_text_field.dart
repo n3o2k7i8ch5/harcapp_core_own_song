@@ -214,7 +214,7 @@ class ItemState extends State<Item>{
           Positioned(
             left: 0,
             right: Dimen.ICON_MARG,
-            bottom: 12,
+            bottom: 10,
             child: Container(
               height: 1,
               decoration: BoxDecoration(
