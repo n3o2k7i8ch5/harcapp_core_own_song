@@ -160,9 +160,8 @@ class TopCards extends StatelessWidget{
                 ),
               ),
 
-              Consumer<AuthorCtrlProvider>(
+              Consumer<CurrentItemProvider>(
                 builder: (context, prov, child) => AppTextFieldHint(
-                  controller: prov.controller,
                   hint: 'Autor słów:',
                   style: AppTextStyle(
                     fontSize: Dimen.TEXT_SIZE_BIG,
@@ -178,9 +177,8 @@ class TopCards extends StatelessWidget{
                 ),
               ),
 
-              Consumer<ComposerCtrlProvider>(
+              Consumer<CurrentItemProvider>(
                 builder: (context, prov, child) => AppTextFieldHint(
-                  controller: prov.controller,
                   hint: 'Kompozytor muzyki:',
                   style: AppTextStyle(
                     fontSize: Dimen.TEXT_SIZE_BIG,
@@ -196,9 +194,8 @@ class TopCards extends StatelessWidget{
                 ),
               ),
 
-              Consumer<PerformerCtrlProvider>(
+              Consumer<CurrentItemProvider>(
                 builder: (context, prov, child) => AppTextFieldHint(
-                    controller: prov.controller,
                     hint: 'Wykonawca:',
                     style: AppTextStyle(
                       fontSize: Dimen.TEXT_SIZE_BIG,

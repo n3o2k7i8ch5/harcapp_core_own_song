@@ -298,7 +298,7 @@ class TitleCtrlProvider extends ChangeNotifier{
     notifyListeners();
   }
 }
-
+/*
 class AuthorCtrlProvider extends ChangeNotifier{
   TextEditingController controller;
   AuthorCtrlProvider({String text}){
@@ -334,7 +334,7 @@ class PerformerCtrlProvider extends ChangeNotifier{
     notifyListeners();
   }
 }
-
+*/
 class YTCtrlProvider extends ChangeNotifier{
   TextEditingController controller;
   YTCtrlProvider({String text}){
