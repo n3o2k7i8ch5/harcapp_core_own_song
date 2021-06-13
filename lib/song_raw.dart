@@ -6,7 +6,7 @@ import 'package:harcapp_core_song/song_element.dart';
 import 'common.dart';
 
 
-class SongRaw implements SongCore{
+class SongRaw extends SongCore{
 
   String fileName;
   String title;
@@ -310,7 +310,7 @@ class SongRaw implements SongCore{
   String toCode({bool withFileName: true}) => jsonEncode(toMap(withFileName: withFileName));
 
   @override
-  int get rate => 0; //SongRate.RATE_NULL;
+  int get rate => 0;
 
 /*
   static Future<SongRaw> read({@required String fileName}) async {
