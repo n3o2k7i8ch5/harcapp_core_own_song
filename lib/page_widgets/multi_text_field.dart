@@ -115,7 +115,9 @@ class ItemState extends State<Item>{
     focusNode = FocusNode();
     focusNode.addListener(() {
       if(!focusNode.hasFocus)
-        setState(() => editing = false);
+        editing = false;
+
+      setState((){});
     });
 
     controller = TextEditingController(text: initText);
@@ -185,6 +187,11 @@ class ItemState extends State<Item>{
               iconSize: 20,
               margin: EdgeInsets.zero,
               onTap: onRemoveTap,
+            )
+          else
+            SizedBox(
+              height: 20 + 2*Dimen.ICON_MARG,
+              width: Dimen.ICON_MARG,
             )
 
         ],
