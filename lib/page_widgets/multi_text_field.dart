@@ -1,11 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
-import 'package:harcapp_core/comm_widgets/text_field_fit.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -13,8 +10,9 @@ class MultiTextField extends StatefulWidget{
 
   final List<String> initVals;
   final String hint;
+  final bool linear;
 
-  const MultiTextField({this.initVals, this.hint});
+  const MultiTextField({this.initVals, this.hint, this.linear: true});
 
   @override
   State<StatefulWidget> createState() => MultiTextFieldState();
@@ -26,6 +24,7 @@ class MultiTextFieldState extends State<MultiTextField>{
 
   List<String> get initVals => widget.initVals;
   String get hint => widget.hint;
+  bool get linear => widget.linear;
 
   List<String> texts;
   List<GlobalKey<ItemState>> keys;
@@ -75,13 +74,22 @@ class MultiTextFieldState extends State<MultiTextField>{
         }),
       )
     );
-    
-    return Wrap(
-      crossAxisAlignment: WrapCrossAlignment.start,
-      children: children,
-      runSpacing: Dimen.DEF_MARG,
-      spacing: Dimen.DEF_MARG,
-    );
+
+    if(linear)
+      return ListView.separated(
+        itemCount: children.length,
+        itemBuilder: (context, index) => children[index],
+        separatorBuilder: (context, index) => SizedBox(width: Dimen.DEF_MARG),
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+      );
+    else
+      return Wrap(
+        crossAxisAlignment: WrapCrossAlignment.start,
+        children: children,
+        runSpacing: Dimen.DEF_MARG,
+        spacing: Dimen.DEF_MARG,
+      );
   }
 
 
