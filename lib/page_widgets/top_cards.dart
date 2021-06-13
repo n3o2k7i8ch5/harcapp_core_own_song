@@ -21,7 +21,7 @@ import 'multi_text_field.dart';
 
 class TopCards extends StatelessWidget{
 
-  final Function(List<String>) onChangedTitle;
+  final Function(String) onChangedTitle;
   final Function(List<String>) onChangedAuthor;
   final Function(List<String>) onChangedComposer;
   final Function(List<String>) onChangedPerformer;
@@ -68,7 +68,7 @@ class TopCards extends StatelessWidget{
                             fontSize: Dimen.TEXT_SIZE_NORMAL,
                             color: hintEnab_(context),
                           ),
-                          onChanged: onChangedTitle,
+                          onChanged: (values) => onChangedTitle?.call(values[0]),
                         )
                     ),
                   ),
