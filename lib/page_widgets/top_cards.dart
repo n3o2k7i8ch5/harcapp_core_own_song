@@ -228,9 +228,9 @@ class TopCards extends StatelessWidget{
                 ),
               ),
 
-              Consumer<AddPersCtrlProvider>(
+              Consumer<CurrentItemProvider>(
                 builder: (context, prov, child) => AppTextFieldHint(
-                  controller: prov.controller,
+                  //controller: prov.controller,
                   hint: 'Os. dodająca:',
                   style: AppTextStyle(
                     fontSize: Dimen.TEXT_SIZE_BIG,
