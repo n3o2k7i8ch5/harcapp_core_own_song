@@ -64,11 +64,13 @@ class CurrentItemProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+  String get youtubeLink => _song.youtubeLink;
   set youtubeLink(String value){
     _song.youtubeLink = value;
     notifyListeners();
   }
 
+  List<String> get addPers => _song.addPers;
   set addPers(List<String> value){
     _song.addPers = value;
     notifyListeners();
@@ -334,7 +336,7 @@ class PerformerCtrlProvider extends ChangeNotifier{
     notifyListeners();
   }
 }
-*/
+
 class YTCtrlProvider extends ChangeNotifier{
   TextEditingController controller;
   YTCtrlProvider({String text}){
@@ -346,7 +348,7 @@ class YTCtrlProvider extends ChangeNotifier{
     notifyListeners();
   }
 }
-
+*/
 
 class SongPartProvider extends ChangeNotifier{
 

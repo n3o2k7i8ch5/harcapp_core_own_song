@@ -173,6 +173,7 @@ class TopCards extends StatelessWidget{
                     color: hintEnab_(context),
                   ),
                   multi: true,
+                  initVals: prov.song.authors,
                   onChanged: onChangedAuthor,
                 ),
               ),
@@ -190,6 +191,7 @@ class TopCards extends StatelessWidget{
                     color: hintEnab_(context),
                   ),
                   multi: true,
+                  initVals: prov.song.composers,
                   onChanged: onChangedComposer,
                 ),
               ),
@@ -207,13 +209,14 @@ class TopCards extends StatelessWidget{
                       color: hintEnab_(context),
                     ),
                     multi: true,
+                    initVals: prov.song.performers,
                     onChanged: onChangedPerformer
                 ),
               ),
 
-              Consumer<YTCtrlProvider>(
+              Consumer<CurrentItemProvider>(
                 builder: (context, prov, child) => AppTextFieldHint(
-                  controller: prov.controller,
+                  controller: TextEditingController(text: prov.youtubeLink),
                   hint: 'Link YouTube:',
                   style: AppTextStyle(
                     fontSize: Dimen.TEXT_SIZE_BIG,
@@ -230,7 +233,6 @@ class TopCards extends StatelessWidget{
 
               Consumer<CurrentItemProvider>(
                 builder: (context, prov, child) => AppTextFieldHint(
-                  //controller: prov.controller,
                   hint: 'Os. dodająca:',
                   style: AppTextStyle(
                     fontSize: Dimen.TEXT_SIZE_BIG,
@@ -241,6 +243,8 @@ class TopCards extends StatelessWidget{
                     fontSize: Dimen.TEXT_SIZE_NORMAL,
                     color: hintEnab_(context),
                   ),
+                  multi: true,
+                  initVals: prov.song.addPers,
                   onChanged: onChangedAddPers,
                 ),
               ),
