@@ -197,18 +197,17 @@ class ItemState extends State<Item>{
 
       ],
     );
-
-    return child;
-
+    
     return AppCard(
-      elevation: selected?AppCard.bigElevation:0,
-      color: selected?cardEnab_(context):background_(context),
+      //elevation: selected?AppCard.bigElevation:0,
+      //color: selected?cardEnab_(context):background_(context),
+      color: background_(context),
       onTap: (){
         setState(() => selected = true);
         focusNode.requestFocus();
       },
       radius: AppCard.BIG_RADIUS,
-      padding: EdgeInsets.only(left: Dimen.ICON_MARG),
+      //padding: EdgeInsets.only(left: Dimen.ICON_MARG),
       child: child
     );
   }
