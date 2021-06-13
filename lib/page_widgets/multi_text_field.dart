@@ -114,10 +114,7 @@ class ItemState extends State<Item>{
   void initState() {
     focusNode = FocusNode();
     focusNode.addListener(() {
-      if(!focusNode.hasFocus)
-        selected = false;
-
-      setState((){});
+      setState(() => selected = focusNode.hasFocus);
     });
 
     controller = TextEditingController(text: initText);
@@ -131,6 +128,7 @@ class ItemState extends State<Item>{
       elevation: selected?AppCard.bigElevation:0,
       color: selected?cardEnab_(context):background_(context),
       onTap: (){
+        setState(() => selected = true);
         focusNode.requestFocus();
       },
       radius: AppCard.BIG_RADIUS,
