@@ -66,6 +66,7 @@ class MultiTextFieldState extends State<MultiTextField>{
         text: 'Dodaj',
         icon: MdiIcons.plus,
         iconLeading: false,
+        textSize: Dimen.TEXT_SIZE_NORMAL,
         iconSize: 20.0,
         onTap: () => setState((){
           texts.add('');
