@@ -181,7 +181,9 @@ class SongTextWidget extends StatelessWidget{
         return;
 
       TextProvider textProv = Provider.of<TextProvider>(context, listen: false);
-      onTextChanged(context, correctText(textProv.text));
+      String text = correctText(textProv.text);
+      textProv.controller.text = text;
+      onTextChanged(context, text);
     });
 
     return GestureDetector(
