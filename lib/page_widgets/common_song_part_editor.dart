@@ -85,11 +85,10 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
   @override
   Widget build(BuildContext context) {
 
-    final FocusNode focusNode = FocusNode();
-
     return AppScaffold(
       backgroundColor: Colors.transparent,
       body: AppCard(
+          radius: AppCard.BIG_RADIUS,
           elevation: widget.elevation,
           key: ValueKey(songPart),
           padding: EdgeInsets.zero,
@@ -206,7 +205,11 @@ class SongTextWidget extends StatelessWidget{
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(focusNode),
       child: AppCard(
-        padding: EdgeInsets.only(left: Dimen.DEF_MARG/2, right: Dimen.DEF_MARG/2, bottom: Dimen.DEF_MARG/2),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(AppCard.BIG_RADIUS),
+          bottomLeft: Radius.circular(AppCard.BIG_RADIUS),
+        ),
+        padding: EdgeInsets.only(left: Dimen.DEF_MARG/2, right: 1, bottom: Dimen.DEF_MARG/2),
         margin: AppCard.normMargin,
         elevation: 0,
         color: background_(context),
@@ -292,6 +295,10 @@ class SongChordsWidget extends StatelessWidget{
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(focusNode),
       child: AppCard(
+        borderRadius: BorderRadius.only(
+          topRight: Radius.circular(AppCard.BIG_RADIUS),
+          bottomRight: Radius.circular(AppCard.BIG_RADIUS),
+        ),
         padding: EdgeInsets.only(left: Dimen.DEF_MARG/2, right: Dimen.DEF_MARG/2, bottom: Dimen.DEF_MARG/2),
         margin: AppCard.normMargin,
         elevation: 0,
