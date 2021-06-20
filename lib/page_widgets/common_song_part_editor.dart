@@ -113,9 +113,7 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
                         crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: <Widget>[
 
-                          Expanded(
-                            child: SongTextWidget(this, boxConstraints),
-                          ),
+                          Expanded(child: SongTextWidget(this, boxConstraints),),
 
                           SongChordsWidget(this, boxConstraints)
 
