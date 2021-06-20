@@ -149,8 +149,10 @@ class SongTextWidget extends StatelessWidget{
     for(int i=0; i<lines.length; i++){
       String line = lines[i];
 
-      if(line.length == 0)
+      if(line.length == 0){
+        result += '\n';
         continue;
+      }
 
       int removeFromEnd = 0;
       while(
