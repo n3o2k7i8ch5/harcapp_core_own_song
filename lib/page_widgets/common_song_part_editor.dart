@@ -142,6 +142,30 @@ class SongTextWidget extends StatelessWidget{
 
   const SongTextWidget(this.parent, this.boxConstraints);
 
+  String correctText(String text){
+
+    List<String> lines = text.split(text);
+    String result = '';
+
+    for(int i=0; i<lines.length; i++){
+      String line = lines[i];
+
+      if(line.length > 0 && line[0].toUpperCase() != line[0])
+        line = line[0].toUpperCase() + line.substring(1);
+
+      while(line[line.length-1] == ' ' || line[line.length-1] == '.' || line[line.length-1] == ',')
+        line = line.substring(0, line.length-1);
+
+      result += line;
+      if(i < lines.length-1)
+        result += '\n';
+
+    }
+
+    return result;
+
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -193,6 +217,8 @@ class SongTextWidget extends StatelessWidget{
                           //controller: controller,
                           inputFormatters: [ALLOWED_TEXT_REGEXP],
                           onChanged: (text){
+                            text = correctText(text);
+
                             Provider.of<TextProvider>(context, listen: false).text = text;
                             parent.songPart.setText(text);
                             int errCount = handleErrors(context, parent.isRefren);
