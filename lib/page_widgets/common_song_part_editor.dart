@@ -93,6 +93,7 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
           elevation: widget.elevation,
           key: ValueKey(songPart),
           padding: EdgeInsets.zero,
+          margin: AppCard.normMargin,
           child: MultiProvider(
             providers: [
               ChangeNotifierProvider(create: (context) => TextProvider(text: songPart.getText())),
@@ -160,6 +161,7 @@ class SongTextWidget extends StatelessWidget{
       onTap: () => FocusScope.of(context).requestFocus(focusNode),
       child: AppCard(
         padding: EdgeInsets.only(left: Dimen.DEF_MARG/2, right: Dimen.DEF_MARG/2, bottom: Dimen.DEF_MARG/2),
+        margin: AppCard.normMargin,
         elevation: 0,
         color: background_(context),
         child: SingleChildScrollView(
@@ -251,6 +253,7 @@ class SongChordsWidget extends StatelessWidget{
       onTap: () => FocusScope.of(context).requestFocus(focusNode),
       child: AppCard(
         padding: EdgeInsets.only(left: Dimen.DEF_MARG/2, right: Dimen.DEF_MARG/2, bottom: Dimen.DEF_MARG/2),
+        margin: AppCard.normMargin,
         elevation: 0,
         color: background_(context),
         child: SingleChildScrollView(
