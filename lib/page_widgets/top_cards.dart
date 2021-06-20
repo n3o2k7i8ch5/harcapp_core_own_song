@@ -180,6 +180,7 @@ class TopCards extends StatelessWidget{
                   multiHintTop: 'Autorzy słów',
                   multiController: MultiAppTextFieldHintController(texts: prov.song.authors),
                   onChanged: onChangedAuthor,
+                  key: ValueKey(prov.song),
                 ),
               ),
 
@@ -200,6 +201,7 @@ class TopCards extends StatelessWidget{
                   multiHintTop: 'Kompozytorzy muzyki',
                   multiController: MultiAppTextFieldHintController(texts: prov.song.composers),
                   onChanged: onChangedComposer,
+                  key: ValueKey(prov.song),
                 ),
               ),
 
@@ -220,7 +222,7 @@ class TopCards extends StatelessWidget{
                   multiHintTop: 'Wykonawcy',
                   multiController: MultiAppTextFieldHintController(texts: prov.song.performers),
                   onChanged: onChangedPerformer,
-                  //key: ValueKey(prov.song.performers),
+                  key: ValueKey(prov.song),
                 ),
               ),
 
@@ -239,7 +241,7 @@ class TopCards extends StatelessWidget{
                     color: hintEnab_(context),
                   ),
                   onChanged: (values) => onChangedYT?.call(values[0]),
-                  key: ValueKey(prov.youtubeLink),
+                  key: ValueKey(prov.song),
                 ),
               ),
 
@@ -260,7 +262,7 @@ class TopCards extends StatelessWidget{
                   multiHintTop: 'Os. dodające',
                   multiController: MultiAppTextFieldHintController(texts: prov.song.addPers),
                   onChanged: onChangedAddPers,
-                  //key: ValueKey(prov.song.addPers),
+                  key: ValueKey(prov.song),
                 ),
               ),
 
