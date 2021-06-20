@@ -184,7 +184,7 @@ class TextProvider extends ChangeNotifier{
   set text(String value){
     TextSelection selection = controller.selection;
     controller.text = value;
-    controller.selection = selection;
+    controller.selection = TextSelection.collapsed(offset: selection.baseOffset);
     notifyListeners();
   }
 
