@@ -182,7 +182,9 @@ class TextProvider extends ChangeNotifier{
 
   String get text => controller.text;
   set text(String value){
+    TextSelection selection = controller.selection;
     controller.text = value;
+    controller.selection = selection;
     notifyListeners();
   }
 
