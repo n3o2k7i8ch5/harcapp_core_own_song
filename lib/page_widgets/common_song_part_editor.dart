@@ -191,39 +191,41 @@ class SongTextWidget extends StatelessWidget{
                     builder: (context, chordsProvider, child) => SingleChildScrollView(
                         physics: BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
-                        child: TextField(
-                          style: TextStyle(
-                            fontFamily: 'Roboto',
-                            fontSize: Dimen.TEXT_SIZE_NORMAL,
-                            color: textEnab_(context),
+                        child: IntrinsicWidth(
+                          child: TextField(
+                            style: TextStyle(
+                              fontFamily: 'Roboto',
+                              fontSize: Dimen.TEXT_SIZE_NORMAL,
+                              color: textEnab_(context),
+                            ),
+                            decoration: InputDecoration(
+                                hintText: 'Słowa ${parent.isRefren?'refrenu':'zwrotki'}',
+                                hintStyle: TextStyle(
+                                    fontFamily: 'Roboto',
+                                    fontSize: Dimen.TEXT_SIZE_NORMAL,
+                                    color: hintEnab_(context)
+                                ),
+                                border: InputBorder.none,
+                                isDense: true
+                            ),
+                            minLines: chordsProvider.chords.split('\n').length,
+                            maxLines: null,
+                            //expands: true,
+                            focusNode: focusNode,
+                            autofocus: false,
+                            //minWidth: Dimen.ICON_FOOTPRINT*2,
+                            //controller: controller,
+                            inputFormatters: [ALLOWED_TEXT_REGEXP],
+                            onChanged: (text){
+                              text = correctText(text);
+                              Provider.of<TextProvider>(context, listen: false).text = text;
+                              parent.songPart.setText(text);
+                              int errCount = handleErrors(context, parent.isRefren);
+                              parent.songPart.isError = errCount != 0;
+                              if(parent.onTextChanged!=null) parent.onTextChanged();
+                            },
+                            controller: Provider.of<TextProvider>(context, listen: false).controller,
                           ),
-                          decoration: InputDecoration(
-                              hintText: 'Słowa ${parent.isRefren?'refrenu':'zwrotki'}',
-                              hintStyle: TextStyle(
-                                  fontFamily: 'Roboto',
-                                  fontSize: Dimen.TEXT_SIZE_NORMAL,
-                                  color: hintEnab_(context)
-                              ),
-                              border: InputBorder.none,
-                              isDense: true
-                          ),
-                          minLines: chordsProvider.chords.split('\n').length,
-                          maxLines: null,
-                          //expands: true,
-                          focusNode: focusNode,
-                          autofocus: false,
-                          //minWidth: Dimen.ICON_FOOTPRINT*2,
-                          //controller: controller,
-                          inputFormatters: [ALLOWED_TEXT_REGEXP],
-                          onChanged: (text){
-                            text = correctText(text);
-                            Provider.of<TextProvider>(context, listen: false).text = text;
-                            parent.songPart.setText(text);
-                            int errCount = handleErrors(context, parent.isRefren);
-                            parent.songPart.isError = errCount != 0;
-                            if(parent.onTextChanged!=null) parent.onTextChanged();
-                          },
-                          controller: Provider.of<TextProvider>(context, listen: false).controller,
                         )
                     ),
                   )),
