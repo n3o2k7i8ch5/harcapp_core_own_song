@@ -185,7 +185,7 @@ class SongTextWidget extends StatelessWidget{
   }
 
   void onTextChanged(BuildContext context, String text){
-    //Provider.of<TextProvider>(context, listen: false).text = text;
+    Provider.of<TextProvider>(context, listen: false).text = text;
     parent.songPart.setText(text);
     int errCount = handleErrors(context, parent.isRefren);
     parent.songPart.isError = errCount != 0;
