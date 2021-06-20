@@ -144,7 +144,7 @@ class SongTextWidget extends StatelessWidget{
 
   String correctText(String text){
 
-    List<String> lines = text.split(text);
+    List<String> lines = text.split('\n');
     String result = '';
 
     for(int i=0; i<lines.length; i++){
