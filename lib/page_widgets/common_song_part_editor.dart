@@ -191,7 +191,7 @@ class SongTextWidget extends StatelessWidget{
                     builder: (context, chordsProvider, child) => SingleChildScrollView(
                         physics: BouncingScrollPhysics(),
                         scrollDirection: Axis.horizontal,
-                        child: TextFieldFit(
+                        child: TextField(
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             fontSize: Dimen.TEXT_SIZE_NORMAL,
@@ -212,7 +212,7 @@ class SongTextWidget extends StatelessWidget{
                           //expands: true,
                           focusNode: focusNode,
                           autofocus: false,
-                          minWidth: Dimen.ICON_FOOTPRINT*2,
+                          //minWidth: Dimen.ICON_FOOTPRINT*2,
                           //controller: controller,
                           inputFormatters: [ALLOWED_TEXT_REGEXP],
                           onChanged: (text){
