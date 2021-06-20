@@ -165,6 +165,14 @@ class SongTextWidget extends StatelessWidget{
     return result;
   }
 
+  void onTextChanged(BuildContext context, String text){
+    Provider.of<TextProvider>(context, listen: false).text = text;
+    parent.songPart.setText(text);
+    int errCount = handleErrors(context, parent.isRefren);
+    parent.songPart.isError = errCount != 0;
+    if(parent.onTextChanged!=null) parent.onTextChanged();
+  }
+
   @override
   Widget build(BuildContext context) {
 
@@ -173,7 +181,7 @@ class SongTextWidget extends StatelessWidget{
         return;
 
       TextProvider textProv = Provider.of<TextProvider>(context, listen: false);
-      textProv.text = correctText(textProv.text);;
+      onTextChanged(context, correctText(textProv.text));
     });
 
     return GestureDetector(
@@ -223,13 +231,7 @@ class SongTextWidget extends StatelessWidget{
                           minWidth: Dimen.ICON_FOOTPRINT*2,
                           //controller: controller,
                           inputFormatters: [ALLOWED_TEXT_REGEXP],
-                          onChanged: (text){
-                            Provider.of<TextProvider>(context, listen: false).text = text;
-                            parent.songPart.setText(text);
-                            int errCount = handleErrors(context, parent.isRefren);
-                            parent.songPart.isError = errCount != 0;
-                            if(parent.onTextChanged!=null) parent.onTextChanged();
-                          },
+                          onChanged: (text) => onTextChanged(context, text),
                           controller: Provider.of<TextProvider>(context, listen: false).controller,
                         )
                     ),
