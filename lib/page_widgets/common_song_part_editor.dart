@@ -168,6 +168,14 @@ class SongTextWidget extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
+    focusNode.addListener(() {
+      if(focusNode.hasFocus)
+        return;
+
+      TextProvider textProv = Provider.of<TextProvider>(context, listen: false);
+      textProv.text = correctText(textProv.text);;
+    });
+
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(focusNode),
       child: AppCard(
@@ -216,7 +224,6 @@ class SongTextWidget extends StatelessWidget{
                           //controller: controller,
                           inputFormatters: [ALLOWED_TEXT_REGEXP],
                           onChanged: (text){
-                            text = correctText(text);
                             Provider.of<TextProvider>(context, listen: false).text = text;
                             parent.songPart.setText(text);
                             int errCount = handleErrors(context, parent.isRefren);
