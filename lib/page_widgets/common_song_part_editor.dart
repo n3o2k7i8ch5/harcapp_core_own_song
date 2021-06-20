@@ -150,7 +150,8 @@ class SongTextWidget extends StatelessWidget{
       String line = lines[i];
 
       if(line.length == 0){
-        result += '\n';
+        if(i < lines.length-1)
+          result += '\n';
         continue;
       }
 
