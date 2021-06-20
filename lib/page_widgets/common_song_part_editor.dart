@@ -114,20 +114,10 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
                         children: <Widget>[
 
                           Expanded(
-                            child: AppCard(
-                              padding: EdgeInsets.only(left: Dimen.DEF_MARG/2, right: Dimen.DEF_MARG/2, bottom: Dimen.DEF_MARG/2),
-                              elevation: 0,
-                              color: background_(context),
-                              child: SongTextWidget(this, boxConstraints),
-                            ),
+                            child: SongTextWidget(this, boxConstraints),
                           ),
 
-                          AppCard(
-                            padding: EdgeInsets.only(left: Dimen.DEF_MARG/2, right: Dimen.DEF_MARG/2, bottom: Dimen.DEF_MARG/2),
-                            elevation: 0,
-                            color: background_(context),
-                            child: SongChordsWidget(this, boxConstraints),
-                          )
+                          SongChordsWidget(this, boxConstraints)
 
                         ],
                       ),
