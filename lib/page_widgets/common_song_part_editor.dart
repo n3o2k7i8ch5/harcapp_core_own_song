@@ -153,20 +153,23 @@ class SongTextWidget extends StatelessWidget{
       if(line.length == 0)
         continue;
 
-      if(line[0].toUpperCase() != line[0])
-        line = line[0].toUpperCase() + line.substring(1);
-
       int removeFromEnd = 0;
-      while(line[line.length-1] == ' ' || line[line.length-1] == '.' || line[line.length-1] == ',')
+      while(
+          line[line.length-1-removeFromEnd] == ' ' ||
+          line[line.length-1-removeFromEnd] == '.' ||
+          line[line.length-1-removeFromEnd] == ',')
         removeFromEnd++;
-
       line = line.substring(0, line.length-removeFromEnd);
 
       int removeFromStart = 0;
-      while(line[0] == ' ')
+      while(line[removeFromStart] == ' ')
         removeFromStart++;
-
       line = line.substring(removeFromStart);
+
+
+      if(line[0].toUpperCase() != line[0])
+        line = line[0].toUpperCase() + line.substring(1);
+
 
       result += line;
       if(i < lines.length-1)
