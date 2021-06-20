@@ -174,16 +174,18 @@ class TextShiftProvider extends ChangeNotifier{
 
 class TextProvider extends ChangeNotifier{
 
+  String _text;
+
   TextEditingController controller;
 
   TextProvider({String text: ''}){
-    controller = TextEditingController(text: text);
+    _text = text;
+    controller = TextEditingController(text: _text);
   }
 
-  String get text => controller.text;
+  String get text => _text;
   set text(String value){
-    //TextSelection selection = controller.selection;
-    controller.text = value;
+    _text = value;
     notifyListeners();
   }
 
