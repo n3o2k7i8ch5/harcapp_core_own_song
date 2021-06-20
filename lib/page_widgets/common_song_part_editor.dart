@@ -157,7 +157,9 @@ class SongTextWidget extends StatelessWidget{
       while(
           line[line.length-1-removeFromEnd] == ' ' ||
           line[line.length-1-removeFromEnd] == '.' ||
-          line[line.length-1-removeFromEnd] == ',')
+          line[line.length-1-removeFromEnd] == ',' ||
+          line[line.length-1-removeFromEnd] == ':' ||
+          line[line.length-1-removeFromEnd] == ';')
         removeFromEnd++;
       line = line.substring(0, line.length-removeFromEnd);
 
