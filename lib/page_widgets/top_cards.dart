@@ -180,7 +180,7 @@ class TopCards extends StatelessWidget{
                   multiHintTop: 'Autorzy słów',
                   initVals: prov.song.authors,
                   onChanged: onChangedAuthor,
-                  key: ValueKey(prov.song),
+                  key: ValueKey(prov.song.authors),
                 ),
               ),
 
@@ -201,7 +201,7 @@ class TopCards extends StatelessWidget{
                   multiHintTop: 'Kompozytorzy muzyki',
                   initVals: prov.song.composers,
                   onChanged: onChangedComposer,
-                  key: ValueKey(prov.song),
+                  key: ValueKey(prov.song.composers),
                 ),
               ),
 
@@ -222,7 +222,7 @@ class TopCards extends StatelessWidget{
                   multiHintTop: 'Wykonawcy',
                   initVals: prov.song.performers,
                   onChanged: onChangedPerformer,
-                  key: ValueKey(prov.song),
+                  key: ValueKey(prov.song.performers),
                 ),
               ),
 
@@ -241,7 +241,7 @@ class TopCards extends StatelessWidget{
                     color: hintEnab_(context),
                   ),
                   onChanged: (values) => onChangedYT?.call(values[0]),
-                  key: ValueKey(prov.song),
+                  key: ValueKey(prov.youtubeLink),
                 ),
               ),
 
@@ -262,7 +262,7 @@ class TopCards extends StatelessWidget{
                   multiHintTop: 'Os. dodające',
                   initVals: prov.song.addPers,
                   onChanged: onChangedAddPers,
-                  key: ValueKey(prov.song),
+                  key: ValueKey(prov.song.addPers),
                 ),
               ),
 
