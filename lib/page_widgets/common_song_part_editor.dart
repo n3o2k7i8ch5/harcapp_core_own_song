@@ -163,7 +163,6 @@ class SongTextWidget extends StatelessWidget{
     }
 
     return result;
-
   }
 
   @override
