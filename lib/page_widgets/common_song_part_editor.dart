@@ -218,7 +218,6 @@ class SongTextWidget extends StatelessWidget{
                           inputFormatters: [ALLOWED_TEXT_REGEXP],
                           onChanged: (text){
                             text = correctText(text);
-
                             Provider.of<TextProvider>(context, listen: false).text = text;
                             parent.songPart.setText(text);
                             int errCount = handleErrors(context, parent.isRefren);
