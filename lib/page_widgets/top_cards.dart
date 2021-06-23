@@ -70,7 +70,7 @@ class TopCards extends StatelessWidget{
                             fontSize: Dimen.TEXT_SIZE_BIG,
                             color: hintEnab_(context),
                           ),
-                          onChanged: (values) => onChangedTitle?.call(values[0]),
+                          onAnyChanged: (values) => onChangedTitle?.call(values[0]),
                         )
                     ),
                   ),
@@ -179,7 +179,7 @@ class TopCards extends StatelessWidget{
                   multi: true,
                   multiHintTop: 'Autorzy słów',
                   multiController: MultiAppTextFieldHintController(texts: prov.song.authors),
-                  onChanged: onChangedAuthor,
+                  onAnyChanged: onChangedAuthor,
                   key: ValueKey(prov.song),
                 ),
               ),
@@ -200,7 +200,7 @@ class TopCards extends StatelessWidget{
                   multi: true,
                   multiHintTop: 'Kompozytorzy muzyki',
                   multiController: MultiAppTextFieldHintController(texts: prov.song.composers),
-                  onChanged: onChangedComposer,
+                  onAnyChanged: onChangedComposer,
                   key: ValueKey(prov.song),
                 ),
               ),
@@ -221,7 +221,7 @@ class TopCards extends StatelessWidget{
                   multi: true,
                   multiHintTop: 'Wykonawcy',
                   multiController: MultiAppTextFieldHintController(texts: prov.song.performers),
-                  onChanged: onChangedPerformer,
+                  onAnyChanged: onChangedPerformer,
                   key: ValueKey(prov.song),
                 ),
               ),
@@ -240,7 +240,7 @@ class TopCards extends StatelessWidget{
                     fontSize: Dimen.TEXT_SIZE_BIG,
                     color: hintEnab_(context),
                   ),
-                  onChanged: (values) => onChangedYT?.call(values[0]),
+                  onAnyChanged: (values) => onChangedYT?.call(values[0]),
                   key: ValueKey(prov.song),
                 ),
               ),
@@ -261,7 +261,7 @@ class TopCards extends StatelessWidget{
                   multi: true,
                   multiHintTop: 'Os. dodające',
                   multiController: MultiAppTextFieldHintController(texts: prov.song.addPers),
-                  onChanged: onChangedAddPers,
+                  onAnyChanged: onChangedAddPers,
                   key: ValueKey(prov.song),
                 ),
               ),
@@ -301,7 +301,7 @@ class TopCards extends StatelessWidget{
                                 fontSize: Dimen.TEXT_SIZE_BIG,
                                 color: hintEnab_(context),
                               ),
-                              onChanged: (text){
+                              onAnyChanged: (text){
                                 if(onChangedReleaseDate != null)
                                   onChangedReleaseDate(prov.releaseDate);
                               },
