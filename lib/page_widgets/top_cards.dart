@@ -6,6 +6,7 @@ import 'package:harcapp_core/comm_widgets/animated_child_slider.dart';
 import 'package:harcapp_core/comm_widgets/app_card.dart';
 import 'package:harcapp_core/comm_widgets/app_scaffold.dart';
 import 'package:harcapp_core/comm_widgets/app_text_field_hint.dart';
+import 'package:harcapp_core/comm_widgets/multi_text_field.dart';
 import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:implicitly_animated_reorderable_list/implicitly_animated_reorderable_list.dart';
@@ -178,7 +179,7 @@ class TopCards extends StatelessWidget{
                   ),
                   multi: true,
                   multiHintTop: 'Autorzy słów',
-                  multiController: MultiAppTextFieldHintController(texts: prov.song.authors),
+                  multiController: MultiTextFieldController(texts: prov.song.authors),
                   onAnyChanged: onChangedAuthor,
                   key: ValueKey(prov.song),
                 ),
@@ -199,7 +200,7 @@ class TopCards extends StatelessWidget{
                   ),
                   multi: true,
                   multiHintTop: 'Kompozytorzy muzyki',
-                  multiController: MultiAppTextFieldHintController(texts: prov.song.composers),
+                  multiController: MultiTextFieldController(texts: prov.song.composers),
                   onAnyChanged: onChangedComposer,
                   key: ValueKey(prov.song),
                 ),
@@ -220,7 +221,7 @@ class TopCards extends StatelessWidget{
                   ),
                   multi: true,
                   multiHintTop: 'Wykonawcy',
-                  multiController: MultiAppTextFieldHintController(texts: prov.song.performers),
+                  multiController: MultiTextFieldController(texts: prov.song.performers),
                   onAnyChanged: onChangedPerformer,
                   key: ValueKey(prov.song),
                 ),
@@ -260,7 +261,7 @@ class TopCards extends StatelessWidget{
                   ),
                   multi: true,
                   multiHintTop: 'Os. dodające',
-                  multiController: MultiAppTextFieldHintController(texts: prov.song.addPers),
+                  multiController: MultiTextFieldController(texts: prov.song.addPers),
                   onAnyChanged: onChangedAddPers,
                   key: ValueKey(prov.song),
                 ),
