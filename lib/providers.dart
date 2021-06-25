@@ -34,13 +34,13 @@ class CurrentItemProvider extends ChangeNotifier{
   CurrentItemProvider({SongRaw song}){
     _song = song;
 
-    authorsController = MultiTextFieldController(texts: song.authors);
-    composersController = MultiTextFieldController(texts: song.composers);
-    performersController = MultiTextFieldController(texts: song.performers);
+    authorsController = MultiTextFieldController(texts: song?.authors);
+    composersController = MultiTextFieldController(texts: song?.composers);
+    performersController = MultiTextFieldController(texts: song?.performers);
 
-    ytLinkController = TextEditingController(text: song.youtubeLink);
+    ytLinkController = TextEditingController(text: song?.youtubeLink??'');
 
-    addPersController = MultiTextFieldController(texts: song.addPers);
+    addPersController = MultiTextFieldController(texts: song?.addPers);
 
   }
 
