@@ -22,13 +22,13 @@ class CurrentItemProvider extends ChangeNotifier{
 
 
   void _updateControllers(SongRaw song){
-    authorsController = MultiTextFieldController(texts: song.authors);
-    composersController = MultiTextFieldController(texts: song.composers);
-    performersController = MultiTextFieldController(texts: song.performers);
+    authorsController.texts = song.authors;
+    composersController.texts = song.composers;
+    performersController.texts = song.performers;
 
     ytLinkController.text = song.youtubeLink;
 
-    addPersController = MultiTextFieldController(texts: song.addPers);
+    addPersController.texts = song.addPers;
   }
 
   CurrentItemProvider({SongRaw song}){
