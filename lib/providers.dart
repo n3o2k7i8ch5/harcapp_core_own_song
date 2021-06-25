@@ -1,5 +1,6 @@
 
 import 'package:flutter/widgets.dart';
+import 'package:harcapp_core/comm_widgets/multi_text_field.dart';
 import 'package:harcapp_core_own_song/song_raw.dart';
 import 'package:harcapp_core_song/song_element.dart';
 import 'package:harcapp_core_tags/tag_layout.dart';
@@ -11,13 +12,42 @@ class CurrentItemProvider extends ChangeNotifier{
 
   SongRaw _song;
 
+  MultiTextFieldController authorsController;
+  MultiTextFieldController composersController;
+  MultiTextFieldController performersController;
+
+  TextEditingController ytLinkController;
+
+  MultiTextFieldController addPersController;
+
+
+  void _updateControllers(SongRaw song){
+    authorsController = MultiTextFieldController(texts: song.authors);
+    composersController = MultiTextFieldController(texts: song.composers);
+    performersController = MultiTextFieldController(texts: song.performers);
+
+    ytLinkController.text = song.youtubeLink;
+
+    addPersController = MultiTextFieldController(texts: song.addPers);
+  }
+
   CurrentItemProvider({SongRaw song}){
-    _song = song;//??SongRaw.empty();
+    _song = song;
+
+    authorsController = MultiTextFieldController(texts: song.authors);
+    composersController = MultiTextFieldController(texts: song.composers);
+    performersController = MultiTextFieldController(texts: song.performers);
+
+    ytLinkController = TextEditingController(text: song.youtubeLink);
+
+    addPersController = MultiTextFieldController(texts: song.addPers);
+
   }
 
   SongRaw get song => _song;
   set song(SongRaw value){
     _song = value;
+    _updateControllers(_song);
     notifyListeners();
   }
 
@@ -300,55 +330,6 @@ class TitleCtrlProvider extends ChangeNotifier{
     notifyListeners();
   }
 }
-/*
-class AuthorCtrlProvider extends ChangeNotifier{
-  TextEditingController controller;
-  AuthorCtrlProvider({String text}){
-    controller = TextEditingController(text: text);
-  }
-
-  set text(String value){
-    controller.text = value;
-    notifyListeners();
-  }
-}
-
-class ComposerCtrlProvider extends ChangeNotifier{
-  TextEditingController controller;
-  ComposerCtrlProvider({String text}){
-    controller = TextEditingController(text: text);
-  }
-
-  set text(String value){
-    controller.text = value;
-    notifyListeners();
-  }
-}
-
-class PerformerCtrlProvider extends ChangeNotifier{
-  TextEditingController controller;
-  PerformerCtrlProvider({String text}){
-    controller = TextEditingController(text: text);
-  }
-
-  set text(String value){
-    controller.text = value;
-    notifyListeners();
-  }
-}
-
-class YTCtrlProvider extends ChangeNotifier{
-  TextEditingController controller;
-  YTCtrlProvider({String text}){
-    controller = TextEditingController(text: text);
-  }
-
-  set text(String value){
-    controller.text = value;
-    notifyListeners();
-  }
-}
-*/
 
 class SongPartProvider extends ChangeNotifier{
 
