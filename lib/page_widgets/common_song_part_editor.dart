@@ -68,8 +68,8 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
   late bool showErrBar;
 
   late LinkedScrollControllerGroup _controllers;
-  ScrollController? textController;
-  ScrollController? chordsController;
+  late ScrollController textController;
+  late ScrollController chordsController;
 
   @override
   void initState() {
@@ -80,6 +80,13 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
 
     showErrBar = false;
     super.initState();
+  }
+
+  @override
+  void dispose() {
+    textController.dispose();
+    chordsController.dispose();
+    super.dispose();
   }
 
   @override
