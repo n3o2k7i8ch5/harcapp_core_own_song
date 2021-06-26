@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_widgets/multi_text_field.dart';
 import 'package:harcapp_core_own_song/song_raw.dart';
 import 'package:harcapp_core_song/song_element.dart';
-import 'package:harcapp_core_tags/tag_layout.dart';
 
 import 'common.dart';
 
@@ -223,7 +222,7 @@ class TextProvider extends ChangeNotifier{
 
 class ChordsProvider extends ChangeNotifier{
 
-  static isChordMissing(String text, String chords) => text != null && text.length>0 && (chords == null || chords.length==0);
+  static isChordMissing(String text, String chords) => text.length>0 && (chords.length==0);
 
   String? _chords;
 
@@ -290,7 +289,7 @@ class TagsProvider extends ChangeNotifier{
   List<String>? _checkedTags;
 
   TagsProvider(List<String> allTags, List<String> checkedTags){
-    _checkedTags = checkedTags??[];
+    _checkedTags = checkedTags;
   }
 
   set(List<String> allTags, List<String> checkedTags){
