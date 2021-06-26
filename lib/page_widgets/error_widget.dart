@@ -29,7 +29,7 @@ class ErrorListWidget extends StatelessWidget{
               chordsMissingErrIdx >= chordsMissingErrorProv.length &&
                   textTooLongErrIdx >= textTooLongErrorProv.length
           )){
-            SongEditError err = chordsMissingErrorProv.errorAt(idx);
+            SongEditError? err = chordsMissingErrorProv.errorAt(idx);
             if(err != null){
               chordsMissingErrIdx++;
               errorLines.add(ErrorInfoLine(err));
@@ -80,7 +80,7 @@ class ErrorInfoLine extends StatelessWidget{
         ),
       ),
       title: Text(error.text),
-      trailing: Text('${error.line + 1}'),
+      trailing: Text('${error.line! + 1}'),
     );
   }
 

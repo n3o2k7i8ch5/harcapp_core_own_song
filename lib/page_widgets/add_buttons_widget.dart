@@ -14,8 +14,8 @@ import '../providers.dart';
 
 class AddButtonsWidget extends StatelessWidget{
 
-  final Function onPressed;
-  final Color accentColor;
+  final Function? onPressed;
+  final Color? accentColor;
   const AddButtonsWidget({this.onPressed, this.accentColor});
 
   @override
@@ -32,7 +32,7 @@ class AddButtonsWidget extends StatelessWidget{
             padding: EdgeInsets.all(Dimen.ICON_MARG),
             onTap: (){
               currItemProv.addPart(SongPart.empty());
-              if(onPressed!=null) onPressed();
+              if(onPressed!=null) onPressed!();
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -51,22 +51,22 @@ class AddButtonsWidget extends StatelessWidget{
               builder: (context, currItemProv, child) =>SimpleButton(
                 radius: AppCard.BIG_RADIUS,
                 padding: EdgeInsets.all(Dimen.ICON_MARG),
-                onTap: currItemProv.hasRefren?(){
+                onTap: currItemProv.hasRefren!?(){
                   RefrenPartProvider refPart = Provider.of<RefrenPartProvider>(context, listen: false);
                   currItemProv.addPart(SongPart.from(refPart.part.element));
-                  if(onPressed!=null) onPressed();
+                  if(onPressed!=null) onPressed!();
                 }:null,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(MdiIcons.plus, color: currItemProv.hasRefren?(accentColor??accent_(context)):iconDisab_(context)),
-                    Icon(MdiIcons.musicBoxOutline, color: currItemProv.hasRefren?(accentColor??accent_(context)):iconDisab_(context)),
+                    Icon(MdiIcons.plus, color: currItemProv.hasRefren!?(accentColor??accent_(context)):iconDisab_(context)),
+                    Icon(MdiIcons.musicBoxOutline, color: currItemProv.hasRefren!?(accentColor??accent_(context)):iconDisab_(context)),
                     SizedBox(width: Dimen.ICON_MARG),
                     Text(
                         'Refren',
                         style: AppTextStyle(
                             fontSize: Dimen.TEXT_SIZE_BIG,
-                            color: currItemProv.hasRefren?textEnab_(context):iconDisab_(context)
+                            color: currItemProv.hasRefren!?textEnab_(context):iconDisab_(context)
                         )
                     )
                   ],
