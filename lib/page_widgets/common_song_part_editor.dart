@@ -28,9 +28,9 @@ class SongPartEditorTemplate extends StatefulWidget{
   final SongPart songPart;
   final bool isRefren;
 
-  final Function? onTextChanged;
-  final Function? onChordsChanged;
-  final Function? onShiftChanged;
+  final void Function()? onTextChanged;
+  final void Function()? onChordsChanged;
+  final void Function() ? onShiftChanged;
 
   final Widget Function(BuildContext, SongPartEditorTemplateState)? topBuilder;
   final Widget Function(BuildContext, SongPartEditorTemplateState)? bottomBuilder;
@@ -61,9 +61,9 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
   SongPart get songPart => widget.songPart;
   bool get isRefren => widget.isRefren;
 
-  Function? get onTextChanged => widget.onTextChanged;
-  Function? get onChordsChanged => widget.onChordsChanged;
-  Function? get onShiftChanged => widget.onShiftChanged;
+  void Function()? get onTextChanged => widget.onTextChanged;
+  void Function()? get onChordsChanged => widget.onChordsChanged;
+  void Function()? get onShiftChanged => widget.onShiftChanged;
 
   late bool showErrBar;
 
@@ -128,7 +128,12 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
                             )
                           ),
 
-                          SongChordsWidget(this, boxConstraints)
+                          SongChordsWidget(
+                            songPart: songPart,
+                            isRefren: isRefren,
+                            scrollController: chordsController,
+                            onChordsChanged: onChordsChanged
+                          )
 
                         ],
                       ),
@@ -303,16 +308,19 @@ class SongTextWidget extends StatelessWidget{
 
 class SongChordsWidget extends StatelessWidget{
 
-  final SongPartEditorTemplateState parent;
-  final BoxConstraints boxConstraints;
-
-  TextEditingController? controller;
+  final SongPart songPart;
+  final bool isRefren;
+  final ScrollController scrollController;
+  final Function? onChordsChanged;
 
   static FocusNode focusNode = FocusNode();
 
-  SongChordsWidget(this.parent, this.boxConstraints){
-    controller = TextEditingController(text: parent.songPart.chords);
-  }
+  SongChordsWidget({
+    required this.songPart,
+    required this.isRefren,
+    required this.scrollController,
+    required this.onChordsChanged
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -330,7 +338,7 @@ class SongChordsWidget extends StatelessWidget{
         color: background_(context),
         child: SingleChildScrollView(
           physics: BouncingScrollPhysics(),
-          controller: parent.chordsController,
+          controller: scrollController,
           child: Stack(
             children: [
 
@@ -338,7 +346,7 @@ class SongChordsWidget extends StatelessWidget{
                   top: TEXT_FIELD_TOP_PADD,
                   right: 0,
                   left: 0,
-                  child: ChordPresenceWarning(parent)
+                  child: ChordPresenceWarning()
               ),
 
               Consumer<ChordsProvider>(
@@ -350,7 +358,7 @@ class SongChordsWidget extends StatelessWidget{
                           color: textEnab_(context),
                         ),
                         decoration: InputDecoration(
-                            hintText: 'Chwyty ${parent.isRefren?'ref.':'zwr.'}',
+                            hintText: 'Chwyty ${isRefren?'ref.':'zwr.'}',
                             hintStyle: TextStyle(
                                 fontFamily: 'Roboto',
                                 fontSize: Dimen.TEXT_SIZE_NORMAL,
@@ -367,10 +375,10 @@ class SongChordsWidget extends StatelessWidget{
                         minWidth: CHORDS_WIDGET_MIN_WIDTH,
                         onChanged: (text){
                           provider.chords = text;
-                          int errCount = handleErrors(context, parent.isRefren);
-                          parent.songPart.chords = text;
-                          parent.songPart.isError = errCount != 0;
-                          if(parent.onChordsChanged!=null) parent.onTextChanged!();
+                          int errCount = handleErrors(context, isRefren);
+                          songPart.chords = text;
+                          songPart.isError = errCount != 0;
+                          onChordsChanged?.call();
                         },
                         controller: provider.chordsController
                     ),
@@ -510,8 +518,7 @@ class ButtonsWidget extends StatelessWidget{
 
 class ChordPresenceWarning extends StatelessWidget{
 
-  final SongPartEditorTemplateState parent;
-  const ChordPresenceWarning(this.parent);
+  const ChordPresenceWarning();
 
   @override
   Widget build(BuildContext context) {
