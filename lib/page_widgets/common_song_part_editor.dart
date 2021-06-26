@@ -30,7 +30,7 @@ class SongPartEditorTemplate extends StatefulWidget{
 
   final void Function()? onTextChanged;
   final void Function()? onChordsChanged;
-  final void Function() ? onShiftChanged;
+  final void Function()? onShiftChanged;
 
   final Widget Function(BuildContext, SongPartEditorTemplateState)? topBuilder;
   final Widget Function(BuildContext, SongPartEditorTemplateState)? bottomBuilder;
