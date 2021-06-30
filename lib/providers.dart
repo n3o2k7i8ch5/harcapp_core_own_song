@@ -1,8 +1,8 @@
 
 import 'package:flutter/widgets.dart';
+import 'package:harcapp_core/comm_widgets/multi_text_field.dart';
 import 'package:harcapp_core_own_song/song_raw.dart';
 import 'package:harcapp_core_song/song_element.dart';
-import 'package:harcapp_core_tags/tag_layout.dart';
 
 import 'common.dart';
 
@@ -11,13 +11,42 @@ class CurrentItemProvider extends ChangeNotifier{
 
   SongRaw? _song;
 
+  late MultiTextFieldController authorsController;
+  late MultiTextFieldController composersController;
+  late MultiTextFieldController performersController;
+
+  late TextEditingController ytLinkController;
+
+  late MultiTextFieldController addPersController;
+
+
+  void _updateControllers(SongRaw song){
+    authorsController.texts = song.authors;
+    composersController.texts = song.composers;
+    performersController.texts = song.performers;
+
+    ytLinkController.text = song.youtubeLink??'';
+
+    addPersController.texts = song.addPers;
+  }
+
   CurrentItemProvider({SongRaw? song}){
-    _song = song;//??SongRaw.empty();
+    _song = song;
+
+    authorsController = MultiTextFieldController(texts: song?.authors);
+    composersController = MultiTextFieldController(texts: song?.composers);
+    performersController = MultiTextFieldController(texts: song?.performers);
+
+    ytLinkController = TextEditingController(text: song?.youtubeLink??'');
+
+    addPersController = MultiTextFieldController(texts: song?.addPers);
+
   }
 
   SongRaw? get song => _song;
   set song(SongRaw? value){
     _song = value;
+    _updateControllers(_song!);
     notifyListeners();
   }
 
@@ -81,8 +110,8 @@ class CurrentItemProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  bool get hasRefren => _song!.hasRefren;
-  set hasRefren(bool value){
+  bool? get hasRefren => _song!.hasRefren;
+  set hasRefren(bool? value){
     _song!.hasRefren = value;
     notifyListeners();
   }
@@ -193,7 +222,7 @@ class TextProvider extends ChangeNotifier{
 
 class ChordsProvider extends ChangeNotifier{
 
-  static isChordMissing(String text, String chords) => text != null && text.length>0 && (chords == null || chords.length==0);
+  static isChordMissing(String text, String chords) => text.length>0 && (chords.length==0);
 
   String? _chords;
 
@@ -260,7 +289,7 @@ class TagsProvider extends ChangeNotifier{
   List<String>? _checkedTags;
 
   TagsProvider(List<String> allTags, List<String> checkedTags){
-    _checkedTags = checkedTags??[];
+    _checkedTags = checkedTags;
   }
 
   set(List<String> allTags, List<String> checkedTags){
@@ -300,55 +329,6 @@ class TitleCtrlProvider extends ChangeNotifier{
     notifyListeners();
   }
 }
-/*
-class AuthorCtrlProvider extends ChangeNotifier{
-  TextEditingController controller;
-  AuthorCtrlProvider({String text}){
-    controller = TextEditingController(text: text);
-  }
-
-  set text(String value){
-    controller.text = value;
-    notifyListeners();
-  }
-}
-
-class ComposerCtrlProvider extends ChangeNotifier{
-  TextEditingController controller;
-  ComposerCtrlProvider({String text}){
-    controller = TextEditingController(text: text);
-  }
-
-  set text(String value){
-    controller.text = value;
-    notifyListeners();
-  }
-}
-
-class PerformerCtrlProvider extends ChangeNotifier{
-  TextEditingController controller;
-  PerformerCtrlProvider({String text}){
-    controller = TextEditingController(text: text);
-  }
-
-  set text(String value){
-    controller.text = value;
-    notifyListeners();
-  }
-}
-
-class YTCtrlProvider extends ChangeNotifier{
-  TextEditingController controller;
-  YTCtrlProvider({String text}){
-    controller = TextEditingController(text: text);
-  }
-
-  set text(String value){
-    controller.text = value;
-    notifyListeners();
-  }
-}
-*/
 
 class SongPartProvider extends ChangeNotifier{
 

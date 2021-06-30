@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:harcapp_core/comm_classes/app_text_style.dart';
 import 'package:harcapp_core/comm_classes/color_pack.dart';
@@ -26,7 +28,7 @@ class TopCards extends StatelessWidget{
   final Function(List<String>)? onChangedAuthor;
   final Function(List<String>)? onChangedComposer;
   final Function(List<String>)? onChangedPerformer;
-  final Function(String)? onChangedYT;
+  final Function(String?)? onChangedYT;
   final Function(List<String>)? onChangedAddPers;
   final Function(DateTime?)? onChangedReleaseDate;
 
@@ -178,10 +180,10 @@ class TopCards extends StatelessWidget{
                     color: hintEnab_(context),
                   ),
                   multi: true,
-                  multiHintTop: 'Autorzy słów',
-                  multiController: MultiTextFieldController(texts: prov.song!.authors),
+                  multiHintTop: 'Autorzy słów:',
+                  multiExpanded: true,
+                  multiController: prov.authorsController,
                   onAnyChanged: onChangedAuthor,
-                  key: ValueKey(prov.song),
                 ),
               ),
 
@@ -199,10 +201,10 @@ class TopCards extends StatelessWidget{
                     color: hintEnab_(context),
                   ),
                   multi: true,
-                  multiHintTop: 'Kompozytorzy muzyki',
-                  multiController: MultiTextFieldController(texts: prov.song!.composers),
+                  multiHintTop: 'Kompozytorzy muzyki:',
+                  multiExpanded: true,
+                  multiController: prov.composersController,
                   onAnyChanged: onChangedComposer,
-                  key: ValueKey(prov.song),
                 ),
               ),
 
@@ -220,17 +222,17 @@ class TopCards extends StatelessWidget{
                     color: hintEnab_(context),
                   ),
                   multi: true,
-                  multiHintTop: 'Wykonawcy',
-                  multiController: MultiTextFieldController(texts: prov.song!.performers),
+                  multiHintTop: 'Wykonawcy:',
+                  multiExpanded: true,
+                  multiController: prov.performersController,
                   onAnyChanged: onChangedPerformer,
-                  key: ValueKey(prov.song),
                 ),
               ),
 
               Consumer<CurrentItemProvider>(
                 builder: (context, prov, child) => AppTextFieldHint(
                   accentColor: accentColor,
-                  controller: TextEditingController(text: prov.youtubeLink),
+                  controller: prov.ytLinkController,
                   hint: 'Link YouTube:',
                   style: AppTextStyle(
                     fontSize: Dimen.TEXT_SIZE_BIG,
@@ -242,7 +244,6 @@ class TopCards extends StatelessWidget{
                     color: hintEnab_(context),
                   ),
                   onAnyChanged: (values) => onChangedYT?.call(values[0]),
-                  key: ValueKey(prov.song),
                 ),
               ),
 
@@ -260,10 +261,10 @@ class TopCards extends StatelessWidget{
                     color: hintEnab_(context),
                   ),
                   multi: true,
-                  multiHintTop: 'Os. dodające',
-                  multiController: MultiTextFieldController(texts: prov.song!.addPers),
+                  multiHintTop: 'Os. dodające:',
+                  multiExpanded: true,
+                  multiController: prov.addPersController,
                   onAnyChanged: onChangedAddPers,
-                  key: ValueKey(prov.song),
                 ),
               ),
 
@@ -314,12 +315,12 @@ class TopCards extends StatelessWidget{
                             child: GestureDetector(
                                 child: Container(color: Colors.transparent),
                                 onTap: () async {
-                                  prov.releaseDate = await showDatePicker(
+                                  prov.releaseDate = await (showDatePicker(
                                     context: context,
                                     initialDate: prov.releaseDate??DateTime.now(),
                                     firstDate: DateTime(966),
                                     lastDate: DateTime.now(),
-                                  );
+                                  ) as FutureOr<DateTime>);
                                 }
                             ),
                           )

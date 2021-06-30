@@ -90,6 +90,7 @@ class SongPartsListWidget extends StatelessWidget{
                 curve: Curves.easeInOut,
                 animation: itemAnimation,
                 child: AppCard(
+                    clipBehavior: Clip.none,
                     padding: EdgeInsets.zero,
                     margin: EdgeInsets.only(
                         top: ITEM_TOP_MARG,

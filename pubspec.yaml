@@ -10,10 +10,9 @@ environment:
 
 dependencies:
 
-  provider: 5.0.0
-  implicitly_animated_reorderable_list: 0.4.0
-  linked_scroll_controller: 0.2.0
-  tuple: 2.0.0
+  provider: ^5.0.0
+  implicitly_animated_reorderable_list: ^0.4.0
+  linked_scroll_controller: ^0.2.0
 
   harcapp_core:
     git:
