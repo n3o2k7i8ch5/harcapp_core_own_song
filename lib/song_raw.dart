@@ -27,7 +27,7 @@ class SongRaw extends SongCore{
 
   List<String> tags;
 
-  bool? hasRefren;
+  bool hasRefren;
   SongPart? refrenPart;
 
   List<SongPart>? songParts;
@@ -48,7 +48,7 @@ class SongRaw extends SongCore{
     this.youtubeLink = song.youtubeLink;
     this.tags = song.tags.toList();
 
-    this.hasRefren = song.hasRefren??SongPart.empty(isRefrenTemplate: true);
+    this.hasRefren = song.hasRefren;//??SongPart.empty(isRefrenTemplate: true);
     this.refrenPart = song.refrenPart?.copy();
 
     this.songParts = song.songParts;
@@ -69,7 +69,7 @@ class SongRaw extends SongCore{
 
     required this.tags,
 
-    this.hasRefren,
+    required this.hasRefren,
     this.refrenPart,
 
     this.songParts,
@@ -207,7 +207,7 @@ class SongRaw extends SongCore{
 
     for (SongPart part in songParts!) {
 
-      if(!hasRefren! && part.element == refrenPart?.element)
+      if(!hasRefren && part.element == refrenPart?.element)
         continue;
 
       text += part.getText(withTabs: part.shift);
@@ -232,7 +232,7 @@ class SongRaw extends SongCore{
 
     for (SongPart part in songParts!) {
 
-      if(!hasRefren! && part.element == refrenPart?.element)
+      if(!hasRefren && part.element == refrenPart?.element)
         continue;
 
       chords += part.chords;
@@ -267,9 +267,9 @@ class SongRaw extends SongCore{
 
     map[SongCore.PARAM_TAGS] = tags;
 
-    hasRefren = hasRefren! && refrenPart != null && !refrenPart!.isEmpty;
+    hasRefren = hasRefren && refrenPart != null && !refrenPart!.isEmpty;
 
-    if(hasRefren!)
+    if(hasRefren)
       map[SongCore.PARAM_REFREN] = {
         'text': refrenPart!.getText(),
         'chords': refrenPart!.chords,
@@ -285,7 +285,7 @@ class SongRaw extends SongCore{
           refCount++;
       } else {
 
-          if (hasRefren! && refCount > 0) {
+          if (hasRefren && refCount > 0) {
             parts.add({'refren': refCount});
             refCount = 0;
           }
@@ -298,7 +298,7 @@ class SongRaw extends SongCore{
         }
     }
 
-    if(hasRefren! && refCount>0)
+    if(hasRefren && refCount>0)
       parts.add({'refren': refCount});
 
     map[SongCore.PARAM_PARTS] = parts;

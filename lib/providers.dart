@@ -110,8 +110,8 @@ class CurrentItemProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  bool? get hasRefren => _song!.hasRefren;
-  set hasRefren(bool? value){
+  bool get hasRefren => _song!.hasRefren;
+  set hasRefren(bool value){
     _song!.hasRefren = value;
     notifyListeners();
   }
