@@ -14,11 +14,11 @@ class SongRaw extends SongCore{
   List<String> authors;
   List<String> performers;
   List<String> composers;
-  DateTime releaseDate;
+  DateTime? releaseDate;
   bool showRelDateMonth;
   bool showRelDateDay;
   List<String> addPers;
-  String youtubeLink;
+  String? youtubeLink;
 
   bool get isOwn => !isOfficial && !isConfid;
 
@@ -28,9 +28,9 @@ class SongRaw extends SongCore{
   List<String> tags;
 
   bool hasRefren;
-  SongPart refrenPart;
+  SongPart? refrenPart;
 
-  List<SongPart> songParts;
+  List<SongPart>? songParts;
 
   bool get hasChords => chords.replaceAll('\n', '').replaceAll(' ', '').length!=0;
 
@@ -46,30 +46,30 @@ class SongRaw extends SongCore{
     this.showRelDateDay = song.showRelDateDay;
     this.addPers = song.addPers;
     this.youtubeLink = song.youtubeLink;
-    this.tags = song.tags?.toList();
+    this.tags = song.tags.toList();
 
-    this.hasRefren = song.hasRefren??SongPart.empty(isRefrenTemplate: true);
+    this.hasRefren = song.hasRefren;
     this.refrenPart = song.refrenPart?.copy();
 
     this.songParts = song.songParts;
   }
 
   SongRaw({
-    this.fileName,
-    this.title,
-    this.hidTitles,
-    this.authors,
-    this.composers,
-    this.performers,
+    required this.fileName,
+    required this.title,
+    required this.hidTitles,
+    required this.authors,
+    required this.composers,
+    required this.performers,
     this.releaseDate,
-    this.showRelDateMonth,
-    this.showRelDateDay,
-    this.addPers,
+    required this.showRelDateMonth,
+    required this.showRelDateDay,
+    required this.addPers,
     this.youtubeLink,
 
-    this.tags,
+    required this.tags,
 
-    this.hasRefren,
+    required this.hasRefren,
     this.refrenPart,
 
     this.songParts,
@@ -114,7 +114,7 @@ class SongRaw extends SongCore{
     List<String> authors = ((map[SongCore.PARAM_TEXT_AUTHORS]??[]) as List).cast<String>();
     List<String> composers = ((map[SongCore.PARAM_COMPOSERS]??[]) as List).cast<String>();
     List<String> performers = ((map[SongCore.PARAM_PERFORMERS]??[]) as List).cast<String>();
-    DateTime releaseDate = DateTime.tryParse(map[SongCore.PARAM_REL_DATE]??'');
+    DateTime? releaseDate = DateTime.tryParse(map[SongCore.PARAM_REL_DATE]??'');
     bool showRelDateMonth = map[SongCore.PARAM_SHOW_REL_DATE_MONTH]??true;
     bool showRelDateDay = map[SongCore.PARAM_SHOW_REL_DATE_DAY]??true;
     String youtubeLink = map[SongCore.PARAM_YT_LINK]??'';
@@ -131,7 +131,7 @@ class SongRaw extends SongCore{
 
     List<SongPart> songParts = [];
     List<dynamic> partsList = map[SongCore.PARAM_PARTS];
-    for (Map partMap in partsList) {
+    for (Map partMap in partsList as Iterable<Map<dynamic, dynamic>>) {
       if (partMap.containsKey('refren'))
         for (int i = 0; i < partMap['refren']; i++) {
           songParts.add(SongPart.from(refrenPart.element));
@@ -168,21 +168,21 @@ class SongRaw extends SongCore{
   }
 
   SongRaw copyWith({
-    String fileName,
-    String title,
-    List<String> hidTitles,
-    List<String> authors,
-    List<String> composers,
-    List<String> performers,
-    DateTime releaseDate,
-    bool showRelDateMonth,
-    bool showRelDateDay,
-    List<String> addPers,
-    String youtubeLink,
-    List<String> tags,
-    String hasRefren,
-    SongPart refrenPart,
-    List<SongPart> songParts,
+    String? fileName,
+    String? title,
+    List<String>? hidTitles,
+    List<String>? authors,
+    List<String>? composers,
+    List<String>? performers,
+    DateTime? releaseDate,
+    bool? showRelDateMonth,
+    bool? showRelDateDay,
+    List<String>? addPers,
+    String? youtubeLink,
+    List<String>? tags,
+    bool? hasRefren,
+    SongPart? refrenPart,
+    List<SongPart>? songParts,
   }) => SongRaw(
       fileName: fileName??this.fileName,
       title: title??this.title,
@@ -205,7 +205,7 @@ class SongRaw extends SongCore{
 
     String text = '';
 
-    for (SongPart part in songParts) {
+    for (SongPart part in songParts!) {
 
       if(!hasRefren && part.element == refrenPart?.element)
         continue;
@@ -230,7 +230,7 @@ class SongRaw extends SongCore{
 
     String chords = '';
 
-    for (SongPart part in songParts) {
+    for (SongPart part in songParts!) {
 
       if(!hasRefren && part.element == refrenPart?.element)
         continue;
@@ -267,19 +267,19 @@ class SongRaw extends SongCore{
 
     map[SongCore.PARAM_TAGS] = tags;
 
-    hasRefren = hasRefren && refrenPart != null && !refrenPart.isEmpty;
+    bool _hasRefren = hasRefren && refrenPart != null && !refrenPart!.isEmpty;
 
-    if(hasRefren)
+    if(_hasRefren)
       map[SongCore.PARAM_REFREN] = {
-        'text': refrenPart.getText(),
-        'chords': refrenPart.chords,
+        'text': refrenPart!.getText(),
+        'chords': refrenPart!.chords,
         'shift': true
       };
 
     List<Map> parts = [];
 
     int refCount = 0;
-    for (SongPart part in songParts) {
+    for (SongPart part in songParts!) {
 
       if(part.element == refrenPart?.element) {
           refCount++;

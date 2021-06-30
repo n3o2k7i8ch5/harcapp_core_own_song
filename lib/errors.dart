@@ -7,7 +7,7 @@ import 'providers.dart';
 const int MAX_CHORDS_IN_LINE = 8;
 const int MAX_TEXT_LINE_LENGTH = 52;
 
-isChordMissing(String text, String chords) => text != null && text.length>0 && (chords == null || chords.length==0);
+isChordMissing(String text, String? chords) => text != null && text.length>0 && (chords == null || chords.length==0);
 
 int handleErrors(BuildContext context, bool isRefren){
 
@@ -24,10 +24,10 @@ int handleErrors(BuildContext context, bool isRefren){
 
 class ErrorProvider<T extends SongEditError> extends ChangeNotifier{
 
-  List<T> _error_list;
-  Map<int, T> _error_map;
+  late List<T> _error_list;
+  late Map<int?, T> _error_map;
 
-  ErrorProvider({Function(ErrorProvider<T> errProv) init}){
+  ErrorProvider({Function(ErrorProvider<T> errProv)? init}){
     _error_list = [];
     _error_map = {};
 
@@ -46,7 +46,7 @@ class ErrorProvider<T extends SongEditError> extends ChangeNotifier{
     _error_map.clear();
   }
 
-  T errorAt(int line){
+  T? errorAt(int line){
     return _error_map[line];
   }
 
@@ -55,21 +55,21 @@ class ErrorProvider<T extends SongEditError> extends ChangeNotifier{
 
 abstract class SongEditError{
 
-  final int line;
+  final int? line;
   final Color color;
   final String text;
 
   const SongEditError({
     this.line,
-    @required this.color,
-    @required this.text
+    required this.color,
+    required this.text
   });
 
 }
 
 class ChordsMissingError extends SongEditError{
 
-  ChordsMissingError({int line}): super(
+  ChordsMissingError({int? line}): super(
     line: line,
     color: COLOR_WAR,
     text: 'Każda linijka tekstu, której akompniuje instrument wymaga podania chwytów.'
@@ -77,8 +77,8 @@ class ChordsMissingError extends SongEditError{
 
   static int handleErrors(BuildContext context, ErrorProvider<ChordsMissingError> errProv){
 
-    List<String> textLines = Provider.of<TextProvider>(context, listen: false).text.split('\n');
-    List<String> chordLines = Provider.of<ChordsProvider>(context, listen: false).chords.split('\n');
+    List<String> textLines = Provider.of<TextProvider>(context, listen: false).text!.split('\n');
+    List<String> chordLines = Provider.of<ChordsProvider>(context, listen: false).chords!.split('\n');
 
     errProv.clear();
     for(int i=0; i<textLines.length; i++)
@@ -105,7 +105,7 @@ class ChordsMissingError extends SongEditError{
 
 class TextTooLongError extends SongEditError{
 
-  TextTooLongError({int line}): super(
+  TextTooLongError({int? line}): super(
       line: line,
       color: COLOR_ERR,
       text: 'Linijka tekstu nie powinna przekraczać $MAX_TEXT_LINE_LENGTH znaków.'
@@ -113,7 +113,7 @@ class TextTooLongError extends SongEditError{
 
   static int handleErrors(BuildContext context, ErrorProvider<TextTooLongError> errProv){
 
-    List<String> textLines = Provider.of<TextProvider>(context, listen: false).text.split('\n');
+    List<String> textLines = Provider.of<TextProvider>(context, listen: false).text!.split('\n');
 
     errProv.clear();
     for(int i=0; i<textLines.length; i++)
@@ -140,7 +140,7 @@ class AnyError extends StatelessWidget{
 
   final Widget Function(BuildContext context, int errCont) builder;
 
-  const AnyError({@required this.builder});
+  const AnyError({required this.builder});
 
   @override
   Widget build(BuildContext context) {

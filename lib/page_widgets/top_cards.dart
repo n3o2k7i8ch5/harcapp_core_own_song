@@ -21,14 +21,14 @@ import '../providers.dart';
 
 class TopCards extends StatelessWidget{
 
-  final Color accentColor;
-  final Function(String) onChangedTitle;
-  final Function(List<String>) onChangedAuthor;
-  final Function(List<String>) onChangedComposer;
-  final Function(List<String>) onChangedPerformer;
-  final Function(String) onChangedYT;
-  final Function(List<String>) onChangedAddPers;
-  final Function(DateTime) onChangedReleaseDate;
+  final Color? accentColor;
+  final Function(String)? onChangedTitle;
+  final Function(List<String>)? onChangedAuthor;
+  final Function(List<String>)? onChangedComposer;
+  final Function(List<String>)? onChangedPerformer;
+  final Function(String)? onChangedYT;
+  final Function(List<String>)? onChangedAddPers;
+  final Function(DateTime?)? onChangedReleaseDate;
 
   const TopCards({
     this.accentColor,
@@ -108,7 +108,7 @@ class TopCards extends StatelessWidget{
 
                     ImplicitlyAnimatedList<TextEditingController>(
                       physics: BouncingScrollPhysics(),
-                      items: provider.controllers,
+                      items: provider.controllers!,
                       areItemsTheSame: (a, b) => a.hashCode == b.hashCode,
                       itemBuilder: (context, animation, item, index) {
                         return SizeFadeTransition(
@@ -179,7 +179,7 @@ class TopCards extends StatelessWidget{
                   ),
                   multi: true,
                   multiHintTop: 'Autorzy słów',
-                  multiController: MultiTextFieldController(texts: prov.song.authors),
+                  multiController: MultiTextFieldController(texts: prov.song!.authors),
                   onAnyChanged: onChangedAuthor,
                   key: ValueKey(prov.song),
                 ),
@@ -200,7 +200,7 @@ class TopCards extends StatelessWidget{
                   ),
                   multi: true,
                   multiHintTop: 'Kompozytorzy muzyki',
-                  multiController: MultiTextFieldController(texts: prov.song.composers),
+                  multiController: MultiTextFieldController(texts: prov.song!.composers),
                   onAnyChanged: onChangedComposer,
                   key: ValueKey(prov.song),
                 ),
@@ -221,7 +221,7 @@ class TopCards extends StatelessWidget{
                   ),
                   multi: true,
                   multiHintTop: 'Wykonawcy',
-                  multiController: MultiTextFieldController(texts: prov.song.performers),
+                  multiController: MultiTextFieldController(texts: prov.song!.performers),
                   onAnyChanged: onChangedPerformer,
                   key: ValueKey(prov.song),
                 ),
@@ -261,7 +261,7 @@ class TopCards extends StatelessWidget{
                   ),
                   multi: true,
                   multiHintTop: 'Os. dodające',
-                  multiController: MultiTextFieldController(texts: prov.song.addPers),
+                  multiController: MultiTextFieldController(texts: prov.song!.addPers),
                   onAnyChanged: onChangedAddPers,
                   key: ValueKey(prov.song),
                 ),
@@ -291,7 +291,7 @@ class TopCards extends StatelessWidget{
                                   text:
                                   prov.releaseDate==null ?
                                   '':
-                                  dateToString(prov.releaseDate, showMonth: prov.showRelDateMonth, showDay: prov.showRelDateMonth&&prov.showRelDateDay)),
+                                  dateToString(prov.releaseDate!, showMonth: prov.showRelDateMonth, showDay: prov.showRelDateMonth&&prov.showRelDateDay)),
                               hint: 'Data pierwszego wykonania:',
                               style: AppTextStyle(
                                 fontSize: Dimen.TEXT_SIZE_BIG,
@@ -304,7 +304,7 @@ class TopCards extends StatelessWidget{
                               ),
                               onAnyChanged: (text){
                                 if(onChangedReleaseDate != null)
-                                  onChangedReleaseDate(prov.releaseDate);
+                                  onChangedReleaseDate!(prov.releaseDate);
                               },
                               key: ValueKey(Tuple3(prov.releaseDate, prov.showRelDateMonth, prov.showRelDateDay)),
                             ),
@@ -377,7 +377,7 @@ class TopCards extends StatelessWidget{
 class AddTextWidget extends StatelessWidget{
 
   final TextEditingController controller;
-  final void Function() onRemoved;
+  final void Function()? onRemoved;
   const AddTextWidget(this.controller, {this.onRemoved});
 
   @override
@@ -390,7 +390,7 @@ class AddTextWidget extends StatelessWidget{
           onPressed: (){
             HidTitlesProvider prov = Provider.of<HidTitlesProvider>(context, listen: false);
             prov.remove(controller);
-            if(onRemoved != null) onRemoved();
+            if(onRemoved != null) onRemoved!();
           },
         ),
 

@@ -9,90 +9,90 @@ import 'common.dart';
 
 class CurrentItemProvider extends ChangeNotifier{
 
-  SongRaw _song;
+  SongRaw? _song;
 
-  CurrentItemProvider({SongRaw song}){
+  CurrentItemProvider({SongRaw? song}){
     _song = song;//??SongRaw.empty();
   }
 
-  SongRaw get song => _song;
-  set song(SongRaw value){
+  SongRaw? get song => _song;
+  set song(SongRaw? value){
     _song = value;
     notifyListeners();
   }
 
   set fileName(String value){
-    _song.fileName = value;
+    _song!.fileName = value;
     notifyListeners();
   }
 
   set title(String value){
-    _song.title = value;
+    _song!.title = value;
     notifyListeners();
   }
 
   set authors(List<String> value){
-    _song.authors = value;
+    _song!.authors = value;
     notifyListeners();
   }
 
   set composers(List<String> value){
-    _song.composers = value;
+    _song!.composers = value;
     notifyListeners();
   }
 
   set performers(List<String> value){
-    _song.performers = value;
+    _song!.performers = value;
     notifyListeners();
   }
 
-  DateTime get releaseDate => _song.releaseDate;
-  set releaseDate(DateTime value){
-    _song.releaseDate = value;
+  DateTime? get releaseDate => _song!.releaseDate;
+  set releaseDate(DateTime? value){
+    _song!.releaseDate = value;
     notifyListeners();
   }
 
-  bool get showRelDateMonth => _song.showRelDateMonth;
+  bool get showRelDateMonth => _song!.showRelDateMonth;
   set showRelDateMonth(bool value){
-    _song.showRelDateMonth = value;
+    _song!.showRelDateMonth = value;
     notifyListeners();
   }
 
-  bool get showRelDateDay => _song.showRelDateDay;
+  bool get showRelDateDay => _song!.showRelDateDay;
   set showRelDateDay(bool value){
-    _song.showRelDateDay = value;
+    _song!.showRelDateDay = value;
     notifyListeners();
   }
 
-  String get youtubeLink => _song.youtubeLink;
-  set youtubeLink(String value){
-    _song.youtubeLink = value;
+  String? get youtubeLink => _song!.youtubeLink;
+  set youtubeLink(String? value){
+    _song!.youtubeLink = value;
     notifyListeners();
   }
 
-  List<String> get addPers => _song.addPers;
+  List<String> get addPers => _song!.addPers;
   set addPers(List<String> value){
-    _song.addPers = value;
+    _song!.addPers = value;
     notifyListeners();
   }
 
   set tags(List<String> value){
-    _song.tags = value;
+    _song!.tags = value;
     notifyListeners();
   }
 
-  bool get hasRefren => _song.hasRefren;
+  bool get hasRefren => _song!.hasRefren;
   set hasRefren(bool value){
-    _song.hasRefren = value;
+    _song!.hasRefren = value;
     notifyListeners();
   }
 
   removePart(SongPart part){
-    _song.songParts.remove(part);
+    _song!.songParts!.remove(part);
     notifyListeners();
   }
   addPart(SongPart part){
-    _song.songParts.add(part);
+    _song!.songParts!.add(part);
     notifyListeners();
   }
 
@@ -100,10 +100,10 @@ class CurrentItemProvider extends ChangeNotifier{
 
 class HidTitlesProvider extends ChangeNotifier{
 
-  List<TextEditingController> _controllers;
-  bool _isLastEmpty;
+  List<TextEditingController>? _controllers;
+  late bool _isLastEmpty;
 
-  HidTitlesProvider({List<String> hidTitles}){
+  HidTitlesProvider({List<String>? hidTitles}){
     if(hidTitles == null)
       _controllers = [];
     else
@@ -112,11 +112,11 @@ class HidTitlesProvider extends ChangeNotifier{
     _isLastEmpty = hidTitles==null || (hidTitles.length > 0 && hidTitles.last.length==0);
   }
 
-  void add({String hidTitle, Function() onChanged}){
+  void add({String? hidTitle, Function()? onChanged}){
     TextEditingController controller = TextEditingController(text: hidTitle??'');
     _isLastEmpty = controller.text.length==0;
     controller.addListener(() {
-      if(controller == _controllers.last){
+      if(controller == _controllers!.last){
 
         if(controller.text.length==0 && !_isLastEmpty)
           notifyListeners();
@@ -130,43 +130,43 @@ class HidTitlesProvider extends ChangeNotifier{
     if(onChanged != null)
       controller.addListener(onChanged);
 
-    _controllers.add(controller);
+    _controllers!.add(controller);
 
     notifyListeners();
   }
 
   void remove(TextEditingController controller){
-    _controllers.remove(controller);
-    _isLastEmpty = controllers.isEmpty || controllers.last.text.length==0;
+    _controllers!.remove(controller);
+    _isLastEmpty = controllers!.isEmpty || controllers!.last.text.length==0;
     notifyListeners();
   }
 
-  List<String> get() => _controllers.map((ctrl) => ctrl.text).toList();
+  List<String> get() => _controllers!.map((ctrl) => ctrl.text).toList();
 
-  bool get isLastEmpty => !hasAny?true:_controllers.last.text.length==0;
+  bool get isLastEmpty => !hasAny?true:_controllers!.last.text.length==0;
 
-  bool get hasAny => _controllers.length != 0;
+  bool get hasAny => _controllers!.length != 0;
 
-  List<TextEditingController> get controllers => _controllers;
+  List<TextEditingController>? get controllers => _controllers;
 
 }
 
 class TextShiftProvider extends ChangeNotifier{
 
-  bool _shifted;
+  bool? _shifted;
 
-  TextShiftProvider({bool shifted}){
+  TextShiftProvider({bool? shifted}){
     _shifted = shifted;
   }
 
-  bool get shifted => _shifted;
-  set shifted(bool value){
+  bool? get shifted => _shifted;
+  set shifted(bool? value){
     _shifted = value;
     notifyListeners();
   }
 
   void reverseShift(){
-    _shifted = !_shifted;
+    _shifted = !_shifted!;
     notifyListeners();
   }
 
@@ -174,17 +174,17 @@ class TextShiftProvider extends ChangeNotifier{
 
 class TextProvider extends ChangeNotifier{
 
-  String _text;
+  String? _text;
 
-  TextEditingController controller;
+  TextEditingController? controller;
 
   TextProvider({String text: ''}){
     _text = text;
     controller = TextEditingController(text: _text);
   }
 
-  String get text => _text;
-  set text(String value){
+  String? get text => _text;
+  set text(String? value){
     _text = value;
     notifyListeners();
   }
@@ -195,17 +195,17 @@ class ChordsProvider extends ChangeNotifier{
 
   static isChordMissing(String text, String chords) => text != null && text.length>0 && (chords == null || chords.length==0);
 
-  String _chords;
+  String? _chords;
 
-  TextEditingController chordsController;
+  TextEditingController? chordsController;
 
   ChordsProvider({String chords: ''}){
     _chords = chords;
     chordsController = TextEditingController(text: chords);
   }
 
-  String get chords => _chords;
-  set chords(String value){
+  String? get chords => _chords;
+  set chords(String? value){
     _chords = value;
     notifyListeners();
   }
@@ -214,15 +214,15 @@ class ChordsProvider extends ChangeNotifier{
 
 class RefrenEnabProvider extends ChangeNotifier{
 
-  bool _refEnab;
+  bool? _refEnab;
 
   RefrenEnabProvider(bool refEnab){
     _refEnab = refEnab;
   }
 
-  bool get refEnab => _refEnab;
+  bool? get refEnab => _refEnab;
 
-  set refEnab(bool value){
+  set refEnab(bool? value){
     _refEnab = value;
     notifyListeners();
   }
@@ -257,7 +257,7 @@ class RefrenPartProvider extends SongPartProvider{
 }
 
 class TagsProvider extends ChangeNotifier{
-  List<String> _checkedTags;
+  List<String>? _checkedTags;
 
   TagsProvider(List<String> allTags, List<String> checkedTags){
     _checkedTags = checkedTags??[];
@@ -268,35 +268,35 @@ class TagsProvider extends ChangeNotifier{
     notifyListeners();
   }
 
-  String get(int idx) => _checkedTags[idx];
+  String get(int idx) => _checkedTags![idx];
 
   void add(String tag){
-    if(!_checkedTags.contains(tag)) {
-      _checkedTags.add(tag);
-      _checkedTags.sort();
+    if(!_checkedTags!.contains(tag)) {
+      _checkedTags!.add(tag);
+      _checkedTags!.sort();
     }
     notifyListeners();
   }
 
   void remove(String tag){
-    _checkedTags.remove(tag);
+    _checkedTags!.remove(tag);
     notifyListeners();
   }
 
-  List<String> get checkedTags => _checkedTags;
+  List<String>? get checkedTags => _checkedTags;
 
-  int get count => _checkedTags.length;
+  int get count => _checkedTags!.length;
 }
 
 class TitleCtrlProvider extends ChangeNotifier{
-  TextEditingController controller;
-  TitleCtrlProvider({String text, Function(String text) onChanged}){
+  TextEditingController? controller;
+  TitleCtrlProvider({String? text, Function(String text)? onChanged}){
     controller = TextEditingController(text: text);
-    if(onChanged!=null) controller.addListener(() => onChanged(controller.text));
+    if(onChanged!=null) controller!.addListener(() => onChanged(controller!.text));
   }
 
   set text(String value){
-    controller.text = value;
+    controller!.text = value;
     notifyListeners();
   }
 }

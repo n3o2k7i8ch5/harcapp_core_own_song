@@ -10,7 +10,7 @@ import '../providers.dart';
 class TagsWidget extends StatelessWidget{
 
   final bool linear;
-  final void Function(List<String> tags) onChanged;
+  final void Function(List<String>? tags)? onChanged;
 
   const TagsWidget({this.linear: true, this.onChanged});
 
@@ -24,7 +24,7 @@ class TagsWidget extends StatelessWidget{
           if(checked) prov.remove(tag);
           else prov.add(tag);
 
-          if(onChanged!=null) onChanged(prov.checkedTags);
+          if(onChanged!=null) onChanged!(prov.checkedTags);
         };
 
         return Column(
@@ -41,14 +41,14 @@ class TagsWidget extends StatelessWidget{
 
             if(linear)
               TagLayout.linear(
-                onTagTap: onTagTap,
+                onTagTap: onTagTap as dynamic Function(String, bool)?,
                 allTags: Tag.ALL_TAG_NAMES,
                 checkedTags: prov.checkedTags,
                 fontSize: Dimen.TEXT_SIZE_NORMAL,
               )
             else
               TagLayout.wrap(
-                onTagTap: onTagTap,
+                onTagTap: onTagTap as dynamic Function(String, bool)?,
                 allTags: Tag.ALL_TAG_NAMES,
                 checkedTags: prov.checkedTags,
                 fontSize: Dimen.TEXT_SIZE_NORMAL,

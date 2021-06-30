@@ -26,8 +26,8 @@ class SongPartCard extends StatelessWidget{
 
   final SongPart songPart;
   final SongPartType type;
-  final Widget Function(BuildContext, SongPart) topBuilder;
-  final Function onTap;
+  final Widget Function(BuildContext, SongPart)? topBuilder;
+  final Function? onTap;
 
   final FocusNode focusNode = FocusNode();
 
@@ -40,10 +40,10 @@ class SongPartCard extends StatelessWidget{
       });
 
   static SongPartCard from(
-      {@required SongPart songPart,
-        @required SongPartType type,
-        Widget Function(BuildContext, SongPart) topBuilder,
-        Function onTap
+      {required SongPart songPart,
+        required SongPartType type,
+        Widget Function(BuildContext, SongPart)? topBuilder,
+        Function? onTap
       }) =>
       SongPartCard(
           songPart,
@@ -75,8 +75,8 @@ class SongPartCard extends StatelessWidget{
             )
         );
 
-        String emptText;
-        IconData iconData;
+        String? emptText;
+        IconData? iconData;
         bool pressable = false;
 
         if(type == SongPartType.ZWROTKA){
@@ -86,7 +86,7 @@ class SongPartCard extends StatelessWidget{
             pressable = true;
           }
         }else if(type == SongPartType.REFREN){
-          if(prov.refEnab) {
+          if(prov.refEnab!) {
             if(songPart.isEmpty)
               emptText = 'Refren pusty. Edytuj szablon powyżej.';
           }else
@@ -147,14 +147,14 @@ class SongPartCard extends StatelessWidget{
           crossAxisAlignment: CrossAxisAlignment.stretch,
           mainAxisSize: MainAxisSize.min,
           children: <Widget>[
-            if(topBuilder!=null) topBuilder(context, songPart),
+            if(topBuilder!=null) topBuilder!(context, songPart),
 
             SimpleButton(
               radius: AppCard.BIG_RADIUS,
               padding: EdgeInsets.all(Dimen.DEF_MARG),
               margin: EdgeInsets.only(top: Dimen.DEF_MARG, bottom: Dimen.DEF_MARG),
               child: main,
-              onTap: onTap
+              onTap: onTap as void Function()?
             )
           ],
         );
@@ -174,14 +174,14 @@ class SongTextWidget extends StatelessWidget{
   const SongTextWidget(this.parent, this.isRefProv);
 
   bool isRefren(BuildContext context) => parent.songPart.isRefren(context);
-  bool get hasRefren => isRefProv.refEnab;
+  bool? get hasRefren => isRefProv.refEnab;
 
   FocusNode get focusNode => parent.focusNode;
 
   @override
   Widget build(BuildContext context) {
 
-    Color textColor;
+    Color? textColor;
 
     if(parent.type == SongPartType.ZWROTKA) textColor = textEnab_(context);
     else if(parent.type == SongPartType.REFREN) textColor = textDisab_(context);
@@ -226,12 +226,12 @@ class SongChordsWidget extends StatelessWidget{
   const SongChordsWidget(this.parent, this.isRefProv);
 
   bool isRefren(BuildContext context) => parent.songPart.isRefren(context);
-  bool get hasRefren => isRefProv.refEnab;
+  bool? get hasRefren => isRefProv.refEnab;
 
   @override
   Widget build(BuildContext context) {
 
-    Color textColor;
+    Color? textColor;
 
     if(parent.type == SongPartType.ZWROTKA) textColor = textEnab_(context);
     else if(parent.type == SongPartType.REFREN) textColor = textDisab_(context);
@@ -269,8 +269,8 @@ class SongChordsWidget extends StatelessWidget{
 class TopZwrotkaButtons extends StatelessWidget{
 
   final SongPart songPart;
-  final Function(SongPart) onDuplicate;
-  final Function(SongPart) onDelete;
+  final Function(SongPart)? onDuplicate;
+  final Function(SongPart)? onDelete;
   final bool showName;
 
   const TopZwrotkaButtons(
@@ -305,7 +305,7 @@ class TopZwrotkaButtons extends StatelessWidget{
         IconButton(
           icon: Icon(MdiIcons.contentDuplicate, color: iconEnab_(context)),
           onPressed: (){
-            if(onDuplicate!=null) onDuplicate(songPart);
+            if(onDuplicate!=null) onDuplicate!(songPart);
             Provider.of<CurrentItemProvider>(context, listen: false).addPart(songPart.copy());
           },
         ),
@@ -314,7 +314,7 @@ class TopZwrotkaButtons extends StatelessWidget{
         IconButton(
           icon: Icon(MdiIcons.trashCanOutline, color: iconEnab_(context)),
           onPressed: (){
-            if(onDelete!=null) onDelete(songPart);
+            if(onDelete!=null) onDelete!(songPart);
             Provider.of<CurrentItemProvider>(context, listen: false).removePart(songPart);
           },
         ),
@@ -328,7 +328,7 @@ class TopZwrotkaButtons extends StatelessWidget{
 class TopRefrenButtons extends StatelessWidget{
 
   final SongPart songPart;
-  final Function(SongPart) onDelete;
+  final Function(SongPart)? onDelete;
   final bool showName;
 
   const TopRefrenButtons(
@@ -357,7 +357,7 @@ class TopRefrenButtons extends StatelessWidget{
         IconButton(
           icon: Icon(MdiIcons.trashCanOutline, color: iconEnab_(context)),
           onPressed: (){
-            if(onDelete!=null) onDelete(songPart);
+            if(onDelete!=null) onDelete!(songPart);
             Provider.of<CurrentItemProvider>(context, listen: false).removePart(songPart);
           },
         ),

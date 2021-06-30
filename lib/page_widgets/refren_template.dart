@@ -13,9 +13,9 @@ import '../song_part_card.dart';
 
 class RefrenTemplate extends StatelessWidget{
 
-  final Function(SongPart, RefrenPartProvider) onPartTap;
-  final Function(bool value) onRefrenEnabledChaned;
-  final Color accentColor;
+  final Function(SongPart, RefrenPartProvider)? onPartTap;
+  final Function(bool value)? onRefrenEnabledChaned;
+  final Color? accentColor;
 
   const RefrenTemplate({this.onPartTap, this.onRefrenEnabledChaned, this.accentColor});
 
@@ -37,21 +37,21 @@ class RefrenTemplate extends StatelessWidget{
                   titleColor:
                   prov.isError?
                   Colors.red:
-                  (currItemProv.hasRefren?textEnab_(context):textDisab_(context)),
+                  (currItemProv.hasRefren!?textEnab_(context):textDisab_(context)),
                   //titleColor: currItemProv.hasRefren?textEnab_(context):hintEnab_(context),
                   textAlign: TextAlign.start,
                   trailing: Switch(
-                    value: currItemProv.hasRefren,
+                    value: currItemProv.hasRefren!,
                     onChanged: (bool value){
-                      currItemProv.hasRefren = !currItemProv.hasRefren;
-                      if(onRefrenEnabledChaned != null) onRefrenEnabledChaned(value);
+                      currItemProv.hasRefren = !currItemProv.hasRefren!;
+                      if(onRefrenEnabledChaned != null) onRefrenEnabledChaned!(value);
                     },
                     activeColor: accentColor??accent_(context),
                   ),
                 ),
               ),
             ),
-            onTap: () => onPartTap(prov.part, prov),
+            onTap: () => onPartTap!(prov.part, prov),
           ),
         ),
     );

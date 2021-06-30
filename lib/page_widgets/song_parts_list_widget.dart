@@ -21,16 +21,16 @@ class SongPartsListWidget extends StatelessWidget{
   static const double ITEM_TOP_MARG = Dimen.DEF_MARG;
   static const double ITEM_BOTTOM_MARG = 12.0;
 
-  final ScrollController controller;
-  final ScrollPhysics physics;
-  final Widget header;
-  final Widget footer;
+  final ScrollController? controller;
+  final ScrollPhysics? physics;
+  final Widget? header;
+  final Widget? footer;
   final bool refrenTapable;
-  final Function(SongPart, SongPartProvider) onPartTap;
+  final Function(SongPart, SongPartProvider)? onPartTap;
   final bool shrinkWrap;
-  final Function() onDelete;
-  final Function() onDuplicate;
-  final Function() onReorderFinished;
+  final Function()? onDelete;
+  final Function()? onDuplicate;
+  final Function()? onReorderFinished;
 
   const SongPartsListWidget({
     this.controller,
@@ -51,20 +51,20 @@ class SongPartsListWidget extends StatelessWidget{
       builder: (context, prov, _) => ImplicitlyAnimatedReorderableList<SongPart>(
         physics: physics??BouncingScrollPhysics(),
         controller: controller,
-        items: prov.song.songParts,
-        insertDuration: Duration(milliseconds: prov.song.songParts.length<=1?0:200),
-        removeDuration: Duration(milliseconds: prov.song.songParts.length==0?0:500),
+        items: prov.song!.songParts!,
+        insertDuration: Duration(milliseconds: prov.song!.songParts!.length<=1?0:200),
+        removeDuration: Duration(milliseconds: prov.song!.songParts!.length==0?0:500),
         areItemsTheSame: (oldItem, newItem) => oldItem.hashCode == newItem.hashCode,
         onReorderFinished: (item, from, to, newItems){
-          prov.song.songParts = newItems;
+          prov.song!.songParts = newItems;
           prov.notifyListeners();
-          if(onReorderFinished != null) onReorderFinished();
+          if(onReorderFinished != null) onReorderFinished!();
         },
         itemBuilder: (context, itemAnimation, item, index) => Reorderable(
           key: ValueKey(item.hashCode),
           builder: (context, dragAnimation, inDrag) {
             final t = dragAnimation.value;
-            final elevation = ui.lerpDouble(0, AppCard.bigElevation, t);
+            final elevation = ui.lerpDouble(0, AppCard.bigElevation, t)!;
             final color = Color.lerp(background_(context), cardEnab_(context), t);
 
             bool isRefren = item.isRefren(context);
@@ -114,7 +114,7 @@ class SongPartsListWidget extends StatelessWidget{
             AnimatedContainer(
               duration: Duration(milliseconds: 1),
               height:
-              prov.song.songParts.isEmpty?
+              prov.song!.songParts!.isEmpty?
               SongPartCard.EMPTY_HEIGHT + Dimen.ICON_FOOTPRINT + ITEM_TOP_MARG + ITEM_BOTTOM_MARG
                   :0,
               child: Column(
@@ -137,7 +137,7 @@ class SongPartsListWidget extends StatelessWidget{
               ),
             ),
 
-            if(footer!=null) footer,
+            if(footer!=null) footer!,
 
           ],
         ),
@@ -153,22 +153,22 @@ class SongPartsListWidget extends StatelessWidget{
         return TopRefrenButtons(
           part,
           onDelete: (songPart){
-            if(onDelete!=null) onDelete();
+            if(onDelete!=null) onDelete!();
           },
         );
       else
         return TopZwrotkaButtons(
           part,
           onDuplicate: (SongPart part){
-            scrollToBottom(controller);
-            if(onDuplicate!=null) onDuplicate();
+            scrollToBottom(controller!);
+            if(onDuplicate!=null) onDuplicate!();
           },
           onDelete: (SongPart part){
-            if(onDelete!=null) onDelete();
+            if(onDelete!=null) onDelete!();
           },
         );
     },
-    onTap: !refrenTapable && isRefren?null:() => onPartTap(part, prov),
+    onTap: !refrenTapable && isRefren?null:() => onPartTap!(part, prov),
   );
 
 }
