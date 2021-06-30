@@ -131,7 +131,10 @@ class SongRaw extends SongCore{
 
     List<SongPart> songParts = [];
     List<dynamic> partsList = map[SongCore.PARAM_PARTS];
-    for (Map partMap in partsList as Iterable<Map<dynamic, dynamic>>) {
+    for (Map partMap in partsList) {
+
+      partsList = partsList.cast<Map<dynamic, dynamic>>();
+
       if (partMap.containsKey('refren'))
         for (int i = 0; i < partMap['refren']; i++) {
           songParts.add(SongPart.from(refrenPart.element));
