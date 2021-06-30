@@ -46,7 +46,7 @@ class CurrentItemProvider extends ChangeNotifier{
   SongRaw? get song => _song;
   set song(SongRaw? value){
     _song = value;
-    _updateControllers(_song!);
+    if(song != null) _updateControllers(_song!);
     notifyListeners();
   }
 
