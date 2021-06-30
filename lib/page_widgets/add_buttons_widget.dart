@@ -51,7 +51,7 @@ class AddButtonsWidget extends StatelessWidget{
               builder: (context, currItemProv, child) =>SimpleButton(
                 radius: AppCard.BIG_RADIUS,
                 padding: EdgeInsets.all(Dimen.ICON_MARG),
-                onTap: currItemProv.hasRefren!?(){
+                onTap: currItemProv.hasRefren?(){
                   RefrenPartProvider refPart = Provider.of<RefrenPartProvider>(context, listen: false);
                   currItemProv.addPart(SongPart.from(refPart.part.element));
                   if(onPressed!=null) onPressed!();
@@ -59,14 +59,14 @@ class AddButtonsWidget extends StatelessWidget{
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(MdiIcons.plus, color: currItemProv.hasRefren!?(accentColor??accent_(context)):iconDisab_(context)),
-                    Icon(MdiIcons.musicBoxOutline, color: currItemProv.hasRefren!?(accentColor??accent_(context)):iconDisab_(context)),
+                    Icon(MdiIcons.plus, color: currItemProv.hasRefren?(accentColor??accent_(context)):iconDisab_(context)),
+                    Icon(MdiIcons.musicBoxOutline, color: currItemProv.hasRefren?(accentColor??accent_(context)):iconDisab_(context)),
                     SizedBox(width: Dimen.ICON_MARG),
                     Text(
                         'Refren',
                         style: AppTextStyle(
                             fontSize: Dimen.TEXT_SIZE_BIG,
-                            color: currItemProv.hasRefren!?textEnab_(context):iconDisab_(context)
+                            color: currItemProv.hasRefren?textEnab_(context):iconDisab_(context)
                         )
                     )
                   ],
