@@ -122,7 +122,7 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
                           Expanded(
                             child: SongTextWidget(
                                 songPart: songPart,
-                                isRefren: songPart.isRefren(context),
+                                isRefren: isRefren,
                                 scrollController: textController,
                                 onTextChanged: onTextChanged,
                             )
