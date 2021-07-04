@@ -25,7 +25,7 @@ TextInputFormatter ALLOWED_TEXT_REGEXP = FilteringTextInputFormatter.allow(RegEx
 class SongPart{
 
   final SongElement _songElement;
-  final PrimitiveWrapper<bool> _isError;
+  bool isError;
 
   String getText({bool withTabs: false}) => _songElement.getText(withTabs: withTabs);
   void setText(String text) => _songElement.setText(text);
@@ -47,7 +47,7 @@ class SongPart{
   static SongPart from(SongElement songElement){
     return SongPart(
         songElement,
-        PrimitiveWrapper<bool>(hasAnyErrors(songElement.getText(), songElement.chords))
+        hasAnyErrors(songElement.getText(), songElement.chords)
     );
   }
 
@@ -55,10 +55,7 @@ class SongPart{
     return SongPart.from(SongElement.empty(isRefrenTemplate: isRefrenTemplate));
   }
 
-  SongPart(this._songElement, this._isError);
-
-  bool get isError => _isError.get();
-  set isError(bool value) => _isError.set(value);
+  SongPart(this._songElement, this.isError);
 
   bool isRefren(BuildContext context){
     RefrenPartProvider prov = Provider.of<RefrenPartProvider>(context, listen: false);
