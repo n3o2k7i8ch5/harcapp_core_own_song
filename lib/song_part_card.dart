@@ -55,25 +55,8 @@ class SongPartCard extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    RefrenEnabProvider isRefProv = Provider.of<RefrenEnabProvider>(context);
-
     return Consumer<RefrenEnabProvider>(
       builder: (context, prov, _){
-
-        Widget songTextCard = Expanded(
-            child: SingleChildScrollView(
-              physics: BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              child: SongTextWidget(this, isRefProv),
-            )
-        );
-
-        Widget songChordsCard = Container(
-            child: ConstrainedBox(
-                constraints: BoxConstraints(minWidth: CHORDS_WIDGET_MIN_WIDTH),
-                child: SongChordsWidget(this, isRefProv)
-            )
-        );
 
         String? emptText;
         IconData? iconData;
@@ -104,9 +87,20 @@ class SongPartCard extends StatelessWidget{
         if(emptText==null)
           main = Row(
             children: <Widget>[
-              songTextCard,
+              Expanded(
+                  child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    scrollDirection: Axis.horizontal,
+                    child: SongTextWidget(type: type, songPart: songPart),
+                  )
+              ),
+
               SizedBox(width: Dimen.DEF_MARG),
-              songChordsCard
+
+              ConstrainedBox(
+                  constraints: BoxConstraints(minWidth: CHORDS_WIDGET_MIN_WIDTH),
+                  child: SongChordsWidget(type: type, songPart: songPart)
+              )
             ],
           );
         else{
@@ -168,27 +162,22 @@ class SongPartCard extends StatelessWidget{
 
 class SongTextWidget extends StatelessWidget{
 
-  final SongPartCard parent;
-  final RefrenEnabProvider isRefProv;
+  final SongPartType type;
+  final SongPart songPart;
 
-  const SongTextWidget(this.parent, this.isRefProv);
-
-  bool isRefren(BuildContext context) => parent.songPart.isRefren(context);
-  bool? get hasRefren => isRefProv.refEnab;
-
-  FocusNode get focusNode => parent.focusNode;
+  const SongTextWidget({required this.type, required this.songPart});
 
   @override
   Widget build(BuildContext context) {
 
     Color? textColor;
 
-    if(parent.type == SongPartType.ZWROTKA) textColor = textEnab_(context);
-    else if(parent.type == SongPartType.REFREN) textColor = textDisab_(context);
-    else if(parent.type == SongPartType.REFREN_TEMPLATE) textColor = textEnab_(context);
+    if(type == SongPartType.ZWROTKA) textColor = textEnab_(context);
+    else if(type == SongPartType.REFREN) textColor = textDisab_(context);
+    else if(type == SongPartType.REFREN_TEMPLATE) textColor = textEnab_(context);
 
     return Padding(
-      padding: EdgeInsets.only(left: parent.songPart.shift?Dimen.ICON_SIZE:0),
+      padding: EdgeInsets.only(left: songPart.shift?Dimen.ICON_SIZE:0),
       child: Text(
         text,
         style: TextStyle(
@@ -202,9 +191,9 @@ class SongTextWidget extends StatelessWidget{
 
   String get text{
 
-    String songText = parent.songPart.getText();
+    String songText = songPart.getText();
     int textLineCnt = songText.split('\n').length;
-    int chrdLineCnt = parent.songPart.chords.split('\n').length;
+    int chrdLineCnt = songPart.chords.split('\n').length;
 
     int newLinesCnt = 0;
     if(textLineCnt<chrdLineCnt) {
@@ -220,22 +209,19 @@ class SongTextWidget extends StatelessWidget{
 
 class SongChordsWidget extends StatelessWidget{
 
-  final SongPartCard parent;
-  final RefrenEnabProvider isRefProv;
+  final SongPartType type;
+  final SongPart songPart;
 
-  const SongChordsWidget(this.parent, this.isRefProv);
-
-  bool isRefren(BuildContext context) => parent.songPart.isRefren(context);
-  bool? get hasRefren => isRefProv.refEnab;
+  const SongChordsWidget({required this.type, required this.songPart});
 
   @override
   Widget build(BuildContext context) {
 
     Color? textColor;
 
-    if(parent.type == SongPartType.ZWROTKA) textColor = textEnab_(context);
-    else if(parent.type == SongPartType.REFREN) textColor = textDisab_(context);
-    else if(parent.type == SongPartType.REFREN_TEMPLATE) textColor = textEnab_(context);
+    if(type == SongPartType.ZWROTKA) textColor = textEnab_(context);
+    else if(type == SongPartType.REFREN) textColor = textDisab_(context);
+    else if(type == SongPartType.REFREN_TEMPLATE) textColor = textEnab_(context);
 
     return Text(
       text,
@@ -249,9 +235,9 @@ class SongChordsWidget extends StatelessWidget{
 
   String get text{
 
-    String songChords = parent.songPart.chords;
+    String songChords = songPart.chords;
     int chrdLineCnt = songChords.split('\n').length;
-    int textLineCnt = parent.songPart.getText().split('\n').length;
+    int textLineCnt = songPart.getText().split('\n').length;
 
     int newLinesCnt = 0;
     if(chrdLineCnt<textLineCnt) {

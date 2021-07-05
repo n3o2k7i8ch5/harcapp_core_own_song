@@ -26,11 +26,11 @@ class SongPartsListWidget extends StatelessWidget{
   final Widget? header;
   final Widget? footer;
   final bool refrenTapable;
-  final Function(SongPart, SongPartProvider)? onPartTap;
+  final void Function(int index)? onPartTap;
   final bool shrinkWrap;
-  final Function()? onDelete;
-  final Function()? onDuplicate;
-  final Function()? onReorderFinished;
+  final void Function()? onDelete;
+  final void Function()? onDuplicate;
+  final void Function()? onReorderFinished;
 
   const SongPartsListWidget({
     this.controller,
@@ -73,14 +73,14 @@ class SongPartsListWidget extends StatelessWidget{
 
             if(isRefren)
               child = Consumer<RefrenPartProvider>(
-                  builder: (context, prov, child) => getSongPartCard<RefrenPartProvider>(item, item.isRefren(context), prov)
+                  builder: (context, prov, child) => getSongPartCard(index, item, isRefren)
               );
 
             else
               child = ChangeNotifierProvider<SongPartProvider>(
                 create: (context) => SongPartProvider(item),
                 builder: (context, child) => Consumer<SongPartProvider>(
-                    builder: (context, prov, child) => getSongPartCard<SongPartProvider>(item, item.isRefren(context), prov)
+                    builder: (context, prov, child) => getSongPartCard(index, item, isRefren)
                 ),
               );
 
@@ -146,7 +146,7 @@ class SongPartsListWidget extends StatelessWidget{
     );
   }
 
-  getSongPartCard<T extends SongPartProvider>(SongPart part, bool isRefren, T prov) => SongPartCard.from(
+  getSongPartCard(int index, SongPart part, bool isRefren) => SongPartCard.from(
     type: isRefren?SongPartType.REFREN:SongPartType.ZWROTKA,
     songPart: part,
     topBuilder: (context, part){
@@ -169,7 +169,7 @@ class SongPartsListWidget extends StatelessWidget{
           },
         );
     },
-    onTap: !refrenTapable && isRefren?null:() => onPartTap!(part, prov),
+    onTap: !refrenTapable && isRefren?null:() => onPartTap?.call(index),
   );
 
 }
