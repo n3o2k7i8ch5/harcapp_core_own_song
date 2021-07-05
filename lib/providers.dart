@@ -125,6 +125,8 @@ class CurrentItemProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+  void notify() => notifyListeners();
+
 }
 
 class HidTitlesProvider extends ChangeNotifier{
@@ -245,8 +247,6 @@ class ChordsProvider extends ChangeNotifier{
     onChanged?.call(_chords);
     notifyListeners();
   }
-
-  void notify() => notifyListeners();
 
 }
 
