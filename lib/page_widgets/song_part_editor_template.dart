@@ -120,44 +120,40 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
               ChangeNotifierProvider(create: (context) => ErrorProvider<ChordsMissingError>(init: (errProv) => ChordsMissingError.handleErrors(context, errProv))),
               ChangeNotifierProvider(create: (context) => ErrorProvider<TextTooLongError>(init: (errProv) => TextTooLongError.handleErrors(context, errProv))),
             ],
-            builder: (context, _){
-              //Provider.of<TextProvider>(context, listen: false).addOnChangedListener((text) => onTextChanged?.call(text, handleErrors(context, isRefren)));
-              //Provider.of<ChordsProvider>(context, listen: false).addOnChangedListener((text) => onChordsChanged?.call(text, handleErrors(context, isRefren)));
-              return Column(
-                children: [
+            builder: (context, _) => Column(
+              children: [
 
-                  if(widget.topBuilder!=null) widget.topBuilder!(context, this),
+                if(widget.topBuilder!=null) widget.topBuilder!(context, this),
 
-                  Expanded(
-                      child: LayoutBuilder(
-                        builder: (context, boxConstraints) => Row(
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          children: <Widget>[
+                Expanded(
+                    child: LayoutBuilder(
+                      builder: (context, boxConstraints) => Row(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: <Widget>[
 
-                            Expanded(
-                                child: SongTextWidget(
-                                    isRefren: isRefren,
-                                    scrollController: textController,
-                                    onTextChanged: (text, errCount) => onTextChanged?.call(text, errCount)
-                                )
-                            ),
+                          Expanded(
+                              child: SongTextWidget(
+                                  isRefren: isRefren,
+                                  scrollController: textController,
+                                  onTextChanged: (text, errCount) => onTextChanged?.call(text, errCount)
+                              )
+                          ),
 
-                            SongChordsWidget(
-                                isRefren: isRefren,
-                                scrollController: chordsController,
-                                onChordsChanged: (text, errCount) => onChordsChanged?.call(text, errCount)
-                            )
+                          SongChordsWidget(
+                              isRefren: isRefren,
+                              scrollController: chordsController,
+                              onChordsChanged: (text, errCount) => onChordsChanged?.call(text, errCount)
+                          )
 
-                          ],
-                        ),
-                      )
-                  ),
+                        ],
+                      ),
+                    )
+                ),
 
-                  if(widget.bottomBuilder!=null) widget.bottomBuilder!(context, this),
+                if(widget.bottomBuilder!=null) widget.bottomBuilder!(context, this),
 
-                ],
-            );
-            },
+              ],
+            ),
           )
       ),
     );
