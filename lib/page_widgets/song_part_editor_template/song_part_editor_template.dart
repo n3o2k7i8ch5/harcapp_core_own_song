@@ -356,7 +356,7 @@ class _SongChordsWidgetState extends State<SongChordsWidget>{
   TextEditingController get chordsController => Provider.of<ChordsProvider>(context, listen: false).controller;
   void Function(String, int)? get onChanged => widget.onChanged;
 
-  _onChanged() => onChanged?.call(chordsController.text, handleErrors(context, isRefren));
+  void _onChanged() => onChanged?.call(chordsController.text, handleErrors(context, isRefren));
 
   late FocusNode focusNode;
 
@@ -434,7 +434,7 @@ class _SongChordsWidgetState extends State<SongChordsWidget>{
 class ButtonsWidget extends StatelessWidget{
 
   final void Function()? onCheckPressed;
-  final void Function()? onChordsChanged;
+  final void Function(String, int)? onChordsChanged;
   final void Function()? onAlertTap;
 
   final bool isRefren;
