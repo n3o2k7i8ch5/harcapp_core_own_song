@@ -206,6 +206,7 @@ class TextShiftProvider extends ChangeNotifier{
 
 }
 
+/*
 class TextProvider extends ChangeNotifier{
 
   late TextEditingController controller;
@@ -238,7 +239,7 @@ class ChordsProvider extends ChangeNotifier{
   }
 
 }
-
+*/
 class RefrenEnabProvider extends ChangeNotifier{
 
   bool? _refEnab;

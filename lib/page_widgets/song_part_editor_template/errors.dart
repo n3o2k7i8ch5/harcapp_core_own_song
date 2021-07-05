@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:harcapp_core_own_song/page_widgets/song_part_editor_template/providers.dart';
 import 'package:provider/provider.dart';
 
-import 'common.dart';
-import 'providers.dart';
+import '../../common.dart';
 
 const int MAX_CHORDS_IN_LINE = 8;
 const int MAX_TEXT_LINE_LENGTH = 52;
@@ -20,37 +20,6 @@ int handleErrors(BuildContext context, bool isRefren){
   errCount += TextTooLongError.handleErrors(context, textTooLongErrProv);
 
   return errCount;
-}
-
-class ErrorProvider<T extends SongEditError> extends ChangeNotifier{
-
-  late List<T> _error_list;
-  late Map<int?, T> _error_map;
-
-  ErrorProvider({Function(ErrorProvider<T> errProv)? init}){
-    _error_list = [];
-    _error_map = {};
-
-    if(init != null) init(this);
-  }
-
-  void add(T error){
-    _error_list.add(error);
-    _error_map[error.line] = error;
-  }
-
-  int get length => _error_list.length;
-
-  void clear(){
-    _error_list.clear();
-    _error_map.clear();
-  }
-
-  T? errorAt(int line){
-    return _error_map[line];
-  }
-
-  void notify() => notifyListeners();
 }
 
 abstract class SongEditError{

@@ -13,13 +13,14 @@ import 'package:harcapp_core/comm_widgets/simple_button.dart';
 import 'package:harcapp_core/comm_widgets/text_field_fit.dart';
 import 'package:harcapp_core/comm_widgets/text_field_fit_chords.dart';
 import 'package:harcapp_core/dimen.dart';
+import 'package:harcapp_core_own_song/page_widgets/song_part_editor_template/providers.dart';
 import 'package:linked_scroll_controller/linked_scroll_controller.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:provider/provider.dart';
 
-import '../common.dart';
-import '../errors.dart';
-import '../providers.dart';
+import '../../common.dart';
+import 'errors.dart';
+import '../../providers.dart';
 
 const double TEXT_FIELD_TOP_PADD = Dimen.TEXT_FIELD_PADD - 7;
 
@@ -79,23 +80,29 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
   //late bool showErrBar;
 
   late LinkedScrollControllerGroup _controllers;
-  late ScrollController textController;
-  late ScrollController chordsController;
+  late ScrollController textScrollController;
+  late ScrollController chordsScrollController;
+
+  late TextEditingController textController;
+  late TextEditingController chordsController;
 
   @override
   void initState() {
 
     _controllers = LinkedScrollControllerGroup();
-    textController = _controllers.addAndGet();
-    chordsController = _controllers.addAndGet();
+    textScrollController = _controllers.addAndGet();
+    chordsScrollController = _controllers.addAndGet();
+
+    textController = TextEditingController(text: initText);
+    chordsController = TextEditingController(text: initChord);
 
     super.initState();
   }
 
   @override
   void dispose() {
-    textController.dispose();
-    chordsController.dispose();
+    textScrollController.dispose();
+    chordsScrollController.dispose();
 
     super.dispose();
   }
@@ -132,15 +139,15 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
                           Expanded(
                               child: SongTextWidget(
                                   isRefren: isRefren,
-                                  scrollController: textController,
-                                  onTextChanged: (text, errCount) => onTextChanged?.call(text, errCount)
+                                  scrollController: textScrollController,
+                                  onChanged: (text, errCount) => onTextChanged?.call(text, errCount)
                               )
                           ),
 
                           SongChordsWidget(
                               isRefren: isRefren,
-                              scrollController: chordsController,
-                              onChordsChanged: (text, errCount) => onChordsChanged?.call(text, errCount)
+                              scrollController: chordsScrollController,
+                              onChanged: (text, errCount) => onChordsChanged?.call(text, errCount)
                           )
 
                         ],
@@ -160,19 +167,32 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
 
 }
 
-class SongTextWidget extends StatelessWidget{
+class SongTextWidget extends StatefulWidget{
 
   final bool isRefren;
   final ScrollController scrollController;
-  final void Function(String, int)? onTextChanged;
-
-  static FocusNode focusNode = FocusNode();
+  final void Function(String, int)? onChanged;
 
   const SongTextWidget({
     required this.isRefren,
     required this.scrollController,
-    required this.onTextChanged,
+    required this.onChanged,
   });
+
+  @override
+  State<StatefulWidget> createState() => _SongTextWidgetState();
+
+}
+
+class _SongTextWidgetState extends State<SongTextWidget>{
+
+  bool get isRefren => widget.isRefren;
+  ScrollController get scrollController => widget.scrollController;
+  TextEditingController get textController => Provider.of<TextProvider>(context, listen: false).controller;
+  TextEditingController get chordsController => Provider.of<ChordsProvider>(context, listen: false).controller;
+  void Function(String, int)? get onTextChanged => onTextChanged;
+
+  late FocusNode focusNode;
 
   String correctText(String text){
 
@@ -190,7 +210,7 @@ class SongTextWidget extends StatelessWidget{
 
       int removeFromEnd = 0;
       while(
-          line[line.length-1-removeFromEnd] == ' ' ||
+      line[line.length-1-removeFromEnd] == ' ' ||
           line[line.length-1-removeFromEnd] == '.' ||
           line[line.length-1-removeFromEnd] == ',' ||
           line[line.length-1-removeFromEnd] == ':' ||
@@ -217,23 +237,30 @@ class SongTextWidget extends StatelessWidget{
     return result;
   }
 
-  void callOnTextChanged(BuildContext context, String text){
-    Provider.of<TextProvider>(context, listen: false).text = text;
-    onTextChanged?.call(text, handleErrors(context, isRefren));
-  }
+  _onChanged() => onTextChanged?.call(textController.text, handleErrors(context, isRefren));
 
   @override
-  Widget build(BuildContext context) {
-
+  void initState() {
+    focusNode = FocusNode();
     focusNode.addListener(() {
       if(focusNode.hasFocus)
         return;
 
-      TextProvider textProv = Provider.of<TextProvider>(context, listen: false);
-      String text = correctText(textProv.text);
-      textProv.controller.text = text;
-      callOnTextChanged(context, text);
+      textController.text = correctText(textController.text);
     });
+
+    textController.addListener(_onChanged);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    textController.removeListener(_onChanged);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).requestFocus(focusNode),
@@ -258,11 +285,10 @@ class SongTextWidget extends StatelessWidget{
                       curve: Curves.easeOutQuad,
                       width: provider.shifted?Dimen.ICON_SIZE + Dimen.ICON_MARG:0
                   ),
-                  Expanded(child: Consumer<ChordsProvider>(
-                    builder: (context, chordsProvider, child) => SingleChildScrollView(
-                        physics: BouncingScrollPhysics(),
-                        scrollDirection: Axis.horizontal,
-                        child: TextFieldFit(
+                  Expanded(child: SingleChildScrollView(
+                      physics: BouncingScrollPhysics(),
+                      scrollDirection: Axis.horizontal,
+                      child: TextFieldFit(
                           style: TextStyle(
                             fontFamily: 'Roboto',
                             fontSize: Dimen.TEXT_SIZE_NORMAL,
@@ -278,18 +304,14 @@ class SongTextWidget extends StatelessWidget{
                               border: InputBorder.none,
                               isDense: true
                           ),
-                          minLines: chordsProvider.chords.split('\n').length,
+                          minLines: chordsController.text.split('\n').length,
                           maxLines: null,
-                          //expands: true,
                           focusNode: focusNode,
                           autofocus: false,
                           minWidth: Dimen.ICON_FOOTPRINT*2,
-                          //controller: controller,
                           inputFormatters: [ALLOWED_TEXT_REGEXP],
-                          onChanged: (text) => callOnTextChanged(context, text),
-                          controller: Provider.of<TextProvider>(context, listen: false).controller,
-                        )
-                    ),
+                          controller: textController
+                      )
                   )),
                   Stack(
                     children: [
@@ -309,19 +331,47 @@ class SongTextWidget extends StatelessWidget{
 
 }
 
-class SongChordsWidget extends StatelessWidget{
+class SongChordsWidget extends StatefulWidget{
 
   final bool isRefren;
   final ScrollController scrollController;
-  final void Function(String, int)? onChordsChanged;
-
-  static FocusNode focusNode = FocusNode();
+  final void Function(String, int)? onChanged;
 
   SongChordsWidget({
     required this.isRefren,
     required this.scrollController,
-    required this.onChordsChanged
+    required this.onChanged,
   });
+
+  @override
+  State<StatefulWidget> createState() => _SongChordsWidgetState();
+
+}
+
+class _SongChordsWidgetState extends State<SongChordsWidget>{
+
+  bool get isRefren => widget.isRefren;
+  ScrollController get scrollController => widget.scrollController;
+  TextEditingController get textController => Provider.of<TextProvider>(context, listen: false).controller;
+  TextEditingController get chordsController => Provider.of<ChordsProvider>(context, listen: false).controller;
+  void Function(String, int)? get onChanged => widget.onChanged;
+
+  _onChanged() => onChanged?.call(chordsController.text, handleErrors(context, isRefren));
+
+  late FocusNode focusNode;
+
+  @override
+  void initState() {
+    focusNode = FocusNode();
+    chordsController.addListener(_onChanged);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    chordsController.removeListener(_onChanged);
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -350,34 +400,27 @@ class SongChordsWidget extends StatelessWidget{
                   child: ChordPresenceWarning()
               ),
 
-              Consumer<ChordsProvider>(
-                  builder: (context, provider, child) => Consumer<TextProvider>(
-                    builder: (context, textProvider, child) => TextFieldFitChords(
-                        style: TextStyle(
+              TextFieldFitChords(
+                  focusNode: focusNode,
+                  style: TextStyle(
+                    fontFamily: 'Roboto',
+                    fontSize: Dimen.TEXT_SIZE_NORMAL,
+                    color: textEnab_(context),
+                  ),
+                  decoration: InputDecoration(
+                      hintText: 'Chwyty ${isRefren?'ref.':'zwr.'}',
+                      hintStyle: TextStyle(
                           fontFamily: 'Roboto',
                           fontSize: Dimen.TEXT_SIZE_NORMAL,
-                          color: textEnab_(context),
-                        ),
-                        decoration: InputDecoration(
-                            hintText: 'Chwyty ${isRefren?'ref.':'zwr.'}',
-                            hintStyle: TextStyle(
-                                fontFamily: 'Roboto',
-                                fontSize: Dimen.TEXT_SIZE_NORMAL,
-                                color: hintEnab_(context)
-                            ),
-                            border: InputBorder.none,
-                            isDense: true
-                        ),
-                        minLines: textProvider.text.split('\n').length,
-                        maxLines: null,
-                        focusNode: focusNode,
-                        //expands: true,
-                        //autofocus: false,
-                        minWidth: CHORDS_WIDGET_MIN_WIDTH,
-                        onChanged: (text) => provider.chords = text,
-                        controller: provider.controller
-                    ),
-                  )
+                          color: hintEnab_(context)
+                      ),
+                      border: InputBorder.none,
+                      isDense: true
+                  ),
+                  minLines: textController.text.split('\n').length,
+                  maxLines: null,
+                  minWidth: CHORDS_WIDGET_MIN_WIDTH,
+                  controller: chordsController
               ),
             ],
           ),
@@ -385,16 +428,18 @@ class SongChordsWidget extends StatelessWidget{
       ),
     );
   }
+
 }
 
 class ButtonsWidget extends StatelessWidget{
 
   final void Function()? onCheckPressed;
+  final void Function()? onChordsChanged;
   final void Function()? onAlertTap;
 
   final bool isRefren;
 
-  const ButtonsWidget({required this.isRefren, this.onCheckPressed, this.onAlertTap});
+  const ButtonsWidget({required this.isRefren, this.onCheckPressed, this.onChordsChanged, this.onAlertTap});
 
   @override
   Widget build(BuildContext context) {
@@ -458,8 +503,6 @@ class ButtonsWidget extends StatelessWidget{
               ),
             )
         )),
-
-
 
         IconButton(
           icon: Icon(MdiIcons.chevronDoubleDown),

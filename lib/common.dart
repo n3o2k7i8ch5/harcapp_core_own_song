@@ -12,7 +12,7 @@ import 'package:harcapp_core_own_song/providers.dart';
 import 'package:harcapp_core_song/song_element.dart';
 import 'package:provider/provider.dart';
 
-import 'errors.dart';
+import 'page_widgets/song_part_editor_template/errors.dart';
 
 const double CHORDS_WIDGET_MIN_WIDTH = 80.0;
 
