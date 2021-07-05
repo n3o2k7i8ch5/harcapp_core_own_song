@@ -89,7 +89,6 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
     textController = _controllers.addAndGet();
     chordsController = _controllers.addAndGet();
 
-    //showErrBar = false;
     super.initState();
   }
 
@@ -97,7 +96,6 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
   void dispose() {
     textController.dispose();
     chordsController.dispose();
-    //parent.setState(() => parent.showErrBar = !parent.showErrBar)
 
     super.dispose();
   }
