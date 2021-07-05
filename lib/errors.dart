@@ -7,7 +7,7 @@ import 'providers.dart';
 const int MAX_CHORDS_IN_LINE = 8;
 const int MAX_TEXT_LINE_LENGTH = 52;
 
-isChordMissing(String text, String? chords) => text != null && text.length>0 && (chords == null || chords.length==0);
+isChordMissing(String text, String? chords) => text.length>0 && (chords == null || chords.length==0);
 
 int handleErrors(BuildContext context, bool isRefren){
 
@@ -77,8 +77,8 @@ class ChordsMissingError extends SongEditError{
 
   static int handleErrors(BuildContext context, ErrorProvider<ChordsMissingError> errProv){
 
-    List<String> textLines = Provider.of<TextProvider>(context, listen: false).text!.split('\n');
-    List<String> chordLines = Provider.of<ChordsProvider>(context, listen: false).chords!.split('\n');
+    List<String> textLines = Provider.of<TextProvider>(context, listen: false).text.split('\n');
+    List<String> chordLines = Provider.of<ChordsProvider>(context, listen: false).chords.split('\n');
 
     errProv.clear();
     for(int i=0; i<textLines.length; i++)
@@ -113,7 +113,7 @@ class TextTooLongError extends SongEditError{
 
   static int handleErrors(BuildContext context, ErrorProvider<TextTooLongError> errProv){
 
-    List<String> textLines = Provider.of<TextProvider>(context, listen: false).text!.split('\n');
+    List<String> textLines = Provider.of<TextProvider>(context, listen: false).text.split('\n');
 
     errProv.clear();
     for(int i=0; i<textLines.length; i++)
