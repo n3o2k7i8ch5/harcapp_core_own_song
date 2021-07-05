@@ -190,7 +190,7 @@ class _SongTextWidgetState extends State<SongTextWidget>{
   ScrollController get scrollController => widget.scrollController;
   TextEditingController get textController => Provider.of<TextProvider>(context, listen: false).controller;
   TextEditingController get chordsController => Provider.of<ChordsProvider>(context, listen: false).controller;
-  void Function(String, int)? get onTextChanged => onTextChanged;
+  void Function(String, int)? get onChanged => widget.onChanged;
 
   late FocusNode focusNode;
 
@@ -237,7 +237,7 @@ class _SongTextWidgetState extends State<SongTextWidget>{
     return result;
   }
 
-  _onChanged() => onTextChanged?.call(textController.text, handleErrors(context, isRefren));
+  _onChanged() => onChanged?.call(textController.text, handleErrors(context, isRefren));
 
   @override
   void initState() {
