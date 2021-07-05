@@ -6,14 +6,13 @@ import 'package:harcapp_core/comm_widgets/title_show_row_widget.dart';
 import 'package:harcapp_core/dimen.dart';
 import 'package:provider/provider.dart';
 
-import '../common.dart';
 import '../providers.dart';
 import '../song_part_card.dart';
 
 
 class RefrenTemplate extends StatelessWidget{
 
-  final Function(SongPart, RefrenPartProvider)? onPartTap;
+  final Function()? onPartTap;
   final Function(bool value)? onRefrenEnabledChaned;
   final Color? accentColor;
 
@@ -51,7 +50,7 @@ class RefrenTemplate extends StatelessWidget{
                 ),
               ),
             ),
-            onTap: () => onPartTap!(prov.part, prov),
+            onTap: () => onPartTap?.call(),
           ),
         ),
     );
