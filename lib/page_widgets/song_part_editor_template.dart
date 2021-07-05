@@ -25,12 +25,15 @@ const double TEXT_FIELD_TOP_PADD = Dimen.TEXT_FIELD_PADD - 7;
 
 class SongPartEditorTemplate extends StatefulWidget{
 
-  final SongPart songPart;
+  //final SongPart songPart;
+  final String? initText;
+  final String? initChord;
+  final bool? initShifted;
   final bool isRefren;
 
-  final void Function()? onTextChanged;
-  final void Function()? onChordsChanged;
-  final void Function()? onShiftChanged;
+  final void Function(String, int)? onTextChanged;
+  final void Function(String, int)? onChordsChanged;
+  final void Function(bool)? onShiftedChanged;
 
   final Widget Function(BuildContext, SongPartEditorTemplateState)? topBuilder;
   final Widget Function(BuildContext, SongPartEditorTemplateState)? bottomBuilder;
@@ -38,18 +41,23 @@ class SongPartEditorTemplate extends StatefulWidget{
   final double elevation;
 
   const SongPartEditorTemplate(
-      this.songPart,
-      {required this.isRefren,
+      {this.initText,
+        this.initChord,
+        this.initShifted,
+
+        required this.isRefren,
 
         this.onTextChanged,
         this.onChordsChanged,
-        this.onShiftChanged,
+        this.onShiftedChanged,
 
         this.topBuilder,
         this.bottomBuilder,
 
         this.elevation: AppCard.bigElevation,
-      });
+
+        Key? key
+      }):super(key: key);
 
   @override
   State<StatefulWidget> createState() => SongPartEditorTemplateState();
@@ -58,14 +66,17 @@ class SongPartEditorTemplate extends StatefulWidget{
 
 class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
 
-  SongPart get songPart => widget.songPart;
+  String? get initText => widget.initText;
+  String? get initChord => widget.initChord;
+  bool? get initShifted => widget.initShifted;
+
   bool get isRefren => widget.isRefren;
 
-  void Function()? get onTextChanged => widget.onTextChanged;
-  void Function()? get onChordsChanged => widget.onChordsChanged;
-  void Function()? get onShiftChanged => widget.onShiftChanged;
+  void Function(String, int)? get onTextChanged => widget.onTextChanged;
+  void Function(String, int)? get onChordsChanged => widget.onChordsChanged;
+  void Function(bool)? get onShiftedChanged => widget.onShiftedChanged;
 
-  late bool showErrBar;
+  //late bool showErrBar;
 
   late LinkedScrollControllerGroup _controllers;
   late ScrollController textController;
@@ -78,7 +89,7 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
     textController = _controllers.addAndGet();
     chordsController = _controllers.addAndGet();
 
-    showErrBar = false;
+    //showErrBar = false;
     super.initState();
   }
 
@@ -86,6 +97,8 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
   void dispose() {
     textController.dispose();
     chordsController.dispose();
+    //parent.setState(() => parent.showErrBar = !parent.showErrBar)
+
     super.dispose();
   }
 
@@ -97,14 +110,13 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
       body: AppCard(
           radius: AppCard.BIG_RADIUS,
           elevation: widget.elevation,
-          key: ValueKey(songPart),
           padding: EdgeInsets.zero,
           margin: AppCard.normMargin,
           child: MultiProvider(
             providers: [
-              ChangeNotifierProvider(create: (context) => TextProvider(text: songPart.getText())),
-              ChangeNotifierProvider(create: (context) => ChordsProvider(chords: songPart.chords)),
-              ChangeNotifierProvider(create: (context) => TextShiftProvider(shifted: songPart.shift)),
+              ChangeNotifierProvider(create: (context) => TextProvider(text: initText??'', onChanged: (text) => onTextChanged?.call(text, handleErrors(context, isRefren)))),
+              ChangeNotifierProvider(create: (context) => ChordsProvider(chords: initChord??'', onChanged: (text) => onChordsChanged?.call(text, handleErrors(context, isRefren)))),
+              ChangeNotifierProvider(create: (context) => TextShiftProvider(shifted: initShifted??isRefren, onChanged: onShiftedChanged)),
               ChangeNotifierProvider(create: (context) => ErrorProvider<ChordsMissingError>(init: (errProv) => ChordsMissingError.handleErrors(context, errProv))),
               ChangeNotifierProvider(create: (context) => ErrorProvider<TextTooLongError>(init: (errProv) => TextTooLongError.handleErrors(context, errProv))),
             ],
@@ -121,7 +133,6 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
 
                           Expanded(
                             child: SongTextWidget(
-                                songPart: songPart,
                                 isRefren: isRefren,
                                 scrollController: textController,
                                 onTextChanged: onTextChanged,
@@ -129,7 +140,6 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
                           ),
 
                           SongChordsWidget(
-                            songPart: songPart,
                             isRefren: isRefren,
                             scrollController: chordsController,
                             onChordsChanged: onChordsChanged
@@ -154,15 +164,13 @@ class SongPartEditorTemplateState extends State<SongPartEditorTemplate>{
 
 class SongTextWidget extends StatelessWidget{
 
-  final SongPart songPart;
   final bool isRefren;
   final ScrollController scrollController;
-  final Function? onTextChanged;
+  final void Function(String, int)? onTextChanged;
 
   static FocusNode focusNode = FocusNode();
 
   const SongTextWidget({
-    required this.songPart,
     required this.isRefren,
     required this.scrollController,
     required this.onTextChanged,
@@ -213,10 +221,7 @@ class SongTextWidget extends StatelessWidget{
 
   void callOnTextChanged(BuildContext context, String text){
     Provider.of<TextProvider>(context, listen: false).text = text;
-    songPart.setText(text);
-    int errCount = handleErrors(context, isRefren);
-    songPart.isError = errCount != 0;
-    onTextChanged?.call();
+    onTextChanged?.call(text, handleErrors(context, isRefren));
   }
 
   @override
@@ -227,7 +232,7 @@ class SongTextWidget extends StatelessWidget{
         return;
 
       TextProvider textProv = Provider.of<TextProvider>(context, listen: false);
-      String text = correctText(textProv.text!);
+      String text = correctText(textProv.text);
       textProv.controller!.text = text;
       callOnTextChanged(context, text);
     });
@@ -253,7 +258,7 @@ class SongTextWidget extends StatelessWidget{
                   AnimatedContainer(
                       duration: Duration(milliseconds: 300),
                       curve: Curves.easeOutQuad,
-                      width: provider.shifted!?Dimen.ICON_SIZE + Dimen.ICON_MARG:0
+                      width: provider.shifted?Dimen.ICON_SIZE + Dimen.ICON_MARG:0
                   ),
                   Expanded(child: Consumer<ChordsProvider>(
                     builder: (context, chordsProvider, child) => SingleChildScrollView(
@@ -275,7 +280,7 @@ class SongTextWidget extends StatelessWidget{
                               border: InputBorder.none,
                               isDense: true
                           ),
-                          minLines: chordsProvider.chords!.split('\n').length,
+                          minLines: chordsProvider.chords.split('\n').length,
                           maxLines: null,
                           //expands: true,
                           focusNode: focusNode,
@@ -308,15 +313,13 @@ class SongTextWidget extends StatelessWidget{
 
 class SongChordsWidget extends StatelessWidget{
 
-  final SongPart songPart;
   final bool isRefren;
   final ScrollController scrollController;
-  final Function? onChordsChanged;
+  final void Function(String, int)? onChordsChanged;
 
   static FocusNode focusNode = FocusNode();
 
   SongChordsWidget({
-    required this.songPart,
     required this.isRefren,
     required this.scrollController,
     required this.onChordsChanged
@@ -367,19 +370,13 @@ class SongChordsWidget extends StatelessWidget{
                             border: InputBorder.none,
                             isDense: true
                         ),
-                        minLines: textProvider.text!.split('\n').length,
+                        minLines: textProvider.text.split('\n').length,
                         maxLines: null,
                         focusNode: focusNode,
                         //expands: true,
                         //autofocus: false,
                         minWidth: CHORDS_WIDGET_MIN_WIDTH,
-                        onChanged: (text){
-                          provider.chords = text;
-                          int errCount = handleErrors(context, isRefren);
-                          songPart.chords = text;
-                          songPart.isError = errCount != 0;
-                          onChordsChanged?.call();
-                        },
+                        onChanged: (text) => provider.chords = text,
                         controller: provider.chordsController
                     ),
                   )
@@ -394,13 +391,12 @@ class SongChordsWidget extends StatelessWidget{
 
 class ButtonsWidget extends StatelessWidget{
 
-  final SongPartEditorTemplateState parent;
-  final Function()? onCheckPressed;
+  final void Function()? onCheckPressed;
+  final void Function()? onAlertTap;
 
-  bool get isRefren => parent.isRefren;
-  SongPart get songPart => parent.songPart;
+  final bool isRefren;
 
-  ButtonsWidget(this.parent, {this.onCheckPressed});
+  const ButtonsWidget({required this.isRefren, this.onCheckPressed, this.onAlertTap});
 
   @override
   Widget build(BuildContext context) {
@@ -424,9 +420,9 @@ class ButtonsWidget extends StatelessWidget{
         Consumer<TextShiftProvider>(
             builder: (context, provider, child) => IconButton(
               icon: AnimatedChildSlider(
-                reverse: provider.shifted!,
+                reverse: provider.shifted,
                 direction: Axis.horizontal,
-                index: provider.shifted!?1:0,
+                index: provider.shifted?1:0,
                 children: [
                   Icon(
                       MdiIcons.circleMedium,
@@ -441,8 +437,6 @@ class ButtonsWidget extends StatelessWidget{
               onPressed: isRefren?null:(){
                 TextShiftProvider prov = Provider.of<TextShiftProvider>(context, listen: false);
                 prov.reverseShift();
-                songPart.shift = prov.shifted!;
-                if(parent.onShiftChanged!=null) parent.onShiftChanged!();
               },
             )
         ),
@@ -453,9 +447,7 @@ class ButtonsWidget extends StatelessWidget{
               duration: Duration(milliseconds: 300),
               curve: Curves.easeOutQuad,
               child: SimpleButton(
-                onTap: errCont==0?null:(){
-                  parent.setState(() => parent.showErrBar = !parent.showErrBar);
-                },
+                onTap: errCont==0?null:onAlertTap,
                 padding: EdgeInsets.all(Dimen.ICON_MARG),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -477,17 +469,15 @@ class ButtonsWidget extends StatelessWidget{
 
             ChordsProvider provider = Provider.of<ChordsProvider>(context, listen: false);
 
-            ChordShifter cs = ChordShifter(provider.chords!, 0);
+            ChordShifter cs = ChordShifter(provider.chords, 0);
             cs.down();
 
             String chords = cs.getText(true);
             provider.chordsController!.text = chords;
             provider.chords = chords;
-            handleErrors(context, isRefren);
-            songPart.chords = chords;
 
-            provider.chordsController!.selection = TextSelection.collapsed(offset: provider.chords!.length);
-            if(parent.onChordsChanged!=null) parent.onTextChanged!();
+            provider.chordsController!.selection = TextSelection.collapsed(offset: provider.chords.length);
+            //parent.onTextChanged?.call(chords, handleErrors(context, isRefren));
           },
         ),
 
@@ -497,17 +487,15 @@ class ButtonsWidget extends StatelessWidget{
 
             ChordsProvider provider = Provider.of<ChordsProvider>(context, listen: false);
 
-            ChordShifter cs = ChordShifter(provider.chords!, 0);
+            ChordShifter cs = ChordShifter(provider.chords, 0);
             cs.up();
 
             String chords = cs.getText(true);
             provider.chordsController!.text = chords;
             provider.chords = chords;
-            handleErrors(context, isRefren);
-            songPart.chords = chords;
 
-            provider.chordsController!.selection = TextSelection.collapsed(offset: provider.chords!.length);
-            if(parent.onChordsChanged!=null) parent.onTextChanged!();
+            provider.chordsController!.selection = TextSelection.collapsed(offset: provider.chords.length);
+            //parent.onTextChanged?.call(chords, handleErrors(context, isRefren));
           },
         ),
       ],
@@ -528,7 +516,7 @@ class ChordPresenceWarning extends StatelessWidget{
 
         List<Widget> lineWidgets = [];
 
-        int lines = Provider.of<TextProvider>(context).text!.split('\n').length;
+        int lines = Provider.of<TextProvider>(context).text.split('\n').length;
         for(int i=0; i<lines; i++){
           ChordsMissingError? error = provider.errorAt(i);
           lineWidgets.add(WarningShade(error==null?background_(context).withOpacity(0):error.color));
@@ -581,7 +569,7 @@ class TextLengthWarning extends StatelessWidget{
 
           List<Widget> lineWidgets = [];
 
-          int lines = Provider.of<TextProvider>(context).text!.split('\n').length;
+          int lines = Provider.of<TextProvider>(context).text.split('\n').length;
           for(int i=0; i<lines; i++){
             TextTooLongError? error = provider.errorAt(i);
             lineWidgets.add(WarningShade(error==null?background_(context).withOpacity(0):error.color));
@@ -614,8 +602,8 @@ class LineCount extends StatelessWidget{
           return Consumer<ChordsProvider>(
               builder: (context, chordsProv, child) {
 
-                int textLines = textProv.text!.split('\n').length;
-                int chordsLines = chordsProv.chords!.split('\n').length;
+                int textLines = textProv.text.split('\n').length;
+                int chordsLines = chordsProv.chords.split('\n').length;
 
                 int lines = max(textLines, chordsLines);
                 String text = '';

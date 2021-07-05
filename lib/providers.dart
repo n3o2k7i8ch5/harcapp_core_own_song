@@ -182,20 +182,23 @@ class HidTitlesProvider extends ChangeNotifier{
 
 class TextShiftProvider extends ChangeNotifier{
 
-  bool? _shifted;
+  late bool _shifted;
+  void Function(bool)? onChanged;
 
-  TextShiftProvider({bool? shifted}){
+  TextShiftProvider({required bool shifted, this.onChanged}){
     _shifted = shifted;
   }
 
-  bool? get shifted => _shifted;
-  set shifted(bool? value){
+  bool get shifted => _shifted;
+  set shifted(bool value){
     _shifted = value;
+    onChanged?.call(_shifted);
     notifyListeners();
   }
 
   void reverseShift(){
-    _shifted = !_shifted!;
+    _shifted = !_shifted;
+    onChanged?.call(_shifted);
     notifyListeners();
   }
 
@@ -203,18 +206,20 @@ class TextShiftProvider extends ChangeNotifier{
 
 class TextProvider extends ChangeNotifier{
 
-  String? _text;
+  late String _text;
+  void Function(String)? onChanged;
 
   TextEditingController? controller;
 
-  TextProvider({String text: ''}){
+  TextProvider({String text = '', this.onChanged}){
     _text = text;
     controller = TextEditingController(text: _text);
   }
 
-  String? get text => _text;
-  set text(String? value){
+  String get text => _text;
+  set text(String value){
     _text = value;
+    onChanged?.call(_text);
     notifyListeners();
   }
 
@@ -223,19 +228,21 @@ class TextProvider extends ChangeNotifier{
 class ChordsProvider extends ChangeNotifier{
 
   static isChordMissing(String text, String chords) => text.length>0 && (chords.length==0);
+  void Function(String)? onChanged;
 
-  String? _chords;
+  late String _chords;
 
   TextEditingController? chordsController;
 
-  ChordsProvider({String chords: ''}){
+  ChordsProvider({String chords = '', this.onChanged}){
     _chords = chords;
     chordsController = TextEditingController(text: chords);
   }
 
-  String? get chords => _chords;
-  set chords(String? value){
+  String get chords => _chords;
+  set chords(String value){
     _chords = value;
+    onChanged?.call(_chords);
     notifyListeners();
   }
 

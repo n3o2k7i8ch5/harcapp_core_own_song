@@ -6,13 +6,11 @@ import 'package:harcapp_core/dimen.dart';
 import 'package:provider/provider.dart';
 
 import '../errors.dart';
-import 'common_song_part_editor.dart';
 
 class ErrorListWidget extends StatelessWidget{
 
-  final SongPartEditorTemplateState parent;
   final showErrBar;
-  const ErrorListWidget(this.parent, this.showErrBar);
+  const ErrorListWidget(this.showErrBar);
 
   @override
   Widget build(BuildContext context) {
