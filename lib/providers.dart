@@ -246,6 +246,8 @@ class ChordsProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+  void notify() => notifyListeners();
+
 }
 
 class RefrenEnabProvider extends ChangeNotifier{
