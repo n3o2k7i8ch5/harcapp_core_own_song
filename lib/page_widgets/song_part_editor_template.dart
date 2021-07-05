@@ -231,7 +231,7 @@ class SongTextWidget extends StatelessWidget{
 
       TextProvider textProv = Provider.of<TextProvider>(context, listen: false);
       String text = correctText(textProv.text);
-      textProv.controller!.text = text;
+      textProv.controller.text = text;
       callOnTextChanged(context, text);
     });
 
@@ -375,7 +375,7 @@ class SongChordsWidget extends StatelessWidget{
                         //autofocus: false,
                         minWidth: CHORDS_WIDGET_MIN_WIDTH,
                         onChanged: (text) => provider.chords = text,
-                        controller: provider.chordsController
+                        controller: provider.controller
                     ),
                   )
               ),
@@ -471,10 +471,10 @@ class ButtonsWidget extends StatelessWidget{
             cs.down();
 
             String chords = cs.getText(true);
-            provider.chordsController!.text = chords;
+            provider.controller.text = chords;
             provider.chords = chords;
 
-            provider.chordsController!.selection = TextSelection.collapsed(offset: provider.chords.length);
+            provider.controller.selection = TextSelection.collapsed(offset: provider.chords.length);
             //parent.onTextChanged?.call(chords, handleErrors(context, isRefren));
           },
         ),
@@ -489,10 +489,10 @@ class ButtonsWidget extends StatelessWidget{
             cs.up();
 
             String chords = cs.getText(true);
-            provider.chordsController!.text = chords;
+            provider.controller.text = chords;
             provider.chords = chords;
 
-            provider.chordsController!.selection = TextSelection.collapsed(offset: provider.chords.length);
+            provider.controller.selection = TextSelection.collapsed(offset: provider.chords.length);
             //parent.onTextChanged?.call(chords, handleErrors(context, isRefren));
           },
         ),
