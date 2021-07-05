@@ -209,44 +209,54 @@ class TextShiftProvider extends ChangeNotifier{
 class TextProvider extends ChangeNotifier{
 
   late String _text;
-  void Function(String)? onChanged;
+
+  //late List<void Function(String)> _listeners;
 
   TextEditingController? controller;
 
-  TextProvider({String text = '', this.onChanged}){
+  TextProvider({String text = ''}){
     _text = text;
+    //_listeners = [];
     controller = TextEditingController(text: _text);
   }
 
   String get text => _text;
   set text(String value){
     _text = value;
-    onChanged?.call(_text);
+    //for(void Function(String) listener in _listeners)
+    //  listener.call(_text);
     notifyListeners();
   }
+
+  //addOnChangedListener(void Function(String) listener) => _listeners.add(listener);
 
 }
 
 class ChordsProvider extends ChangeNotifier{
 
   static isChordMissing(String text, String chords) => text.length>0 && (chords.length==0);
-  void Function(String)? onChanged;
 
   late String _chords;
 
+  //late List<void Function(String)> _listeners;
+
   TextEditingController? chordsController;
 
-  ChordsProvider({String chords = '', this.onChanged}){
+  ChordsProvider({String chords = ''}){
     _chords = chords;
+    //_listeners = [];
     chordsController = TextEditingController(text: chords);
   }
 
   String get chords => _chords;
   set chords(String value){
     _chords = value;
-    onChanged?.call(_chords);
+    //for(void Function(String) listener in _listeners)
+    //  listener.call(_chords);
     notifyListeners();
   }
+
+  //addOnChangedListener(void Function(String) listener) => _listeners.add(listener);
 
 }
 
