@@ -13,10 +13,10 @@ import '../song_part_card.dart';
 class RefrenTemplate extends StatelessWidget{
 
   final Function()? onPartTap;
-  final Function(bool value)? onRefrenEnabledChaned;
+  final Function(bool value)? onRefrenEnabledChanged;
   final Color? accentColor;
 
-  const RefrenTemplate({this.onPartTap, this.onRefrenEnabledChaned, this.accentColor});
+  const RefrenTemplate({this.onPartTap, this.onRefrenEnabledChanged, this.accentColor});
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +41,7 @@ class RefrenTemplate extends StatelessWidget{
                     value: currItemProv.hasRefren,
                     onChanged: (bool value){
                       currItemProv.hasRefren = !currItemProv.hasRefren;
-                      if(onRefrenEnabledChaned != null) onRefrenEnabledChaned!(value);
+                      if(onRefrenEnabledChanged != null) onRefrenEnabledChanged!(value);
                     },
                     activeColor: accentColor??accent_(context),
                   ),
