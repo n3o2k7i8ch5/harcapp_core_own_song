@@ -51,13 +51,13 @@ class SongPartsListWidget extends StatelessWidget{
       builder: (context, prov, _) => ImplicitlyAnimatedReorderableList<SongPart>(
         physics: physics??BouncingScrollPhysics(),
         controller: controller,
-        items: prov.song!.songParts!,
-        insertDuration: Duration(milliseconds: prov.song!.songParts!.length<=1?0:200),
-        removeDuration: Duration(milliseconds: prov.song!.songParts!.length==0?0:500),
+        items: prov.song.songParts,
+        insertDuration: Duration(milliseconds: prov.song.songParts.length<=1?0:200),
+        removeDuration: Duration(milliseconds: prov.song.songParts.length==0?0:500),
         areItemsTheSame: (oldItem, newItem) => oldItem.hashCode == newItem.hashCode,
         onReorderFinished: (item, from, to, newItems){
-          prov.song!.songParts = newItems;
-          prov.notifyListeners();
+          prov.song.songParts = newItems;
+          prov.notify();
           if(onReorderFinished != null) onReorderFinished!();
         },
         itemBuilder: (context, itemAnimation, item, index) => Reorderable(
@@ -115,7 +115,7 @@ class SongPartsListWidget extends StatelessWidget{
             AnimatedContainer(
               duration: Duration(milliseconds: 1),
               height:
-              prov.song!.songParts!.isEmpty?
+              prov.song.songParts.isEmpty?
               SongPartCard.EMPTY_HEIGHT + Dimen.ICON_FOOTPRINT + ITEM_TOP_MARG + ITEM_BOTTOM_MARG
                   :0,
               child: Column(
