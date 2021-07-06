@@ -33,7 +33,7 @@ class RefrenTemplate extends StatelessWidget{
                 builder: (context, currItemProv, child) => TitleShortcutRowWidget(
                   title: 'Szablon refrenu',
                   titleColor:
-                  ((currItemProv.song?.refrenPart)!.isError)?
+                  (currItemProv.song?.refrenPart.isError??false)?
                   Colors.red:
                   (currItemProv.hasRefren?textEnab_(context):textDisab_(context)),
                   textAlign: TextAlign.start,
