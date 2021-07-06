@@ -25,7 +25,7 @@ class RefrenTemplate extends StatelessWidget{
         builder: (context, currItemProv, refProv, child) => Padding(
           padding: EdgeInsets.only(left: Dimen.DEF_MARG, right: Dimen.DEF_MARG),
           child: SongPartCard.from(
-            songPart: (currItemProv.song?.refrenPart)!,
+            songPart: currItemProv.song.refrenPart,
             type: SongPartType.REFREN_TEMPLATE,
             topBuilder: (context, part) => Padding(
               padding: EdgeInsets.only(left: Dimen.ICON_MARG - Dimen.DEF_MARG),
@@ -33,7 +33,7 @@ class RefrenTemplate extends StatelessWidget{
                 builder: (context, currItemProv, child) => TitleShortcutRowWidget(
                   title: 'Szablon refrenu',
                   titleColor:
-                  (currItemProv.song?.refrenPart.isError??false)?
+                  currItemProv.song.refrenPart.isError?
                   Colors.red:
                   (currItemProv.hasRefren?textEnab_(context):textDisab_(context)),
                   textAlign: TextAlign.start,
