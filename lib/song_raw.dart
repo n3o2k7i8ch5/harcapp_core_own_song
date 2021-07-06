@@ -30,7 +30,7 @@ class SongRaw extends SongCore{
   bool hasRefren;
   late SongPart refrenPart;
 
-  List<SongPart>? songParts;
+  List<SongPart> songParts;
 
   bool get hasChords => chords.replaceAll('\n', '').replaceAll(' ', '').length!=0;
 
@@ -72,7 +72,7 @@ class SongRaw extends SongCore{
     required this.hasRefren,
     SongPart? refrenPart,
 
-    this.songParts,
+    required this.songParts,
   }){
     this.refrenPart = refrenPart??SongPart.empty(isRefrenTemplate: true);
   }
@@ -210,9 +210,9 @@ class SongRaw extends SongCore{
 
     String text = '';
 
-    for (SongPart part in songParts!) {
+    for (SongPart part in songParts) {
 
-      if(!hasRefren && part.element == refrenPart?.element)
+      if(!hasRefren && part.element == refrenPart.element)
         continue;
 
       text += part.getText(withTabs: part.shift);
@@ -235,9 +235,9 @@ class SongRaw extends SongCore{
 
     String chords = '';
 
-    for (SongPart part in songParts!) {
+    for (SongPart part in songParts) {
 
-      if(!hasRefren && part.element == refrenPart?.element)
+      if(!hasRefren && part.element == refrenPart.element)
         continue;
 
       chords += part.chords;
@@ -272,21 +272,21 @@ class SongRaw extends SongCore{
 
     map[SongCore.PARAM_TAGS] = tags;
 
-    hasRefren = hasRefren && refrenPart != null && !refrenPart!.isEmpty;
+    hasRefren = hasRefren && !refrenPart.isEmpty;
 
-    if(hasRefren)
+    if(hasRefren && !refrenPart.isEmpty)
       map[SongCore.PARAM_REFREN] = {
-        'text': refrenPart!.getText(),
-        'chords': refrenPart!.chords,
+        'text': refrenPart.getText(),
+        'chords': refrenPart.chords,
         'shift': true
       };
 
     List<Map> parts = [];
 
     int refCount = 0;
-    for (SongPart part in songParts!) {
+    for (SongPart part in songParts) {
 
-      if(part.element == refrenPart?.element) {
+      if(part.element == refrenPart.element) {
           refCount++;
       } else {
 

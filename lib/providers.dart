@@ -2,14 +2,13 @@
 import 'package:flutter/widgets.dart';
 import 'package:harcapp_core/comm_widgets/multi_text_field.dart';
 import 'package:harcapp_core_own_song/song_raw.dart';
-import 'package:harcapp_core_song/song_element.dart';
 
 import 'common.dart';
 
 
 class CurrentItemProvider extends ChangeNotifier{
 
-  SongRaw? _song;
+  late SongRaw _song;
 
   late MultiTextFieldController authorsController;
   late MultiTextFieldController composersController;
@@ -30,98 +29,98 @@ class CurrentItemProvider extends ChangeNotifier{
     addPersController.texts = song.addPers;
   }
 
-  CurrentItemProvider({SongRaw? song}){
+  CurrentItemProvider({required SongRaw song}){
     _song = song;
 
-    authorsController = MultiTextFieldController(texts: song?.authors);
-    composersController = MultiTextFieldController(texts: song?.composers);
-    performersController = MultiTextFieldController(texts: song?.performers);
+    authorsController = MultiTextFieldController(texts: song.authors);
+    composersController = MultiTextFieldController(texts: song.composers);
+    performersController = MultiTextFieldController(texts: song.performers);
 
-    ytLinkController = TextEditingController(text: song?.youtubeLink??'');
+    ytLinkController = TextEditingController(text: song.youtubeLink??'');
 
-    addPersController = MultiTextFieldController(texts: song?.addPers);
+    addPersController = MultiTextFieldController(texts: song.addPers);
 
   }
 
-  SongRaw? get song => _song;
-  set song(SongRaw? value){
+  SongRaw get song => _song;
+  set song(SongRaw value){
     _song = value;
-    if(song != null) _updateControllers(_song!);
+    _updateControllers(_song);
     notifyListeners();
   }
 
   set fileName(String value){
-    _song!.fileName = value;
+    _song.fileName = value;
     notifyListeners();
   }
 
   set title(String value){
-    _song!.title = value;
+    _song.title = value;
     notifyListeners();
   }
 
   set authors(List<String> value){
-    _song!.authors = value;
+    _song.authors = value;
     notifyListeners();
   }
 
   set composers(List<String> value){
-    _song!.composers = value;
+    _song.composers = value;
     notifyListeners();
   }
 
   set performers(List<String> value){
-    _song!.performers = value;
+    _song.performers = value;
     notifyListeners();
   }
 
-  DateTime? get releaseDate => _song!.releaseDate;
+  DateTime? get releaseDate => _song.releaseDate;
   set releaseDate(DateTime? value){
-    _song!.releaseDate = value;
+    _song.releaseDate = value;
     notifyListeners();
   }
 
-  bool get showRelDateMonth => _song!.showRelDateMonth;
+  bool get showRelDateMonth => _song.showRelDateMonth;
   set showRelDateMonth(bool value){
-    _song!.showRelDateMonth = value;
+    _song.showRelDateMonth = value;
     notifyListeners();
   }
 
-  bool get showRelDateDay => _song!.showRelDateDay;
+  bool get showRelDateDay => _song.showRelDateDay;
   set showRelDateDay(bool value){
-    _song!.showRelDateDay = value;
+    _song.showRelDateDay = value;
     notifyListeners();
   }
 
-  String? get youtubeLink => _song!.youtubeLink;
+  String? get youtubeLink => _song.youtubeLink;
   set youtubeLink(String? value){
-    _song!.youtubeLink = value;
+    _song.youtubeLink = value;
     notifyListeners();
   }
 
-  List<String> get addPers => _song!.addPers;
+  List<String> get addPers => _song.addPers;
   set addPers(List<String> value){
-    _song!.addPers = value;
+    _song.addPers = value;
     notifyListeners();
   }
 
   set tags(List<String> value){
-    _song!.tags = value;
+    _song.tags = value;
     notifyListeners();
   }
 
-  bool get hasRefren => _song!.hasRefren;
+  bool get hasRefren => _song.hasRefren;
   set hasRefren(bool value){
-    _song!.hasRefren = value;
+    _song.hasRefren = value;
     notifyListeners();
   }
 
   removePart(SongPart part){
-    _song!.songParts!.remove(part);
+    _song.songParts!.remove(part);
     notifyListeners();
   }
   addPart(SongPart part){
-    _song!.songParts!.add(part);
+    _song.songParts!.add(part);
     notifyListeners();
   }
 

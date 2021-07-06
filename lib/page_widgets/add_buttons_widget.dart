@@ -52,7 +52,7 @@ class AddButtonsWidget extends StatelessWidget{
                 radius: AppCard.BIG_RADIUS,
                 padding: EdgeInsets.all(Dimen.ICON_MARG),
                 onTap: currItemProv.hasRefren?(){
-                  currItemProv.addPart(SongPart.from((currItemProv.song?.refrenPart)!.element));
+                  currItemProv.addPart(SongPart.from(currItemProv.song.refrenPart.element));
                   if(onPressed!=null) onPressed!();
                 }:null,
                 child: Row(
