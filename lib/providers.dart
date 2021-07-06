@@ -116,11 +116,11 @@ class CurrentItemProvider extends ChangeNotifier{
   }
 
   removePart(SongPart part){
-    _song.songParts!.remove(part);
+    _song.songParts.remove(part);
     notifyListeners();
   }
   addPart(SongPart part){
-    _song.songParts!.add(part);
+    _song.songParts.add(part);
     notifyListeners();
   }
 
