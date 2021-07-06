@@ -48,12 +48,11 @@ class AddButtonsWidget extends StatelessWidget{
 
         Expanded(
           child: Consumer<CurrentItemProvider>(
-              builder: (context, currItemProv, child) =>SimpleButton(
+              builder: (context, currItemProv, child) => SimpleButton(
                 radius: AppCard.BIG_RADIUS,
                 padding: EdgeInsets.all(Dimen.ICON_MARG),
                 onTap: currItemProv.hasRefren?(){
-                  RefrenPartProvider refPart = Provider.of<RefrenPartProvider>(context, listen: false);
-                  currItemProv.addPart(SongPart.from(refPart.part.element));
+                  currItemProv.addPart(SongPart.from((currItemProv.song?.refrenPart)!.element));
                   if(onPressed!=null) onPressed!();
                 }:null,
                 child: Row(

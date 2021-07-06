@@ -257,8 +257,8 @@ class RefrenEnabProvider extends ChangeNotifier{
 
 }
 
-class RefrenPartProvider extends SongPartProvider{
-
+class RefrenPartProvider extends ChangeNotifier{
+/*
   RefrenPartProvider(SongPart part):super(part);
 
   String get chords => part.chords;
@@ -279,7 +279,7 @@ class RefrenPartProvider extends SongPartProvider{
 
   SongElement get element => part.element;
   bool get isError => part.isError;
-
+*/
   void notify() => notifyListeners();
 
 }

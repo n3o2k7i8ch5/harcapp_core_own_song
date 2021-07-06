@@ -58,8 +58,8 @@ class SongPart{
   SongPart(this._songElement, this.isError);
 
   bool isRefren(BuildContext context){
-    RefrenPartProvider prov = Provider.of<RefrenPartProvider>(context, listen: false);
-    return prov.isRefren(element);
+    CurrentItemProvider prov = Provider.of<CurrentItemProvider>(context, listen: false);
+    return prov.song?.refrenPart?.element == element;
   }
 
 }

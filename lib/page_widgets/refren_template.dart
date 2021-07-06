@@ -21,23 +21,21 @@ class RefrenTemplate extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
 
-    return Consumer<RefrenPartProvider>(
-        builder: (context, prov, child) => Padding(
+    return Consumer2<CurrentItemProvider, RefrenPartProvider>(
+        builder: (context, currItemProv, refProv, child) => Padding(
           padding: EdgeInsets.only(left: Dimen.DEF_MARG, right: Dimen.DEF_MARG),
           child: SongPartCard.from(
-            songPart: prov.part,
+            songPart: (currItemProv.song?.refrenPart)!,
             type: SongPartType.REFREN_TEMPLATE,
             topBuilder: (context, part) => Padding(
               padding: EdgeInsets.only(left: Dimen.ICON_MARG - Dimen.DEF_MARG),
               child: Consumer<CurrentItemProvider>(
                 builder: (context, currItemProv, child) => TitleShortcutRowWidget(
                   title: 'Szablon refrenu',
-                  //icon: prov.isError?MdiIcons.alertOutline:MdiIcons.musicBoxOutline,
                   titleColor:
-                  prov.isError?
+                  ((currItemProv.song?.refrenPart)!.isError)?
                   Colors.red:
                   (currItemProv.hasRefren?textEnab_(context):textDisab_(context)),
-                  //titleColor: currItemProv.hasRefren?textEnab_(context):hintEnab_(context),
                   textAlign: TextAlign.start,
                   trailing: Switch(
                     value: currItemProv.hasRefren,

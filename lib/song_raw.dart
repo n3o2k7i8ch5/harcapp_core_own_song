@@ -28,7 +28,7 @@ class SongRaw extends SongCore{
   List<String> tags;
 
   bool hasRefren;
-  SongPart? refrenPart;
+  late SongPart refrenPart;
 
   List<SongPart>? songParts;
 
@@ -49,7 +49,7 @@ class SongRaw extends SongCore{
     this.tags = song.tags.toList();
 
     this.hasRefren = song.hasRefren;//??SongPart.empty(isRefrenTemplate: true);
-    this.refrenPart = song.refrenPart?.copy();
+    this.refrenPart = song.refrenPart.copy();
 
     this.songParts = song.songParts;
   }
@@ -70,10 +70,12 @@ class SongRaw extends SongCore{
     required this.tags,
 
     required this.hasRefren,
-    this.refrenPart,
+    SongPart? refrenPart,
 
     this.songParts,
-  });
+  }){
+    this.refrenPart = refrenPart??SongPart.empty(isRefrenTemplate: true);
+  }
 
   static SongRaw empty({fileName: ''}){
 
