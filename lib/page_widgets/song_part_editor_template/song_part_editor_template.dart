@@ -246,6 +246,9 @@ class _SongTextWidgetState extends State<SongTextWidget>{
       if(focusNode.hasFocus)
         return;
 
+      if(!mounted)
+        return;
+
       textController.text = correctText(textController.text);
     });
 
