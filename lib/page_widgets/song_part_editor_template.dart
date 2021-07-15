@@ -458,8 +458,6 @@ class ButtonsWidget extends StatelessWidget{
             )
         )),
 
-
-
         IconButton(
           icon: Icon(MdiIcons.chevronDoubleDown),
           onPressed: (){
