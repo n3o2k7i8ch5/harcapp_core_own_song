@@ -37,30 +37,30 @@ class ChordsProvider extends ChangeNotifier{
 
 class ErrorProvider<T extends SongEditError> extends ChangeNotifier{
 
-  late List<T> _error_list;
-  late Map<int?, T> _error_map;
+  late List<T> _errorList;
+  late Map<int?, T> _errorMap;
 
   ErrorProvider({Function(ErrorProvider<T> errProv)? init}){
-    _error_list = [];
-    _error_map = {};
+    _errorList = [];
+    _errorMap = {};
 
     if(init != null) init(this);
   }
 
   void add(T error){
-    _error_list.add(error);
-    _error_map[error.line] = error;
+    _errorList.add(error);
+    _errorMap[error.line] = error;
   }
 
-  int get length => _error_list.length;
+  int get length => _errorList.length;
 
   void clear(){
-    _error_list.clear();
-    _error_map.clear();
+    _errorList.clear();
+    _errorMap.clear();
   }
 
   T? errorAt(int line){
-    return _error_map[line];
+    return _errorMap[line];
   }
 
   void notify() => notifyListeners();
