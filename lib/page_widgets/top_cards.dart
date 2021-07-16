@@ -301,10 +301,7 @@ class TopCards extends StatelessWidget{
                                 fontSize: Dimen.TEXT_SIZE_BIG,
                                 color: hintEnab_(context),
                               ),
-                              onAnyChanged: (text){
-                                if(onChangedReleaseDate != null)
-                                  onChangedReleaseDate!(prov.releaseDate);
-                              },
+                              onAnyChanged: (text) => onChangedReleaseDate?.call(prov.releaseDate),
                               key: ValueKey(Tuple3(prov.releaseDate, prov.showRelDateMonth, prov.showRelDateDay)),
                             ),
                           ),
@@ -313,12 +310,12 @@ class TopCards extends StatelessWidget{
                             child: GestureDetector(
                                 child: Container(color: Colors.transparent),
                                 onTap: () async {
-                                  prov.releaseDate = await (showDatePicker(
+                                  prov.releaseDate = await showDatePicker(
                                     context: context,
                                     initialDate: prov.releaseDate??DateTime.now(),
                                     firstDate: DateTime(966),
                                     lastDate: DateTime.now(),
-                                  ) as FutureOr<DateTime>);
+                                  );
                                 }
                             ),
                           )
